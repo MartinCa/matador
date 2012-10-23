@@ -34,21 +34,6 @@ private static boolean gui = true;
 	}
 	
 	/**
-	 * Creates the game with 2 Die and numPlayers Player instances. Using this constructor the starting player and extra conditions can be changed.
-	 * @param numPlayers int number of players has to be greater than 0.
-	 * @param startPlayer int, starting player [0:numPlayers-1].
-	 * @param twoOnes if true you will lose all you points by rolling the values 1 and 1 in the same turn. 
-	 * @param twoSame if true you will gain an extra turn by rolling two of the same values in one turn.
-	 * @param twoSixes if true you will win if you roll two sixes in two consecutive turns.
-	 * @param win52 if true winning requires 52 points and then rolling two of the same values.
-	 * @param gui if true turns on the GUI.
-	 */
-	public GameController(int numPlayers, int startPlayer, boolean twoOnes, boolean twoSame, boolean twoSixes, boolean win52, boolean gui) {
-		GameController.gui = gui;
-		activeGame = new Game(numPlayers, 2, startPlayer, twoOnes, twoSame, twoSixes, win52);
-	}
-	
-	/**
 	 * Starts the first round of the game.
 	 */
 	public void startGame() {

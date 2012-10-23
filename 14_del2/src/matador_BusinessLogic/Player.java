@@ -8,12 +8,10 @@ package matador_BusinessLogic;
  *
  */
 public class Player {
-	private int point;
 	private int carColor;
-	private int balance;
 	private String name;
-	private boolean twelveLastTime;
 	private Konto konto;
+	//private Field field; // This is probably how we are going to implement the location of each player.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -24,18 +22,7 @@ public class Player {
 	public Player(String name, int carColor, int balance) {
 		this.name = name;
 		this.carColor = carColor;
-		this.balance = balance;
-		point = 0;
-		twelveLastTime = false;
-		konto = new Konto();
-	}
-	
-	/**
-	 * Returns the Players points.
-	 * @return Players current points as an int.
-	 */
-	public int getPoint() {
-		return point;
+		konto = new Konto(balance);
 	}
 	
 	/**
@@ -45,39 +32,7 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
-	/**
-	 * Returns whether or not the Player rolled two sixes on Players last turn.
-	 * @return true if the Player rolled two sixes on Players last turn.
-	 */
-	public boolean getTwelveLastTime() {
-		return twelveLastTime;
-	}
-	
-	/**
-	 * Sets whether or not the Player rolled two sixes.
-	 * @param twelveLastTime boolean, true if the Player rolled two sixes.
-	 */
-	public void setTwelveLastTime(boolean twelveLastTime) {
-		this.twelveLastTime = twelveLastTime;
-	}
-	
-	/**
-	 * Adds the provided integer to Players current points.
-	 * @param point int with points to be added to Players current points.
-	 */
-	public void addPoint(int point) {
-		this.point += point;
-	}
-	
-	/**
-	 * Sets the Players current points to the provided value.
-	 * @param point int to set the Players points to.
-	 */
-	public void setPoint(int point) {
-		this.point = point;
-	}
-	
+
 	/**
 	 * Returns the carColor of the Player.
 	 * @return carColor as an int.
@@ -86,24 +41,20 @@ public class Player {
 		return carColor;
 	}
 
-	/**
-	 * Returns the balance of the Player.
-	 * @return balance of the Player as an int.
-	 */
-	public int getBalance() {
-		return balance;
+	public Konto getKonto() {
+		return konto;
 	}
-
-	/**
-	 * Sets the balance of the Player to balance.
-	 * @param balance int to set the Players balance to.
-	 */
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
+	
+//	public Field getField() {
+//		return field;
+//	}
+//	
+//	public void setGield(Field field) {
+//		this.field = field;
+//	}
 	
 	@Override
 	public String toString() {
-		return name + ": " + point;
+		return name + ": ";
 	}
 }
