@@ -2,9 +2,10 @@ package matador_BusinessLogic;
 
 public class Konto {
 	private int balance;
+	private int iniCash;
 	
 	public Konto() {
-		balance = 10000;
+		balance = iniCash;
 	}
 	
 	public Konto(int balance) {
