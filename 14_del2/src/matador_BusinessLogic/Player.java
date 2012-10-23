@@ -13,6 +13,7 @@ public class Player {
 	private int balance;
 	private String name;
 	private boolean twelveLastTime;
+	private Konto konto;
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -26,6 +27,7 @@ public class Player {
 		this.balance = balance;
 		point = 0;
 		twelveLastTime = false;
+		konto = new Konto();
 	}
 	
 	/**
