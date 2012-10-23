@@ -1,0 +1,256 @@
+\chapter{UML efter programmering}\label{ch:afterUML}
+\begin{quote}
+Når I har løst programmeringsopgaven, bedes I lave UML-diagrammer som dokumenterer Jeres
+program. I bedes gennemføre følgende aktiviteter:
+\begin{itemize}
+\item Udarbejde UML-diagrammer (designklassediagram og sekvensdiagram), som svarer til jeres
+program
+\item Finde en anden gruppe med hvilken I bytter jeres kode og UML-diagrammer
+\begin{itemize}
+\item Vurdere om deres UML-diagrammer var tilstrækkeligt grundlag for vurdering af, om
+I kunne anvende deres Bæger klasse (MatadorRafleBaeger)\cite{CDIOdel1}
+\end{itemize}
+\end{itemize}
+\end{quote}
+Ovenstående vil blive behandlet i dette afsnit.
+
+\section{Designklassediagram[1]}\label{sec:afterDesignklasseDiagram}
+I figur \vref{fig:afterDesignklasseDiagram} ses designklassediagrammet som vi udarbejdede efter programmeringen var færdig. Dermed viser diagrammet relationerne mellem klasserne i vores færdige program. Det ses at der er store forskelle i forhold til diagrammet fra før programmeringen som kan ses i figur \vref{fig:beforeDesignKlasse}. De største forskelle er at der er kommet flere klasser og metoder til, mange af disse skyldes at vi valgte at implementere alle udvidelsesmulighederne i vores kode.
+
+Vi vil nu gennemgå diagrammet og beskrive relationerne. Kravene til koden som kan ses i afsnit \vref{sec:kravspec} stiller kun krav om at der er en \klasse{MatadorRafleBaeger} klasse. Vi fandt det dog mest logisk at repræsenterer de terninger som der skal simuleres i \klasse{MatadorRafleBaeger} ved instanser af en klasse vi har valgt at kalde \klasse{Die}. Vores \klasse{MatadorRafleBaeger} holder disse instanser i et Array fordi vi på denne måde har mulighed for nemt at variere antallet af terninger som skal bruges.
+
+\begin{figure}[htbp]
+\caption{Designklassediagram efter programmeringen}\label{fig:afterDesignklasseDiagram}
+\centering
+\tikzumlset{fill class=white,font=\tiny}
+\begin{tikzpicture}
+ \umlclass{Die}{-facevalue : int\\-sides : int}{+Die()\\+Die(int)\\+rollDie() : void\\+getFacevalue() : int}
+ \umlclass[x=6.5]{MatadorRafleBaeger}{}{+MatadorRafleBaeger()\\+MatadorRafleBaeger(int)\\-createDice() : void\\+getEns() : bool\\+getSum() : int\\+rollDice()\\+getFacevalues : int[]}
+ \umlclass[x=11]{TestMatadorRafleBaeger}{}{\umlstatic{main(String[]) : void}}
+ \umlclass[x=6.5,y=-6]{Game}{-activePlayer : int\\-winpoint : int\\-winner : bool\\-twoOnes : bool\\-twoSame : bool\\-twoSixes : bool\\-win52 : bool}{+Game()\\+Game(int,int,int,bool,bool,bool,bool)\\-createPlayers() : void\\+startGame() : void\\-oneRound() : void\\-endRoundChecks() : void\\-checkWinner() : void\\-gameEnd() : void\\-nextPlayer() : void\\-getPlayerPoints() : int[]}
+ \umlclass[y=-6]{Player}{-point : int\\-carColor : int\\-balance : int\\-name : String\\-twelveLastTime : bool}{+Player(String,int,int)\\+getPoint() : int\\+getName() : String\\+getTwelveLastTime() : bool\\+setTwelveLastTime(bool) : void\\+addPoint(int) : void\\+setPoint(int) : void\\+getCarColor() : int\\+getBalance() : int\\+setBalance(int) : void}
+ \umlclass[x=6.5,y=-12.5]{GameController}{\umlstatic{-gui : bool}}{+GameController()\\+GameController(int,int,bool,bool,bool,bool,bool)\\+startGame() : void\\\umlstatic{+addPlayer(String,int,int) : void}\\\umlstatic{+setCar(int,int) : void}\\\umlstatic{+getPlayerAccept(int) : bool}\\\umlstatic{+setDice(int[]) : void}\\\umlstatic{+showStatus(int[],int[]) : void}\\\umlstatic{+showString(String) : void}\\\umlstatic{+endGame() : void}}
+ \umlclass[y=-12.5]{Main}{\umlstatic{+main(String[]) : void}}{}
+ \umlclass[y=-17.5]{BoundaryToGUI}{}{\umlstatic{+main(String[]) : void}\\\umlstatic{+setDice(int[]) : void}\\\umlstatic{+addPlayer(String,int,int) : void}\\\umlstatic{+setBalance(int,int) : void}\\\umlstatic{+setCar(int,int) : void}}
+ \umlclass[y=-17.5,x=8]{BoundaryToPlayer}{\umlstatic{-input : Scanner}}{\umlstatic{+main(String[]) : void}\\\umlstatic{+getPlayerAccept(int) : bool}\\\umlstatic{+showString(String) : void}\\\umlstatic{+closeScanner() : void}\\\umlstatic{+showStatus(int[],int[])}}
+ 
+ \umlcompo[mult1=1,arg2=-dice,mult2=0..*]{MatadorRafleBaeger}{Die}
+ \umlcompo[mult1=1,mult2=0..1,arg2=-baeger]{Game}{MatadorRafleBaeger}
+ \umlcompo[mult1=1,mult2=0..*,arg2=-players,pos2=0.65]{Game}{Player}
+ \umldep{TestMatadorRafleBaeger}{MatadorRafleBaeger}
+ \umlcompo[mult1=1,mult2=0..1,arg2=-activeGame]{GameController}{Game}
+ \umldep{Main}{GameController}
+ \umldep{GameController}{BoundaryToGUI}
+ \umldep{GameController}{BoundaryToPlayer}
+ \umldep[anchors=-70 and 65]{Game}{GameController}
+\end{tikzpicture}
+\end{figure}
+
+\klasse{MatadorRafleBaeger} bruges af klassen \klasse{TestMatadorRafleBaeger} og som navnet antyder er denne klasses formål at teste \klasse{MatadorRafleBaeger}. \klasse{TestMatadorRafleBaeg\-er} bruges ikke i spillet.
+
+Vi har en \klasse{Game} som repræsenterer det spil vi skulle implementere, denne klasse indeholder en instans af \klasse{MatadorRafleBaeger}. Dermed har hver instans af \klasse{Game} adgang til to terninger som netop var hvad der skulle bruges i dette spil.
+
+Derudover har vi valgt at repræsenterer de fysiske spillere i vores system med \klasse{Play\-er} klassen. Hver instans af klassen har mulighed for at indeholde en række oplysninger til dette spil er det hovedsaligt pointene der er vigtige. Der vil typisk være to spillere med i spillet, men vi har mulighed for at variere dette da vi ligesom med \klasse{Die} holder vores \klasse{Player} instanser i et Array i \klasse{Game}.
+
+Vi har en \klasse{GameController} klasse som står for at starte spillet og kommunikation mellem \klasse{Game} og de to boundary klasser vi har. \klasse{GameController} indeholder én instans af \klasse{Game} og der er ikke mulighed for at den kan indeholde flere instanser. Det ses også at \klasse{Game} afhænger af \klasse{GameController} det skyldes at \klasse{Game} kalder statiske metoder i \klasse{GameController}.
+
+Selve spillet bliver startet af \klasse{Main} klassen som i main metode opretter en instans af \klasse{GameController} og kalder de nødvendige metoder for at starte spillet.
+
+\klasse{GameController} afhænger af \klasse{BoundaryToPlayer} og \klasse{BoundaryToGUI} fordi den kalder metoder i klasserne for at kommunikere med henholdsvis den fysiske spiller og GUIen.
+
+\section{Sekvensdiagrammer[5]}\label{sec:aftersekvensDiagram}
+For at beskrive interaktionen mellem klasserne som bliver vist i figur \vref{fig:afterDesignklasseDiagram}. Har vi udarbejdet sekvensdiagrammer for vores kode efter programmeringen. Vi har for overskuelighedens skyld valgt at opdele sekvensdiagrammet i to dele. Én sekvensdiagram for starten af spillet som beskrives i afsnit \vref{subsec:afterStartAfSpillet} og ét diagram for spil af en runde som beskrives i afsnit \vref{subsec:afterEnRunde}.
+
+\subsection{Start af spillet}\label{subsec:afterStartAfSpillet}
+Som sekvensdiagrammet i figur \vref{fig:afterSekvensStartSpil} viser; startes programmet ved at den fysiske spiller kører \klasse{Main}. \klasse{Main} den skal opretter en instans af \klasse{GameController}, her bestemmes hvilke regler der skal sættes for spillet. Videre opretter \klasse{GameController} en instans af \klasse{Game}, som opretter en instans af \klasse{MatadorRafleBaeger}, som opretter det ønskede antal instanser af \klasse{Die}. Dette udgør hoved ingredienserne i selve ternings spillet og skal danne grundlag for selve spillets udførelse. Dog mangler repræsentationen af spillerne, \klasse{Game} opretter det ønskede antal instanser af \klasse{Player}. Når alle de nødvendige instanser er oprettet går kontrollen tilbage til \klasse{Main} som kalder metoden \metode{startGame()} på instansen af \klasse{GameController}. \klasse{GameController} kalder så \metode{startGame()} på instansen af \klasse{Game}.
+\begin{figure}
+\centering
+\caption{Sekvensdiagram som viser starten af spillet.}\label{fig:afterSekvensStartSpil}
+	\tikzumlset{fill object=white,font=\tiny}
+	\begin{tikzpicture}
+		\begin{umlseqdiag}
+		\umlactor{Spiller}
+		\umlobject[x=1.5,class=Main]{Main}
+		\begin{umlcall}[op={Run}]{Spiller}{Main}
+			\umlcreatecall[x=4,class=GameController]{Main}{game}
+			\umlcreatecall[x=6.5,class=Game]{game}{activeGame}
+			\umlcreatecall[x=9.5,class=MatadorRafleBaeger]{activeGame}{baeger}
+			\begin{umlcall}[op=void createDice()]{baeger}{baeger}
+				\umlcreatecall[dt=2,x=11.5,class=Die,stereo=multi]{baeger}{dice}
+			\end{umlcall}
+			\begin{umlcall}[dt=10,op=void createPlayers()]{activeGame}{activeGame}
+				\umlcreatecall[dt=2,x=11.5,class=Player,stereo=multi]{activeGame}{players}
+			\end{umlcall}
+			\begin{umlcall}[dt=26,op=void startGame(),padding=0]{Main}{game}
+				\begin{umlcall}[op=void startGame(),padding=0]{game}{activeGame}
+				\end{umlcall}
+			\end{umlcall}
+		\end{umlcall}
+		\umlnote[x=10,y=0,fill=white]{game}{I konstruktøren til GameController kan der sættes regler for spillet}
+		\end{umlseqdiag}
+	\end{tikzpicture}
+\end{figure}
+
+\subsection{En runde}\label{subsec:afterEnRunde}
+Inden vi gennemgår sekvensdiagrammet for en runde af spillet er der nogle betingelser der skal stilles op. Først og fremmest skal spillet være startet, sekvensdiagram for dette bliver behandlet i afsnit \vref{sec:aftersekvensDiagram}. Derudover viser vores sekvensdiagram for en runde det forløb hvor der er Spiller 1 der har turen. Ingen af udvidelsesmuligheder vi har implementeret bliver nærmere behandlet i sekvensdiagrammet men kontrollen af disse sker i \klasse{Game} klassens \metode{endRoundChecks()} metode. Vi har også i koden koblet GUI på men viser kun hvordan terningerne bliver vist, ikke bilerne. Til sidst antager vi at der ikke bliver fundet en vinder og at turen skal gå videre til Spiller 2. Sekvensdiagrammet starter med det sidste kald fra sekvensdiagrammet for start af spillet nemlig at \klasse{GameController} instansen kalder \metode{startGame()} på \klasse{Game} instansen. Diagrammet ses i figur \vref{fig:afterSekvensEnRunde}.
+
+Sekvensdiagrammet viser hvordan én runde for spiller 1 forløber; Først anmoder \klasse{Game} via \klasse{GameController} og \klasse{BoundaryToPlayer} den fysiske spiller, om i dette tilfælde at trykke ”1” for at slå terningerne. Så sender \klasse{Game} anmodningen om at slå med terningerne via \metode{rollDice()} til baeger instansen, som kalder \metode{rollDie()} på instanserne af \klasse{Die}. \klasse{Game} anmoder herefter baeger instansen om værdierne for slaget via \metode{getFacevalues()}, baeger instansen tjekker herefter dette i instanserne af \klasse{Die}. Disse informationer sendes til \klasse{GameController} og derfra videre til \klasse{BoundaryToGUI} med \metode{setDice(int[])}. Herefter kalder \klasse{Game} \metode{getSum()} på baeger instansen for at hente værdien af terningslaget, baeger instansen henter de nødvendige oplysninger fra instanserne af \klasse{Die}. \klasse{Game} bruger så \metode{addPoint()} for at lægge summen af terningerne til den instans af \klasse{Player} der repræsenterer spiller 1. Til sidst udfører \klasse{Game} 3 opgaver med hjælpemetoder, \metode{endRoundChecks()} kontroller udvidelsesmuligheder og hvem der skal have næste tur, i \metode{endRoundChecks()} kaldes \metode{checkWinner()} for at kontrollerer om der er en vinder. Om nødvendigt kaldes \metode{nextPlayer()} for at avancere turen til næste instans af \klasse{Player}. Efter dette starter runden forfra med den instans af \klasse{Player} som repræsenterer spiller 2 i stedet.
+\begin{figure}
+\centering
+\caption{Sekvensdiagram som viser en runde af spillet.}\label{fig:afterSekvensEnRunde}
+\rotatebox{90}{
+	\tikzumlset{fill object=white,font=\tiny}
+	\begin{tikzpicture}
+		\begin{umlseqdiag}
+		\umlactor{Spiller 1}
+		\umlobject[x=2,class=Game]{activeGame}
+		\umlobject[x=5,class=GameController]{game}
+		\umlobject[x=8]{BoundaryToPlayer}
+		\umlobject[x=11.5,class=MatadorRafleBaeger]{baeger}
+		\umlobject[x=14.5,class=Die]{dice}
+		\umlobject[x=16.5]{BoundaryToGUI}
+		\umlobject[x=19,class=Player]{players}
+		\begin{umlcall}[op=void startGame(),padding=-3]{game}{activeGame}
+			\begin{umlcall}[op=bool getPlayerAccept(activePlayer),return=bool accept,padding=1]{activeGame}{game}
+				\begin{umlcall}[op=bool getPlayerAccept(activePlayer),return=bool accept,dt=2]{game}{BoundaryToPlayer}
+					\begin{umlcall}[op=int console input,return=int,dt=2]{BoundaryToPlayer}{Spiller 1}
+					\end{umlcall}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=void rollDice(),padding=0]{activeGame}{baeger}
+				\begin{umlcall}[dt=1,op=void rollDie(),padding=0]{baeger}{dice}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op={int[] getFacevalues()},return={int[] facevalues},padding=1]{activeGame}{baeger}
+				\begin{umlcall}[op=int getFacevalue(),return=int facevalue,padding=2,dt=1]{baeger}{dice}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op={void setDice(facevalues)},padding=0]{activeGame}{game}
+				\begin{umlcall}[dt=1,op=void setDice(facevalues),padding=0]{game}{BoundaryToGUI}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op={int getSum()},return={int sum},padding=1]{activeGame}{baeger}
+				\begin{umlcall}[op=int getFacevalue(),return=int facevalue,padding=2,dt=1]{baeger}{dice}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=void addPoint(sum),padding=0]{activeGame}{players}
+			\end{umlcall}
+			\begin{umlcall}[op=void endRoundChecks(),dt=1]{activeGame}{activeGame}
+				\begin{umlcall}[op={void showStatus(int[],int[])},padding=0]{activeGame}{game}
+					\begin{umlcall}[op={void showStatus(int[],int[])},padding=0,dt=2]{game}{BoundaryToPlayer}
+						\begin{umlcall}[op=output to console,padding=0,dt=2]{BoundaryToPlayer}{Spiller 1}
+						\end{umlcall}
+					\end{umlcall}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=void checkWinner(),dt=-2]{activeGame}{activeGame}
+			\end{umlcall}
+			\begin{umlcall}[op=void nextPlayer(),dt=-2]{activeGame}{activeGame}
+			\end{umlcall}
+		\end{umlcall}
+		\end{umlseqdiag}
+	\end{tikzpicture}
+}
+\end{figure}
+\section{Vurdering af anden gruppes UML og kode[1]}\label{sec:afterVurderingAndenGruppe}
+For at vurdere en anden gruppes UML og kode har vi lånt et designklassediagram fra gruppe 17 som viser deres \klasse{MatadorRaflebaeger} og \klasse{Dice} klasser. I figur \vref{fig:umlGrp17} ses designklassediagrammet. Af diagrammet kan det ses at de har valgt at implementere deres \klasse{MatadorRaflebaeger} med separate variabler for de to terninger som er nødvendige for dette spil. Vi bemærker også at deres klasse ikke hedder \klasse{MatadorRafleBae\-ger} som vores gør, deres klasse hedder \klasse{MatadorRaflebaeger} (bemærk lille b i baeger). Vi vil starte med at kigge på metoderne der findes i deres \klasse{MatadorRaflebaeger}.
+
+\begin{figure}
+\caption{Designklassediagram fra Gruppe 17 som viser \klasse{MatadorRaflebaeger} og \klasse{Dice} klasserne.\cite{grp17}}\label{fig:umlGrp17}
+\centering
+\tikzumlset{fill class=white,font=\tiny}
+\begin{tikzpicture}
+ \umlclass{MatadorRaflebaeger}{-numDice : int\\-ens : bool}{+MatadorRaflebaeger()\\+roll() : void\\+getDice1Facevalue() : int\\+setDice1Facevalue(int) : void\\+getDice2Facevalue() : int\\+setDice2Facevalue(int) : void\\+getEns() : bool\\+getSum() : int}
+ \umlclass[x=6]{Dice}{-diceFaceValue : int}{+Dice()\\+setRandomFaceValue() : void\\+getDiceFaceValue() : int\\+setDiceFaceValue(int) : void}
+ \umluniassoc[arg2=-dice1, mult2={0..1},anchors=-10 and -170,pos2=0.7]{MatadorRaflebaeger}{Dice}
+ \umluniassoc[arg2=-dice2, mult2={0..1},anchors=20 and 160,pos2=0.7]{MatadorRaflebaeger}{Dice}
+\end{tikzpicture}
+\end{figure}
+
+Det ses at Gruppe 17 har en konstruktør som ikke tager nogen parametre ligesom vi har. Koden for deres konstruktører for \klasse{MatadorRaflebaeger} og \klasse{Dice} ses i figur \vref{fig:grp17-01}. Det ses at deres konstruktør for \klasse{MatadorRaflebaeger} som forventet opretter to terningers objekter. I konstruktøren for deres \klasse{Dice} klasse ses dog en forskel fra vores \klasse{Die} klasse, de giver ikke terningen en værdi når den bliver konstrueret. Det ændrer dog ikke på vores kode eftersom vi alle steder i vores kode ruller terningerne inden vi bruger værdier fra dem. Vi vil altså uden ændringer i vores kode kunne bruge deres konstruktør \metode{MatadorRaflebaeger()}.
+\begin{figure}
+\caption{Konstruktør for \klasse{MatadorRaflebaeger} og \klasse{Dice}\cite{grp17}}\label{fig:grp17-01}
+\centering
+\begin{minipage}{8cm}
+\begin{verbatim}
+public MatadorRaflebaeger(){
+    this.dice1 = new Dice();
+    this.dice2 = new Dice();
+}
+\end{verbatim}
+\end{minipage}
+\qquad
+\begin{minipage}{5cm}
+\begin{verbatim}
+public Dice(){
+}
+\end{verbatim}
+\end{minipage}
+\end{figure}
+
+Næste metode vi vil kigge på er \metode{roll()} som vi formoder svarer til vores \metode{rollDice}. De ses at ingen af metoderne returnerer en værdi og derfor er der indtil videre ingen problemer med at bruge deres metode. Det ses i figur \vref{fig:grp17-02} at \metode{roll()} i \klasse{MatadorRafle\-baeger} kalder \metode{setRandom\-Face\-Value()} på begge terningerne i deres \klasse{Mata\-dorRafle\-bae\-ger}. For at vi kan være sikre på at vi kan bruge deres \metode{roll()} skal vi lige sikre os at \metode{setRandom\-Face\-Value()} nu også gør som navnet antyder og giver terningen en tilfældig facevalue.
+\begin{figure}
+\caption{\metode{roll()} metoden fra \klasse{MatadorRaflebaeger}\cite{grp17}}\label{fig:grp17-02}
+\centering
+\begin{verbatim}
+public void roll() {
+    dice1.setRandomFaceValue();
+    dice2.setRandomFaceValue();
+}
+\end{verbatim}
+\end{figure}
+
+Koden for gruppe 17s \metode{setRandomFaceValue()} ses i figur \vref{fig:grp17-03} og det ses at de bruger sammen metode som os til at give deres terninger en ny tilfældig facevalue. Vi vil altså kunne bruge deres \metode{roll()} i stedet for vores \metode{rollDice()} ved at ændre alle vores kald til \metode{rollDice()} så de i stedet går til \metode{roll()}.
+\begin{figure}
+\centering
+\caption{\metode{setRandomFaceValue()} fra \klasse{Dice}\cite{grp17}}\label{fig:grp17-03}
+\begin{verbatim}
+public void setRandomFaceValue(){
+    Random rand = new Random();
+    this.diceFaceValue = rand.nextInt(6)+1;
+}
+\end{verbatim}
+\end{figure}
+
+Næste metode vi vil kigge på er deres \metode{getEns()} som svarer til vores \metode{getEns()}. Begge metoder returnerer en boolean så på overfladen er der ingen problemer. Koden for både \metode{getEns()} og \metode{getDiceFaceValue()} som \metode{getEns()} kalder ses i figur \vref{fig:grp17-04}. Fra koden ses det at \metode{getDiceFaceValue()} som den skal returnerer den givne ternings facevalue. \metode{getEns()} vil så returnerer true hvis de to terningers facevalue er ens. Det er sådan vi forventer at \metode{getEns()} virker og vi vil uden ændringer i vores kode kunne bruge denne metode.
+\begin{figure}
+\centering
+\caption{\metode{getEns()} og \metode{getDiceFaceValue()} metoderne fra henholdsvis \klasse{MatadorRaflebaeger} og \klasse{Dice}.)\cite{grp17}}\label{fig:grp17-04}
+\begin{verbatim}
+public Boolean getEns() {
+    return dice1.getDiceFaceValue() == dice2.getDiceFaceValue();
+}
+
+public int getDiceFaceValue(){
+    return this.diceFaceValue;
+}
+\end{verbatim}
+\end{figure}
+
+Så er turen kommet til at kigge på \metode{getSum()} hvor vi igen i begge grupper har metoder af samme navn. Vi forventer at denne metode returnerer summen af de to terningers facevalue, fra diagrammet ser det godt ud da den er sat til at returnerer en int, ligesom vores metode gør. Et lille kig i koden og vi kan med sikkerhed afgøre om koden gør som vi antager, koden for \metode{getSum()} kan ses i figur \vref{fig:grp17-05} og \metode{getDiceFaceValue()} kan ses i figur \vref{fig:grp17-04}. Det ses hurtigt at gruppe 17s \metode{getSum()} metode som forventet korrekt returnerer summen af de to terningers facevalue. Vi vil derfor uden ændringer i vores kode kunne benytte os at \metode{getSum()} metoden i vores program.
+\begin{figure}
+\centering
+\caption{\metode{getSum()} fra \klasse{MatadorRaflebaeger}.)\cite{grp17}}\label{fig:grp17-05}
+\begin{verbatim}
+public int getSum(){
+    return dice1.getDiceFaceValue() + dice2.getDiceFaceValue();
+}
+\end{verbatim}
+\end{figure}
+
+Til sidst kommer så den forskel at vi har valgt at implementere vores \klasse{MatadorRafle\-Baeger} sådan at vores terninger (\klasse{Die}) bliver holdt i et Array af \klasse{Die} objekter. Dette giver nogle forskelle i hvordan \klasse{MatadorRafleBae\-g\-er} har implementeret de forskellige metoder. Det betyder dog ikke noget for de funktioner som afhænger af \klasse{MatadorRafleBae\-ger}. Sålænge alle metoderne i \klasse{MatadorRafleBaeger} er implementeret korrekt og virker som de skal vil brugerne af \klasse{MatadorRafleBaeger} ikke mærke forskel. Her er der dog en forskel i den måde som terningerne facevalue hentes på. I vores \klasse{MatadorRafleBaeger} hentes terningernes facevalue som en Array af ints, i gruppe 17s tilfælde hentes de to facevalues med \metode{getDice1Facevalue()} og \metode{getDice2Facevalue()}. Den nemmeste måde at undersøge hvilke ændringer dette medfører i vores kode, er i Eclipse at benytte sig af funktionen hvor man kan se hvor i koden der er referencer til en given metode. Det ses at vi har to referencer til \metode{getFacevalues()} i Game klassen. De to referencer er i \metode{endRoundChecks()} og \metode{oneRound()}, disse to metoder sender blot informationerne videre til \klasse{GameController} som så sender dem videre til \klasse{BoundaryToGUI} og \klasse{BoundaryToPlayer}. Man kan ændre i de berørte metoder i \klasse{GameController}, \klasse{Boundary\-ToGUI} og \klasse{BoundaryToPlayer} og i \klasse{Game}. Vi var sluppet uden om dette problem hvis vi havde sendt baeger objektet til \klasse{GameController} og senere til de to boundaries. På den måde ville en ændring i \klasse{MatadorRafleBaeger} kun have ført til en ændring i den måde som boundaryen skulle hente infomationerne ud af \klasse{MatadorRafleBaeger}. I figur \vref{fig:grp17-06} ses gruppe 17s kode for at hente de to facevalues ud. Selvom koden er lidt forskellig virker begge måder at skrive koden på og den virker som vi forventer.
+\begin{figure}
+\centering
+\caption{getDice<num>FaceValue fra MatadorRafleBaeger.\cite{grp17}}\label{fig:grp17-06}
+\begin{verbatim}
+public int getDice1FaceValue() {
+    return this.dice1.getDiceFaceValue();
+}
+
+public int getDice2FaceValue() {
+    return dice2.getDiceFaceValue();
+}
+\end{verbatim}
+\end{figure}
+
+Til at slutte af med kan man sige at for langt de fleste af metoderne vil det være simpelt at benytte gruppe 17s \klasse{MatadorRaflebaeger} i stedet for vores eget. I ét tilfælde, \metode{roll()}, skal alle vores kald til \metode{rollDice()} laves om til i stedet at kalde \metode{roll()}, dette klares hurtigt i Eclipse. Lidt større vanskeligheder er der når terningernes facevalue skal hentes ud af \klasse{MatadorRafleBaeger}. Det skyldes nok også at med \metode{roll()}, \metode{getEns()} og \metode{getSum()} ligger der i navnet hvordan de skal virke. En metode som skal hente facevalues ud er tilgengæld meget åben for fortolkning og kan implementeres på mange forskellige måder.
