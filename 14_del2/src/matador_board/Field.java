@@ -4,7 +4,7 @@ public abstract class Field {
 	private String name;
 	private int changeBalance;
 
-//	public abstract boolean landOnField();
+//	public abstract boolean landOnField(); //to be implemented later
 
 	public Field(String name, int changeBalance){
 		this.name = name;
