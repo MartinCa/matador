@@ -1,7 +1,6 @@
 package matador_board;
 
 public class Board {
-	private int numFields = 11; // assignment description demands 11 specific instances
 	private Field[] boardFields;	// array containing each field on the board 
 
 	/**
@@ -9,7 +8,9 @@ public class Board {
 	 * 
 	 * @see initBoard
 	 */
-	public Board(){
+	public Board() {
+		int numFields = 11; // assignment description demands 11 specific instances
+		
 		initBoard(numFields);
 	}
 
