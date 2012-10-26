@@ -20,7 +20,7 @@ public class Board {
 	 * 
 	 * @param numFields
 	 */
-	private void initBoard(int numFields) {
+	public void initBoard(int numFields) {
 		boardFields = new Field[numFields]; // sets array length to numFields
 
 		boardFields[0] = new Refuge("Start", 200);
