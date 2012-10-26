@@ -1,13 +1,9 @@
 package matador_BusinessLogic;
 
+import matador_board.*;
+
 /**
- * Plays a game using two six-sided dice. The rules of the game can be modified in the constructor, the basic rules are as follows:
- * Two Player will take turns to roll two dice. The value of the two dice will be added to the Players running total.
- * The first Player to 52 points and who rolls two dice with the same facevalues in the same round wins the game.
- * By rolling two dice with the same facevalue in the same round the Player will get another turn.
- * By rolling two dice with the facevalue one in the same round the Player will get their points set to 0.
- * By rolling two dice with the facevalue six in two consecutive rounds the Player will win the game.
- * The rules can be modified by the use of one of the Game constructors.
+ * 
  * @author Martin Caspersen
  * @see Player
  * @see MatadorRafleBaeger
@@ -19,6 +15,8 @@ public class Game {
 	private int winpoint;
 	private MatadorRafleBaeger baeger;
 	private Player[] players;
+	private Board board;
+	private boolean winner = false;
 	
 	/**
 	 * Constructor that starts the game, 2 Die and 2 Player instances are created. Creates the baeger using MatadorRafleBaeger and two players of type Player.
@@ -28,12 +26,13 @@ public class Game {
 	 */
 	public Game() {
 		baeger = new MatadorRafleBaeger();
-		players = new Player[2];
-		winpoint = 52;
-		activePlayer = 0;
-		int balance = 10000;
+		players = new Player[2]; // This game will be played with two players
+		winpoint = 30000; // Winner at 30000 balance
+		activePlayer = 0; // Player one starts
+		int initBalance = 10000; // Initial
+		board = new Board();
 		
-		createPlayers(balance);
+		createPlayers(initBalance);
 	}
 	
 	/**
@@ -51,6 +50,7 @@ public class Game {
 	 * Starts the game. The game will have the options set by the constructor.
 	 */
 	public void startGame() {
+		GameController.showString("Spillet starter");
 		oneRound();
 	}
 	
@@ -61,7 +61,21 @@ public class Game {
 	 * @see Player
 	 */
 	private void oneRound() {
-
+		int balanceChange;
+		GameController.showString("" + players[activePlayer].getName() + " har turen.");
+		baeger.rollDice();
+		GameController.setDice(baeger.getFacevalues());
+		balanceChange = board.getFieldAction(baeger.getSum() - 2);
+		System.out.println(balanceChange);
+		
+		if (balanceChange >= 0) {
+			players[activePlayer].getKonto().deposit(balanceChange);
+		} else if (!players[activePlayer].getKonto().withdraw(-balanceChange)) {
+			nextPlayer();
+			winner = true;
+		}
+		GameController.showStatus(baeger.getFacevalues(), getPlayerPoints());
+		endRoundChecks();
 	}
 	
 	/**
@@ -73,21 +87,30 @@ public class Game {
 	 * @see Player
 	 */
 	private void endRoundChecks() {
-
+		checkWinner();
+		if (winner) {
+			GameController.showString("" + players[activePlayer].getName() + " vandt spillet.");
+			gameEnd();
+		} else {
+			nextPlayer();
+			oneRound();
+		}
 	}
 	
 	/**
 	 * 
 	 */
 	private void checkWinner() {
-
+		if (players[activePlayer].getKonto().getBalance() >= winpoint) {
+			winner = true;
+		}
 	}
 	
 	/**
 	 * 
 	 */
 	private void gameEnd() {
-
+		// Nothing to see here move along
 	}
 	
 
@@ -101,20 +124,20 @@ public class Game {
 		}
 	}
 
-//	/**
-//	 * Returns an Array of ints containing alle the Player instances points.
-//	 * @return Array of ints with all the Player instances points.
-//	 */
-//	private int[] getPlayerPoints() {
-//		int[] returnArray = new int[players.length];
-//		int i = 0;
-//				
-//		for (Player player : players) {
-//			returnArray[i] = player.getPoint();
-//			i++;
-//		}
-//		return returnArray;
-//	}
+	/**
+	 * Returns an Array of ints containing alle the Player instances points.
+	 * @return Array of ints with all the Player instances points.
+	 */
+	private int[] getPlayerPoints() {
+		int[] returnArray = new int[players.length];
+		int i = 0;
+				
+		for (Player player : players) {
+			returnArray[i] = player.getKonto().getBalance();
+			i++;
+		}
+		return returnArray;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -1,14 +1,14 @@
 package matador_board;
 
 public abstract class Ownable extends Field {
-	private int rent;
+	//private int rent;
 
 	public Ownable(String name, int rent) {
-		super(name);
-		setRent(rent);
+		super(name, rent);
+		//setRent(rent);
 	}
 
-	private void setRent(int rent){
-		this.rent = rent;
-	}
+//	private void setRent(int rent){
+//		this.rent = rent;
+//	}
 }
