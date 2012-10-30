@@ -50,8 +50,10 @@ public class BoundaryToGUI {
 	 * @param carColor Player represented by this color will get the balance changed.	
 	 * @param newBalance newBalance to set the Players balance to.
 	 */
-	public static void setBalance(int carColor, int newBalance) {
-		GUI.setBalance(carColor, newBalance);
+	public static void setBalance(Player[] players) {
+		for (Player player : players) {
+		GUI.setBalance(player.getCarColor(), player.getKonto().getBalance());
+		}
 	}
 	
 	/**

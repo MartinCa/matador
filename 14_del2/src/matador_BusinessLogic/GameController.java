@@ -93,6 +93,7 @@ private static boolean gui = true;
 	public static void showStatus(MatadorRafleBaeger baeger, Player[] players) {
 		BoundaryToGUI.setDice(baeger);
 		BoundaryToPlayer.showStatus(baeger, players);
+		BoundaryToGUI.setBalance(players);
 	}
 	
 	/**
