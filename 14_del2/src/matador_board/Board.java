@@ -24,17 +24,17 @@ public class Board {
 	public void initBoard(int numFields) {
 		boardFields = new Field[numFields]; // sets array length to numFields
 
-		boardFields[0] = new Refuge("Start", 200);
-		boardFields[1] = new Street("Rødovervej", -200);
-		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100);
-		boardFields[3] = new Street("Hvidovrevej", -20);
-		boardFields[4] = new Shipping("D.F.D.S.", -75);
-		boardFields[5] = new Refuge("Prøv lykken", 0);
-		boardFields[6] = new Taxes("Fængsel", -500);
-		boardFields[7] = new Street("Strandvejen", -60);
-		boardFields[8] = new Street("Grønningen", -80);
-		boardFields[9] = new Street("Rådhuspladsen", -150);
-		boardFields[10] = new Refuge("Helle", 20000);
+		boardFields[0] = new Refuge("Start", 200, 1);
+		boardFields[1] = new Street("Rødovervej", -200, 2);
+		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100, 39);
+		boardFields[3] = new Street("Hvidovrevej", -20, 4);
+		boardFields[4] = new Shipping("D.F.D.S.", -75, 16);
+		boardFields[5] = new Refuge("Prøv lykken", 0, 3);
+		boardFields[6] = new Taxes("Fængsel", -500, 11);
+		boardFields[7] = new Street("Strandvejen", -60, 20);
+		boardFields[8] = new Street("Grønningen", -80, 25);
+		boardFields[9] = new Street("Rådhuspladsen", -150, 40);
+		boardFields[10] = new Refuge("Helle", 20000, 21);
 	}
 	
 	public int getFieldAction(int fieldIndex) {

@@ -8,6 +8,10 @@ public class Taxes extends Field{
 		//setTax(tax);
 	}
 
+	public Taxes(String name, int tax, int fieldNum) {
+		super(name, tax, fieldNum);
+	}
+
 //	private void setTax(int tax) {
 //		this.tax = tax;		
 //	}

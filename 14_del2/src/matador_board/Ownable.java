@@ -8,6 +8,10 @@ public abstract class Ownable extends Field {
 		//setRent(rent);
 	}
 
+	public Ownable(String name, int rent, int fieldNum) {
+		super(name, rent, fieldNum);
+	}
+
 //	private void setRent(int rent){
 //		this.rent = rent;
 //	}

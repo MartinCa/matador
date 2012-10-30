@@ -9,6 +9,10 @@ public class Refuge extends Field{
 		//setBonus(bonus);
 	}
 
+	public Refuge(String name, int bonus, int fieldNum) {
+		super(name, bonus, fieldNum);
+	}
+
 //	private void setBonus(int bonus) {
 //		this.bonus = bonus;		
 //	}

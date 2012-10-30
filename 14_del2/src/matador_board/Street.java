@@ -6,6 +6,10 @@ public class Street extends Ownable{
 		super(name, rent);
 	}
 
+	public Street(String name, int rent, int fieldNum) {
+		super(name, rent, fieldNum);
+	}
+
 //	public boolean landOnField() {
 //		// TODO Auto-generated method stub
 //		return false;
