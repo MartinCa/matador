@@ -73,16 +73,16 @@ private static boolean gui = true;
 		return BoundaryToPlayer.getPlayerAccept(activePlayer);
 	}
 	
-	/**
-	 * Will set the dice on the GUI to the facevalue of the Dies instances in the game if gui is true.
-	 * @param facevalues Array of ints containing the facevalue of all the Dice in the game.
-	 * @see BoundaryToGUI
-	 */
-	public static void setDice(int[] facevalues) {
-		if (gui) {
-			BoundaryToGUI.setDice(facevalues);
-		}
-	}
+//	/**
+//	 * Will set the dice on the GUI to the facevalue of the Dies instances in the game if gui is true.
+//	 * @param facevalues Array of ints containing the facevalue of all the Dice in the game.
+//	 * @see BoundaryToGUI
+//	 */
+//	public static void setDice(MatadorRafleBaeger baeger) {
+//		if (gui) {
+//			BoundaryToGUI.setDice(baeger);
+//		}
+//	}
 	
 	/**
 	 * Shows the status of the game. BoundaryToPlayer is responsible for formatting the two provided Array of ints.
@@ -90,8 +90,9 @@ private static boolean gui = true;
 	 * @param playerPoints Array of ints containg the points of all the Players in the game.
 	 * @see BoundaryToPlayer
 	 */
-	public static void showStatus(int[] facevalues, int[] playerPoints) {
-		BoundaryToPlayer.showStatus(facevalues, playerPoints);
+	public static void showStatus(MatadorRafleBaeger baeger, Player[] players) {
+		BoundaryToGUI.setDice(baeger);
+		BoundaryToPlayer.showStatus(baeger, players);
 	}
 	
 	/**

@@ -32,7 +32,7 @@ public class BoundaryToPlayer {
 		
 		do {
 			input.reset();
-			showString("Det er spiller " + activePlayer + "'s tur. Tast " + activePlayer + " for at slå");
+			showString("Det er spiller " + activePlayer + "'s tur. Tast " + activePlayer + " for at slï¿½");
 			inputInt = input.nextInt();
 		} while (inputInt != activePlayer);
 		return inputInt == activePlayer;
@@ -61,9 +61,11 @@ public class BoundaryToPlayer {
 	 * @param facevalues Array of ints containing the facevalue of all the Die instances in the Game.
 	 * @param playerPoints Array of ints containing the points of all the Player instances in the Game.
 	 */
-	public static void showStatus(int[] facevalues, int[] playerPoints) {
+	public static void showStatus(MatadorRafleBaeger baeger, Player[] players) {
 		int i = 1;
 		String toShow = "\nStatus\n";
+		int[] facevalues = baeger.getFacevalues();
+		int[] playerBalances = getPlayerBalances(players);
 		
 		for (int facevalue : facevalues) {
 			toShow += "Terning " + i + ": " + facevalue;
@@ -75,13 +77,24 @@ public class BoundaryToPlayer {
 		
 		i = 1;
 		toShow += "\n";
-		for (int playerPoint : playerPoints) {
-			toShow += "Spiller " + i + ": " + playerPoint;
-			if (i < playerPoints.length) {
+		for (int playerBalance : playerBalances) {
+			toShow += "Spiller " + i + ": " + playerBalance;
+			if (i < playerBalances.length) {
 				toShow += ", ";
 			}
 			i++;
 		}
 		System.out.println(toShow);
+	}
+	
+	private static int[] getPlayerBalances(Player[] players) {
+		int[] returnArray = new int[players.length];
+		int i = 0;
+				
+		for (Player player : players) {
+			returnArray[i] = player.getKonto().getBalance();
+			i++;
+		}
+		return returnArray;
 	}
 }

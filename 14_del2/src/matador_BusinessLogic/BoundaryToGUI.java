@@ -24,7 +24,8 @@ public class BoundaryToGUI {
 	 * Only shows the dice if the Array has a length of 2. 
 	 * @param facevalues Array of ints of the length 2.
 	 */
-	public static void setDice(int[] facevalues) {
+	public static void setDice(MatadorRafleBaeger baeger) {
+		int[] facevalues = baeger.getFacevalues();
 		if (facevalues.length == 2) {
 			GUI.setDice(facevalues[0], facevalues[1]);
 		}

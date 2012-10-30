@@ -42,7 +42,7 @@ public class Game {
 	private void createPlayers(int balance) {
 		for (int i = 0; i < players.length; i++) {
 			players[i] = new Player("Spiller " + (i+1), i, balance);
-			GameController.addPlayer("Spiller " + (i+1), 100, i); // CHANGE: Should we even have GameController or is Game the Controller?
+			GameController.addPlayer("Spiller " + (i+1), balance, i); // CHANGE: Should we even have GameController or is Game the Controller?
 		}
 	}
 	
@@ -64,9 +64,8 @@ public class Game {
 		int balanceChange;
 		GameController.showString("" + players[activePlayer].getName() + " har turen.");
 		baeger.rollDice();
-		GameController.setDice(baeger.getFacevalues());
 		balanceChange = board.getFieldAction(baeger.getSum() - 2);
-		System.out.println(balanceChange);
+		//System.out.println(balanceChange);
 		
 		if (balanceChange >= 0) {
 			players[activePlayer].getKonto().deposit(balanceChange);
@@ -74,7 +73,8 @@ public class Game {
 			nextPlayer();
 			winner = true;
 		}
-		GameController.showStatus(baeger.getFacevalues(), getPlayerPoints());
+		//GameController.setDice(baeger);
+		GameController.showStatus(baeger, players);
 		endRoundChecks();
 	}
 	
@@ -124,20 +124,20 @@ public class Game {
 		}
 	}
 
-	/**
-	 * Returns an Array of ints containing alle the Player instances points.
-	 * @return Array of ints with all the Player instances points.
-	 */
-	private int[] getPlayerPoints() {
-		int[] returnArray = new int[players.length];
-		int i = 0;
-				
-		for (Player player : players) {
-			returnArray[i] = player.getKonto().getBalance();
-			i++;
-		}
-		return returnArray;
-	}
+//	/**
+//	 * Returns an Array of ints containing alle the Player instances points.
+//	 * @return Array of ints with all the Player instances points.
+//	 */
+//	private int[] getPlayerPoints() {
+//		int[] returnArray = new int[players.length];
+//		int i = 0;
+//				
+//		for (Player player : players) {
+//			returnArray[i] = player.getKonto().getBalance();
+//			i++;
+//		}
+//		return returnArray;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
