@@ -17,6 +17,7 @@ public class Konto {
 	
 	public boolean withdraw(int amount) {
 		if (amount > balance) {
+			balance = 0; // Balance set to zero instead of going to negative.
 			return false;
 		} else {
 			balance -= amount;
