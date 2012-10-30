@@ -1,6 +1,9 @@
 package matador_Test;
 
 import static org.junit.Assert.*;
+//import static org.mockito.Mockito.*;
+
+import java.util.Random;
 
 import matador_BusinessLogic.*;
 
@@ -59,4 +62,13 @@ public class TestDie {
 		assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= 6);
 	}
 
+	//Testing mock 
+//	@Test
+//	public void testDieWithMock(){
+//		Die mockDie = mock(Die.class);
+//		Random mockRand = mock(Random.class);
+//		when(mockRand.nextInt()).thenReturn(3);
+//		when(mockDie.rollDie()).then.mockRand.nextInt(3);
+//		assertTrue(mockDie.getFacevalue() == 3);
+//	}
 }
