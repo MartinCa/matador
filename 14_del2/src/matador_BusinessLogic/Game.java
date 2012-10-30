@@ -42,7 +42,7 @@ public class Game {
 	private void createPlayers(int balance) {
 		for (int i = 0; i < players.length; i++) {
 			players[i] = new Player("Spiller " + (i+1), i, balance);
-			GameController.addPlayer("Spiller " + (i+1), balance, i); // CHANGE: Should we even have GameController or is Game the Controller?
+			GameController.addPlayer(players[i]); // CHANGE: Should we even have GameController or is Game the Controller?
 		}
 	}
 	

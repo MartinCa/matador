@@ -37,7 +37,11 @@ public class BoundaryToGUI {
 	 * @param balance balance of the Player as an int.
 	 * @param carColor color of the Players car as an int [0:5].
 	 */
-	public static void addPlayer(String playerName, int balance, int carColor) {
+	public static void addPlayer(Player player) {
+		String playerName = player.getName();
+		int balance = player.getKonto().getBalance();
+		int carColor = player.getCarColor();
+		
 		GUI.addPlayer(playerName, balance, carColor);
 	}
 	

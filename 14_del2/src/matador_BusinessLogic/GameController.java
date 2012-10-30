@@ -47,9 +47,9 @@ private static boolean gui = true;
 	 * @param carColor color of the Players car as an int.
 	 * @see BoundaryToGUI
 	 */
-	public static void addPlayer(String name, int balance, int carColor) {
+	public static void addPlayer(Player player) {
 		if (gui) {
-			BoundaryToGUI.addPlayer(name, balance, carColor);
+			BoundaryToGUI.addPlayer(player);
 		}
 	}
 	
