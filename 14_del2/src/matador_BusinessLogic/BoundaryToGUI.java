@@ -63,7 +63,7 @@ public class BoundaryToGUI {
 	 * @param fieldNumber int [1:40]
 	 * @param carColor int used to reprensent the Player and the color of his car [0:5].
 	 */
-	public static void setCar(int fieldNumber, int carColor) {
-		GUI.setCar((fieldNumber%40)+1, carColor);
+	public static void setCar(int fieldNum, Player player) {
+		GUI.setCar(fieldNum, player.getCarColor());
 	}
 }

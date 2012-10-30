@@ -42,5 +42,9 @@ public class Board {
 		
 		return balanceChange;
 	}
+	
+	public Field getField(int index) {
+		return boardFields[index];
+	}
 }
 

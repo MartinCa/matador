@@ -23,7 +23,11 @@ public abstract class Field {
 		return changeBalance;
 	}
 	
-	public String getname() {
+	public String getName() {
 		return name;
+	}
+	
+	public int getFieldNum() {
+		return fieldNum;
 	}
 }

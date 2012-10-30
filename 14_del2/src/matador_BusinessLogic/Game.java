@@ -74,7 +74,9 @@ public class Game {
 			winner = true;
 		}
 		//GameController.setDice(baeger);
+		GameController.setCar(board.getField(baeger.getSum() - 2).getFieldNum(), players[activePlayer]);
 		GameController.showStatus(baeger, players);
+		
 		endRoundChecks();
 	}
 	

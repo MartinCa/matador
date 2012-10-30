@@ -1,5 +1,7 @@
 package matador_BusinessLogic;
 
+import matador.ui.BoundaryToPlayer;
+
 /**
  * Starts the game and handles communication between Game and the boundaries.
  * The rules can be modified with a constructor, the extra options are:
@@ -57,9 +59,9 @@ private static boolean gui = true;
 	 * Sets the cars position on the GUI, if gui is true.
 	 * @see BoundaryToGUI
 	 */
-	public static void setCar(int point, int carColor) {
+	public static void setCar(int fieldNum, Player player) {
 		if (gui) {
-			BoundaryToGUI.setCar(point, carColor);
+			BoundaryToGUI.setCar(fieldNum, player);
 		}
 	}
 	
