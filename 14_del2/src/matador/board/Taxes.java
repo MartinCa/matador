@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public class Taxes extends Field{
 	//private int tax;

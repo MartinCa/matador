@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public abstract class Field {
 	private String name;

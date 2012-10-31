@@ -2,9 +2,9 @@ package matador.ui;
 
 import java.util.Scanner;
 
-import matador_BusinessLogic.GameController;
-import matador_BusinessLogic.MatadorRafleBaeger;
-import matador_BusinessLogic.Player;
+import matador.business_logic.GameController;
+import matador.business_logic.MatadorRafleBaeger;
+import matador.business_logic.Player;
 
 /**
  * Provides a boundary for communicating with the physical player.

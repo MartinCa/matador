@@ -1,11 +1,11 @@
-package matador_Test;
+package matador.test;
 
 import static org.junit.Assert.*;
 //import static org.mockito.Mockito.*;
 
 import java.util.Random;
 
-import matador_BusinessLogic.*;
+import matador.business_logic.*;
 
 import org.junit.After;
 import org.junit.AfterClass;

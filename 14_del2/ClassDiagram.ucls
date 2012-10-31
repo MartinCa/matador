@@ -1,15 +1,15 @@
 <class-diagram version="1.0.10" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.Main" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/Main.java" binary="false">    
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Main" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/Main.java" binary="false">    
     <position height="95" width="111" x="593" y="-234"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="2" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.Konto" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/Konto.java" binary="false">    
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Konto" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/Konto.java" binary="false">    
     <position height="180" width="131" x="432" y="714"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -24,56 +24,56 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="4" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.GameController" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/GameController.java" binary="false">    
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.GameController" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/GameController.java" binary="false">    
     <position height="214" width="251" x="593" y="-99"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="5" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.Player" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/Player.java" binary="false">    
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Player" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/Player.java" binary="false">    
     <position height="180" width="118" x="472" y="477"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="6" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.TestMatadorRafleBaeger" 
-    project="14_del2" file="/14_del2/src/matador_BusinessLogic/TestMatadorRafleBaeger.java" binary="false">    
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.TestMatadorRafleBaeger" 
+    project="14_del2" file="/14_del2/src/matador/business_logic/TestMatadorRafleBaeger.java" binary="false">    
     <position height="95" width="165" x="884" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="7" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.Game" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/Game.java" binary="false">    
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Game" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/Game.java" binary="false">    
     <position height="282" width="140" x="432" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="8" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.MatadorRafleBaeger" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/MatadorRafleBaeger.java" binary="false">    
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.MatadorRafleBaeger" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/MatadorRafleBaeger.java" binary="false">    
     <position height="197" width="142" x="651" y="477"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="9" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.BoundaryToGUI" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/BoundaryToGUI.java" binary="false">    
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.BoundaryToGUI" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/BoundaryToGUI.java" binary="false">    
     <position height="163" width="190" x="633" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="10" corner="BOTTOM_RIGHT" language="java" name="matador_BusinessLogic.Die" project="14_del2" 
-    file="/14_del2/src/matador_BusinessLogic/Die.java" binary="false">    
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Die" project="14_del2" 
+    file="/14_del2/src/matador/business_logic/Die.java" binary="false">    
     <position height="180" width="111" x="651" y="714"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      

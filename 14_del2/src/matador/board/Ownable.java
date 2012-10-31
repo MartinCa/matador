@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public abstract class Ownable extends Field {
 	//private int rent;

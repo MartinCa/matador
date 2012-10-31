@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public class Shipping extends Ownable {
 

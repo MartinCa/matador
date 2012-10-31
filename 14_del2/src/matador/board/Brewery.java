@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public class Brewery extends Ownable {
 

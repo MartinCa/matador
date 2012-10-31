@@ -1,4 +1,4 @@
-package matador_BusinessLogic;
+package matador.business_logic;
 
 import boundaryToMatador.GUI;
 

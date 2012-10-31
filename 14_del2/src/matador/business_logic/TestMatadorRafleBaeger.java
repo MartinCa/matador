@@ -1,4 +1,4 @@
-package matador_BusinessLogic;
+package matador.business_logic;
 
 import java.text.NumberFormat;
 
@@ -47,14 +47,14 @@ public class TestMatadorRafleBaeger {
 			System.out.println(nf.format(i + 2) + ": " + nfpercent.format((float) dicevalues[i] / MAXCOUNT));
 		}
 		
-		System.out.println("\nDer blev slået to ens: " + sameCount + " gange.\nDet svarer til " + nfpercent.format((float) sameCount / MAXCOUNT));
+		System.out.println("\nDer blev slï¿½et to ens: " + sameCount + " gange.\nDet svarer til " + nfpercent.format((float) sameCount / MAXCOUNT));
 		
 		System.out.println("\nI alt er der med 2 terninger 36 forskellige muligheder (6*6).\n" +
 				"Der er 1 af de muligheder der giver 2, 2 der giver 3, 3 der giver 4, osv. op til 6 der giver 7. \n" +
-				"Fra 7 og opefter går det nedaf igen så det ender med at der er 1 mulighed der giver 12.\n");
-		System.out.println("Én mulighed svarer til " + nfpercent.format((float) 1 / 36) + "\n" +
-				"Det er altså den procent som 2 og 12 ca skal ligge på, hvorimod syv skal ligge på ca. " + nfpercent.format((float) 6 / 36) + ".");
-		System.out.println("\nDer er samme sandsynlighed for at værdien af de to terninger er ens som der er for at slå summen syv 6 muligheder ud af 36.\nDerfor skal der helst være omkring " +
-				nfpercent.format((float) 6 / 36) + " af slagene hvor de to terninger har samme værdi.");
+				"Fra 7 og opefter gï¿½r det nedaf igen sï¿½ det ender med at der er 1 mulighed der giver 12.\n");
+		System.out.println("ï¿½n mulighed svarer til " + nfpercent.format((float) 1 / 36) + "\n" +
+				"Det er altsï¿½ den procent som 2 og 12 ca skal ligge pï¿½, hvorimod syv skal ligge pï¿½ ca. " + nfpercent.format((float) 6 / 36) + ".");
+		System.out.println("\nDer er samme sandsynlighed for at vï¿½rdien af de to terninger er ens som der er for at slï¿½ summen syv 6 muligheder ud af 36.\nDerfor skal der helst vï¿½re omkring " +
+				nfpercent.format((float) 6 / 36) + " af slagene hvor de to terninger har samme vï¿½rdi.");
 	}
 }

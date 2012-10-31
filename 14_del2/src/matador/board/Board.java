@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public class Board {
 	private Field[] boardFields;	// array containing each field on the board 

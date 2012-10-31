@@ -1,4 +1,4 @@
-package matador_board;
+package matador.board;
 
 public class Street extends Ownable{
 	

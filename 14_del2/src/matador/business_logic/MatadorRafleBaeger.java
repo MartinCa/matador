@@ -1,4 +1,4 @@
-package matador_BusinessLogic;
+package matador.business_logic;
 
 /**
  * Provides a MatadorRafleBaeger containing either two or a custom number of pseudo random six-sided dice. Provides necessary methods to support the Game class.
