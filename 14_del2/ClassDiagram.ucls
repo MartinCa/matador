@@ -1,7 +1,7 @@
 <class-diagram version="1.0.10" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.Main" project="14_del2" 
-    file="/14_del2/src/matador/business_logic/Main.java" binary="false">    
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="Main" project="14_del2" file="/14_del2/src/Main.java" 
+    binary="false">    
     <position height="95" width="111" x="593" y="-234"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="9" corner="BOTTOM_RIGHT" language="java" name="matador.business_logic.BoundaryToGUI" project="14_del2" 
-    file="/14_del2/src/matador/business_logic/BoundaryToGUI.java" binary="false">    
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="matador.ui.BoundaryToGUI" project="14_del2" 
+    file="/14_del2/src/matador/ui/BoundaryToGUI.java" binary="false">    
     <position height="163" width="190" x="633" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      

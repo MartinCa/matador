@@ -1,6 +1,8 @@
 package matador.business_logic;
 
 import matador.board.*;
+import matador.ui.BoundaryToGUI;
+import matador.ui.BoundaryToPlayer;
 
 /**
  * 
@@ -42,7 +44,7 @@ public class Game {
 	private void createPlayers(int balance) {
 		for (int i = 0; i < players.length; i++) {
 			players[i] = new Player("Spiller " + (i+1), i, balance);
-			GameController.addPlayer(players[i]); // CHANGE: Should we even have GameController or is Game the Controller?
+			BoundaryToGUI.addPlayer(players[i]); // CHANGE: Should we even have GameController or is Game the Controller?
 		}
 	}
 	
@@ -50,7 +52,7 @@ public class Game {
 	 * Starts the game. The game will have the options set by the constructor.
 	 */
 	public void startGame() {
-		GameController.showString("Spillet starter");
+		BoundaryToPlayer.showString("Spillet starter");
 		oneRound();
 	}
 	
@@ -62,10 +64,9 @@ public class Game {
 	 */
 	private void oneRound() {
 		int balanceChange;
-		GameController.showString("" + players[activePlayer].getName() + " har turen.");
+		BoundaryToPlayer.showString("" + players[activePlayer].getName() + " har turen.");
 		baeger.rollDice();
 		balanceChange = board.getFieldAction(baeger.getSum() - 2);
-		//System.out.println(balanceChange);
 		
 		if (balanceChange >= 0) {
 			players[activePlayer].getKonto().deposit(balanceChange);
@@ -73,9 +74,7 @@ public class Game {
 			nextPlayer();
 			winner = true;
 		}
-		//GameController.setDice(baeger);
-		GameController.setCar(board.getField(baeger.getSum() - 2).getFieldNum(), players[activePlayer]);
-		GameController.showStatus(baeger, players);
+		ShowStatus(baeger, players, board.getField(baeger.getSum() - 2));
 		
 		endRoundChecks();
 	}
@@ -91,12 +90,19 @@ public class Game {
 	private void endRoundChecks() {
 		checkWinner();
 		if (winner) {
-			GameController.showString("" + players[activePlayer].getName() + " vandt spillet.");
+			BoundaryToPlayer.showString("" + players[activePlayer].getName() + " vandt spillet.");
 			gameEnd();
 		} else {
 			nextPlayer();
 			oneRound();
 		}
+	}
+	
+	private void ShowStatus(MatadorRafleBaeger baeger, Player[] players, Field field) {
+		BoundaryToGUI.setCar(field, players[activePlayer]);
+		BoundaryToGUI.setDice(baeger);
+		BoundaryToPlayer.showStatus(baeger, players);
+		BoundaryToGUI.setBalance(players);
 	}
 	
 	/**

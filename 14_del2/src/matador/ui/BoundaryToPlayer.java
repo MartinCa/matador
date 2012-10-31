@@ -2,7 +2,6 @@ package matador.ui;
 
 import java.util.Scanner;
 
-import matador.business_logic.GameController;
 import matador.business_logic.MatadorRafleBaeger;
 import matador.business_logic.Player;
 

@@ -1,6 +1,9 @@
-package matador.business_logic;
+package matador.ui;
 
 import boundaryToMatador.GUI;
+import matador.board.*;
+import matador.business_logic.MatadorRafleBaeger;
+import matador.business_logic.Player;
 
 /**
  * Provides a boundary for communicating with the provided GUI.
@@ -63,7 +66,7 @@ public class BoundaryToGUI {
 	 * @param fieldNumber int [1:40]
 	 * @param carColor int used to reprensent the Player and the color of his car [0:5].
 	 */
-	public static void setCar(int fieldNum, Player player) {
-		GUI.setCar(fieldNum, player.getCarColor());
+	public static void setCar(Field field, Player player) {
+		GUI.setCar(field.getFieldNum(), player.getCarColor());
 	}
 }
