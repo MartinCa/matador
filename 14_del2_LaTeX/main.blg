@@ -1,0 +1,14 @@
+[0] Config.pm:357> INFO - This is Biber 1.2
+[1] Config.pm:360> INFO - Logfile is 'main.blg'
+[2] biber-MSWIN:152> INFO - === %a %b %e, %Y, %H:%M:%S
+[3] Biber.pm:286> INFO - Reading 'main.bcf'
+[164] Biber.pm:585> INFO - Found 3 citekeys in bib section 0
+[231] Biber.pm:2802> INFO - Processing section 0
+[257] Biber.pm:2895> INFO - Looking for bibtex format file 'main.bib' for section 0
+[264] bibtex.pm:783> INFO - Decoding LaTeX character macros into UTF-8
+[265] bibtex.pm:658> INFO - Found BibTeX data source 'main.bib'
+[501] Biber.pm:2691> INFO - Overriding locale 'English_United States.1252' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[501] Biber.pm:2697> INFO - Sorting 'entry' list 'anyt' keys
+[501] Biber.pm:2701> INFO - No sort tailoring available for locale 'English_United States.1252'
+[578] bbl.pm:456> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[578] bbl.pm:516> INFO - Output to main.bbl
