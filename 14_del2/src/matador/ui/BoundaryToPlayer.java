@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import matador.business_logic.MatadorRafleBaeger;
 import matador.business_logic.Player;
+import matador.board.*;
 
 /**
  * Provides a boundary for communicating with the physical player.
@@ -29,16 +30,16 @@ public class BoundaryToPlayer {
 	 * @param activePlayer the activer Player instances index in the Array.
 	 * @return the int entered by the physical player as an int.
 	 */
-	public static boolean getPlayerAccept(int activePlayer) {
+	public static boolean getPlayerAccept(Player activePlayer) {
 		int inputInt;
-		activePlayer++; // Increment by one to match Player name.
-		
+		int playerInt = activePlayer.getCarColor() + 1;
+
 		do {
 			input.reset();
-			showString("Det er spiller " + activePlayer + "'s tur. Tast " + activePlayer + " for at sl�");
+			showString("Det er spiller " + playerInt + "'s tur. Tast " + playerInt + " for at slå:");
 			inputInt = input.nextInt();
-		} while (inputInt != activePlayer);
-		return inputInt == activePlayer;
+		} while (inputInt != playerInt);
+		return inputInt == playerInt;
 	}
 	
 	/**
@@ -55,6 +56,17 @@ public class BoundaryToPlayer {
 	public static void closeScanner() {
 		input.close();
 	}
+	
+	public static void landOnField(Field field) {
+		String fieldName = field.getName();
+		String result = "Det ";
+		
+		System.out.println("Du landede på: " + fieldName + ".");
+		result += (field.getChangeBalance() >= 0) ? "giver " + field.getChangeBalance(): "koster " + (-field.getChangeBalance());
+		result += ".";
+		System.out.println(result);
+	}
+	
 	
 	/**
 	 * Outputs the status of the Game to the physical player in the console.

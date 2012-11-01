@@ -29,7 +29,7 @@ public class Game {
 	public Game() {
 		baeger = new MatadorRafleBaeger();
 		players = new Player[2]; // This game will be played with two players
-		winpoint = 30000; // Winner at 30000 balance
+		winpoint = 30000; // Winner at balance of 30000
 		activePlayer = 0; // Player one starts
 		int initBalance = 10000; // Initial
 		board = new Board();
@@ -44,7 +44,7 @@ public class Game {
 	private void createPlayers(int balance) {
 		for (int i = 0; i < players.length; i++) {
 			players[i] = new Player("Spiller " + (i+1), i, balance);
-			BoundaryToGUI.addPlayer(players[i]); // CHANGE: Should we even have GameController or is Game the Controller?
+			BoundaryToGUI.addPlayer(players[i]);
 		}
 	}
 	
@@ -64,13 +64,16 @@ public class Game {
 	 */
 	private void oneRound() {
 		int balanceChange;
-		BoundaryToPlayer.showString("" + players[activePlayer].getName() + " har turen.");
+		Player actPlayer = players[activePlayer];
+		
+		BoundaryToPlayer.showString("\n" + actPlayer.getName() + " har turen.");
+		BoundaryToPlayer.getPlayerAccept(actPlayer);
 		baeger.rollDice();
 		balanceChange = board.getFieldAction(baeger.getSum() - 2);
 		
 		if (balanceChange >= 0) {
-			players[activePlayer].getKonto().deposit(balanceChange);
-		} else if (!players[activePlayer].getKonto().withdraw(-balanceChange)) {
+			actPlayer.getKonto().deposit(balanceChange);
+		} else if (!actPlayer.getKonto().withdraw(-balanceChange)) {
 			nextPlayer();
 			winner = true;
 		}
@@ -101,8 +104,9 @@ public class Game {
 	private void ShowStatus(MatadorRafleBaeger baeger, Player[] players, Field field) {
 		BoundaryToGUI.setCar(field, players[activePlayer]);
 		BoundaryToGUI.setDice(baeger);
-		BoundaryToPlayer.showStatus(baeger, players);
 		BoundaryToGUI.setBalance(players);
+		BoundaryToPlayer.showStatus(baeger, players);
+		BoundaryToPlayer.landOnField(field);
 	}
 	
 	/**
@@ -118,7 +122,7 @@ public class Game {
 	 * 
 	 */
 	private void gameEnd() {
-		// Nothing to see here move along
+		BoundaryToPlayer.closeScanner();
 	}
 	
 
