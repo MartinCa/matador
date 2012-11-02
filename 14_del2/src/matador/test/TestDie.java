@@ -1,7 +1,7 @@
 package matador.test;
 
 import static org.junit.Assert.*;
-//import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Random;
 
@@ -63,12 +63,12 @@ public class TestDie {
 	}
 
 	//Testing mock 
-//	@Test
-//	public void testDieWithMock(){
-//		Die mockDie = mock(Die.class);
-//		Random mockRand = mock(Random.class);
-//		when(mockRand.nextInt()).thenReturn(3);
-//		when(mockDie.rollDie()).then.mockRand.nextInt(3);
-//		assertTrue(mockDie.getFacevalue() == 3);
-//	}
+	@Test
+	public void testDieWithMock(){
+		Random mockRand = mock(Random.class);
+		when(mockRand.nextInt(6)).thenReturn(3);
+		Die die = new Die(mockRand);
+		die.rollDie();
+		assertTrue(die.getFacevalue() == 3+1);
+	}
 }

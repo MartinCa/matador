@@ -12,6 +12,7 @@ import java.util.Random;
 public class Die {
 	private int facevalue;
 	private int sides;
+	private static Random rand = new Random();
 	
 	/**
 	 * Constructs a Die with 6 sides and gives it a random value.
@@ -30,11 +31,17 @@ public class Die {
 		this.rollDie();
 	}
 	
+	public Die(Random rand) {
+		Die.rand = rand;
+		this.sides = 6;
+		this.facevalue = 1;
+	}
+	
 	/**
 	 * Rolls the Die using the nextInt method provided by java.util.Random.
 	 */
 	public void rollDie() {
-		Random rand = new Random();
+//		Random rand = new Random();
 		
 		facevalue = rand.nextInt(sides) + 1;
 	}
