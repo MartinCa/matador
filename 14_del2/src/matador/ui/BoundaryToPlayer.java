@@ -33,13 +33,25 @@ public class BoundaryToPlayer {
 	public static boolean getPlayerAccept(Player activePlayer) {
 		int inputInt;
 		int playerInt = activePlayer.getCarColor() + 1;
-
+		
 		do {
-			input.reset();
 			showString("Det er spiller " + playerInt + "'s tur. Tast " + playerInt + " for at slå:");
-			inputInt = input.nextInt();
+			inputInt = getPlayerInt(input, playerInt);
 		} while (inputInt != playerInt);
 		return inputInt == playerInt;
+	}
+	
+	private static int getPlayerInt(Scanner in, int playerInt) {
+		int inputInt;
+		
+		try  {
+			inputInt = in.nextInt();
+		} catch (Exception e) {
+			showString("Only integers are allowed.");
+			in.nextLine();
+			inputInt = getPlayerInt(in, playerInt);
+		}
+		return inputInt;
 	}
 	
 	/**
