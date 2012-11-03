@@ -2,16 +2,12 @@ package matador.board;
 
 public class Street extends Ownable{
 	
-	public Street(String name, int rent) {
-		super(name, rent);
+	public Street(String name, int changeBalance) {
+		super(name, changeBalance);
 	}
 
-	public Street(String name, int rent, int fieldNum) {
-		super(name, rent, fieldNum);
+	public Street(String name, int changeBalance, int fieldNum) {
+		super(name, changeBalance, fieldNum);
 	}
 
-//	public boolean landOnField() {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 }

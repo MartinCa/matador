@@ -37,12 +37,6 @@ public class Board {
 		boardFields[10] = new Refuge("Helle", 20000, 21);
 	}
 	
-	public int getFieldAction(int fieldIndex) {
-		int balanceChange = boardFields[fieldIndex].getChangeBalance();
-		
-		return balanceChange;
-	}
-	
 	public Field getField(int index) {
 		return boardFields[index];
 	}

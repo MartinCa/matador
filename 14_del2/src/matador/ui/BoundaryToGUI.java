@@ -29,7 +29,7 @@ public class BoundaryToGUI {
 	 */
 	public static void setDice(MatadorRafleBaeger baeger) {
 		int[] facevalues = baeger.getFacevalues();
-		if (facevalues.length == 2) {
+		if (facevalues.length == 2) { // Only show dice if the game uses two dice.
 			GUI.setDice(facevalues[0], facevalues[1]);
 		}
 	}

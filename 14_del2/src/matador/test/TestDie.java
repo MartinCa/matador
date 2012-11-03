@@ -49,26 +49,13 @@ public class TestDie {
 
 	@Test
 	public void testRollDie() {
-		die1 = new Die();
-		for (int i = 0; i <= 100; i++) {
-			die1.rollDie();
-			assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= 6);
-		}
-	}
-
-	@Test
-	public void testGetFacevalue() {
-		die1 = new Die();
-		assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= 6);
-	}
-
-	//Testing mock 
-	@Test
-	public void testDieWithMock(){
 		Random mockRand = mock(Random.class);
 		when(mockRand.nextInt(6)).thenReturn(3);
-		Die die = new Die(mockRand);
+		Die die = new Die(mockRand); // Sending the mockRandom to Die to be used for generating "random" numbers.
+		
 		die.rollDie();
+		
 		assertTrue(die.getFacevalue() == 3+1);
+		verify(mockRand).nextInt(6); // Verify that nextInt was actually called with the parameter 6.
 	}
 }

@@ -1,8 +1,7 @@
 package matador.business_logic;
 
 import matador.board.*;
-import matador.ui.BoundaryToGUI;
-import matador.ui.BoundaryToPlayer;
+import matador.ui.*;
 
 /**
  * 
@@ -31,7 +30,7 @@ public class Game {
 		players = new Player[2]; // This game will be played with two players
 		winpoint = 30000; // Winner at balance of 30000
 		activePlayer = 0; // Player one starts
-		int initBalance = 10000; // Initial
+		int initBalance = 10000; // Initial balance
 		board = new Board();
 		
 		createPlayers(initBalance);
@@ -65,11 +64,13 @@ public class Game {
 	private void oneRound() {
 		int balanceChange;
 		Player actPlayer = players[activePlayer];
+		Field actField;
 		
 		BoundaryToPlayer.showString("\n" + actPlayer.getName() + " har turen.");
 		BoundaryToPlayer.getPlayerAccept(actPlayer);
 		baeger.rollDice();
-		balanceChange = board.getFieldAction(baeger.getSum() - 2);
+		actField = board.getField(baeger.getSum() - 2);
+		balanceChange = actField.getChangeBalance();
 		
 		if (balanceChange >= 0) {
 			actPlayer.getKonto().deposit(balanceChange);
@@ -77,7 +78,7 @@ public class Game {
 			nextPlayer();
 			winner = true;
 		}
-		ShowStatus(baeger, players, board.getField(baeger.getSum() - 2));
+		ShowStatus(baeger, players, actField);
 		
 		endRoundChecks();
 	}
@@ -135,21 +136,6 @@ public class Game {
 			activePlayer = 0;
 		}
 	}
-
-//	/**
-//	 * Returns an Array of ints containing alle the Player instances points.
-//	 * @return Array of ints with all the Player instances points.
-//	 */
-//	private int[] getPlayerPoints() {
-//		int[] returnArray = new int[players.length];
-//		int i = 0;
-//				
-//		for (Player player : players) {
-//			returnArray[i] = player.getKonto().getBalance();
-//			i++;
-//		}
-//		return returnArray;
-//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

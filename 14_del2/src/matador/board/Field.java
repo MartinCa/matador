@@ -1,18 +1,16 @@
 package matador.board;
 
 public abstract class Field {
-	private String name;
-	private int changeBalance;
-	private int fieldNum;
+	protected String name;
+	protected int changeBalance;
+	protected int fieldNum;
 
-//	public abstract boolean landOnField();
-
-	public Field(String name, int changeBalance){
+	public Field(String name, int changeBalance) {
 		this.name = name;
 		this.changeBalance = changeBalance; // Added to simplify part 2.
 	}
 	
-	public Field(String name, int changeBalance, int fieldNum){
+	public Field(String name, int changeBalance, int fieldNum) {
 		this.name = name;
 		this.changeBalance = changeBalance; // Added to simplify part 2.
 		this.fieldNum = fieldNum;

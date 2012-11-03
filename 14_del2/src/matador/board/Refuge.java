@@ -1,29 +1,13 @@
 package matador.board;
 
 public class Refuge extends Field{
-//private String name;
-//private int bonus;
 
-	public Refuge(String name, int bonus) {
-		super(name, bonus);
-		//setBonus(bonus);
+	public Refuge(String name, int changeBalance) {
+		super(name, changeBalance);
 	}
 
-	public Refuge(String name, int bonus, int fieldNum) {
-		super(name, bonus, fieldNum);
+	public Refuge(String name, int changeBalance, int fieldNum) {
+		super(name, changeBalance, fieldNum);
 	}
 
-//	private void setBonus(int bonus) {
-//		this.bonus = bonus;		
-//	}
-//	
-//	public int getBonus() {
-//		return bonus;
-//	}
-
-	
-//	public boolean landOnField() {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 }

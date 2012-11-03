@@ -14,8 +14,7 @@ public class Main {
 	 * @param args not used.
 	 */
 	public static void main(String[] args) {
-		Game game = new Game(); // This runs a game with all the extra conditions on
-		//GameController game = new GameController(2, 0, false, false, false, false, false); // This runs the basic game to 25 with no extra conditions and no GUI.
+		Game game = new Game();
 		
 		game.startGame();
 	}

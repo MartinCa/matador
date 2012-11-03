@@ -40,9 +40,7 @@ public class Die {
 	/**
 	 * Rolls the Die using the nextInt method provided by java.util.Random.
 	 */
-	public void rollDie() {
-//		Random rand = new Random();
-		
+	public void rollDie() {		
 		facevalue = rand.nextInt(sides) + 1;
 	}
 	

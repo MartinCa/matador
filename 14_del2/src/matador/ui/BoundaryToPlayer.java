@@ -47,7 +47,7 @@ public class BoundaryToPlayer {
 		try  {
 			inputInt = in.nextInt();
 		} catch (Exception e) {
-			showString("Only integers are allowed.");
+			showString("Kun integers er tilladt.");
 			in.nextLine();
 			inputInt = getPlayerInt(in, playerInt);
 		}

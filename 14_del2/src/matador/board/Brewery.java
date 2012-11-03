@@ -2,12 +2,12 @@ package matador.board;
 
 public class Brewery extends Ownable {
 
-	public Brewery(String name, int rent) {
-		super(name, rent);
+	public Brewery(String name, int changeBalance) {
+		super(name, changeBalance);
+	}
+	
+	public Brewery(String name, int changeBalance, int fieldNum) {
+		super(name, changeBalance, fieldNum);
 	}
 
-	//	public boolean landOnField() {
-	//		// TODO Auto-generated method stub
-	//		return false;
-	//	}
 }

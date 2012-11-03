@@ -11,7 +11,6 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
-	//private Field field; // This is probably how we are going to implement the location of each player.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -44,15 +43,7 @@ public class Player {
 	public Konto getKonto() {
 		return konto;
 	}
-	
-//	public Field getField() {
-//		return field;
-//	}
-//	
-//	public void setGield(Field field) {
-//		this.field = field;
-//	}
-	
+
 	@Override
 	public String toString() {
 		return name + ": ";

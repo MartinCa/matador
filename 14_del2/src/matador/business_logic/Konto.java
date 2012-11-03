@@ -4,7 +4,7 @@ public class Konto {
 	private int balance;
 	
 	public Konto() {
-		balance = 10000;
+		balance = 10000; // Balance initially set to 10000 if no parameters are passed to the constructor.
 	}
 	
 	public Konto(int balance) {
