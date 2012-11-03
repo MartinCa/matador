@@ -1,0 +1,63 @@
+\tikzumlset{fill object=white,font=\tiny}
+\begin{tikzpicture}
+	\begin{umlseqdiag}
+		\umlactor[scale=0.5,y=-0.7]{Spiller 1}
+		\umlobject[x=2,class=Game]{game}
+		\umlobject[x=4.6]{BoundaryToPlayer}
+		\umlobject[x=9.7,class=MRB]{baeger}
+		\umlobject[x=11.6,class=Die,stereo=multi]{dice}
+		\umlobject[x=7.4]{BoundaryToGUI}
+		\umlobject[x=13.5,class=Player,stereo=multi]{players}
+		\umlobject[x=15.7,class=Board]{board}
+		\umlobject[x=18,class=Field,stereo=multi]{boardFields}
+		\umlobject[x=20.5,class=Konto,stereo=multi]{konto}
+	
+		\begin{umlcallself}[op=oneRound(),dt=3,padding=1]{game}
+			\begin{umlcall}[op=showString(),padding=0]{game}{BoundaryToPlayer}
+			\end{umlcall}
+			\begin{umlcall}[op=getPlayerAccept(),return=bool,padding=1.5]{game}{BoundaryToPlayer}
+				\begin{umlcall}[op=Scanner,return=int,padding=1.5,dt=2]{BoundaryToPlayer}{Spiller 1}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=rollDice(),dt=2,padding=0]{game}{baeger}
+				\begin{umlcall}[op=rollDie(),padding=0,dt=0.5]{baeger}{dice}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=getSum(),return=int,padding=1.5]{game}{baeger}
+				\begin{umlcall}[op=getFacevalue(), return=int,padding=1.5,dt=0.5]{baeger}{dice}
+				\end{umlcall}
+			\end{umlcall}
+			\begin{umlcall}[op=getField(), return=Field,padding=1.5,dt=2.2]{game}{board}
+			\end{umlcall}
+			\begin{umlcall}[op=getChangeBalance(), return=int,padding=1.5,dt=2.2]{game}{boardFields}
+			\end{umlcall}
+			\begin{umlcall}[op=getKonto(), return=Konto,padding=1.5,dt=2.2]{game}{players}
+			\end{umlcall}
+			\begin{umlcall}[op=deposit(int)/withdraw(int), return=void/bool,padding=1.5,dt=2.2]{game}{konto}
+			\end{umlcall}
+			\begin{umlcallself}[op=showStatus(),dt=1,padding=1]{game}
+				\begin{umlcall}[op={setCar(Field, Player), setDice(MRB), setBalance(Player[])},padding=0]{game}{BoundaryToGUI}
+				\end{umlcall}
+				\begin{umlcall}[op={showStatus(MRB, Player[]), landOnField(Field)},padding=0]{game}{BoundaryToPlayer}
+				\end{umlcall}
+			\end{umlcallself}
+			\begin{umlcallself}[op=endRoundChecks(),dt=0,padding=1]{game}
+				\begin{umlcallself}[op=checkWinner(),dt=1.3,padding=1]{game}
+					\begin{umlcall}[op=getBalance(),return=int,padding=1.5,dt=1]{game}{konto}
+					\end{umlcall}
+					\begin{umlfragment}[type=alt,label=winner,inner xsep=4]
+						\begin{umlcall}[op=showString(String),padding=0,dt=1]{game}{BoundaryToPlayer}
+						\end{umlcall}
+						\begin{umlcallself}[op=gameEnd(),padding=1,dt=1]{game}
+							\begin{umlcall}[op=closeScanner(),padding=0,dt=2.2]{game}{BoundaryToPlayer}
+							\end{umlcall}
+						\end{umlcallself}
+					\umlfpart[default]
+						\begin{umlcallself}[op=nextPlayer(),padding=1,dt=1]{game}
+						\end{umlcallself}
+					\end{umlfragment}
+				\end{umlcallself}
+			\end{umlcallself}
+		\end{umlcallself}
+	\end{umlseqdiag}
+\end{tikzpicture}

@@ -1962,7 +1962,7 @@
     <bcf:datasource type="file" datatype="bibtex">main.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">CDIOdel1</bcf:citekey>
+    <bcf:citekey order="1">CDIOdel2</bcf:citekey>
     <bcf:citekey order="2">umlbook</bcf:citekey>
     <bcf:citekey order="3">javabook</bcf:citekey>
   </bcf:section>

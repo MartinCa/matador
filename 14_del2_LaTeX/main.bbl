@@ -60,26 +60,26 @@
       \field{title}{Java Software Solutions Foundations of Program Design}
       \field{year}{2012}
     \endentry
-    \entry{CDIOdel1}{misc}{}
+    \entry{CDIOdel2}{misc}{}
       \name{labelname}{1}{}{%
-        {{hash=059a249e9dda6afa0956e930d6b8edd1}{Nyborg}{N\bibinitperiod}{Mads}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=5ce58d2977b97bd6ce1d79993acd76a1}{Nybord}{N\bibinitperiod}{Mads}{M\bibinitperiod}{}{}{}{}}%
       }
       \name{author}{1}{}{%
-        {{hash=059a249e9dda6afa0956e930d6b8edd1}{Nyborg}{N\bibinitperiod}{Mads}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=5ce58d2977b97bd6ce1d79993acd76a1}{Nybord}{N\bibinitperiod}{Mads}{M\bibinitperiod}{}{}{}{}}%
       }
       \list{organization}{1}{%
         {DTU}%
       }
-      \strng{namehash}{059a249e9dda6afa0956e930d6b8edd1}
-      \strng{fullhash}{059a249e9dda6afa0956e930d6b8edd1}
+      \strng{namehash}{5ce58d2977b97bd6ce1d79993acd76a1}
+      \strng{fullhash}{5ce58d2977b97bd6ce1d79993acd76a1}
       \field{labelalpha}{Nyb12}
       \field{sortinit}{N}
-      \field{labeltitle}{Del opgave 1}
+      \field{labeltitle}{Del opgave 2}
       \field{day}{08}
       \field{month}{08}
       \field{note}{Opgavebeskrivelse udleveret i forbindelse med projektet}
-      \field{subtitle}{Simpel anvendelse af klasser i Java og UML}
-      \field{title}{Del opgave 1}
+      \field{subtitle}{Anvendelse af klasser og relationer}
+      \field{title}{Del opgave 2}
       \field{version}{2012-08-08}
       \field{year}{2012}
     \endentry

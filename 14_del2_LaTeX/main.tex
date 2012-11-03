@@ -1,4 +1,4 @@
-\documentclass[final,12pt,a4paper,oneside,article,danish]{memoir} %Her sættes document classen samt indstillinger for classen, her er den sat til at efterligne article. Her angives også om dokumentet er final eller draft. Angiv også sprog her.
+\documentclass[draft,12pt,a4paper,oneside,article,danish]{memoir} %Her sættes document classen samt indstillinger for classen, her er den sat til at efterligne article. Her angives også om dokumentet er final eller draft. Angiv også sprog her.
 
 %%%Tjek liste for brug af denne template
 %%%%%%Indsæt forfatter istedet for Insert Author
@@ -45,12 +45,12 @@
 \usepackage{tikz-uml} %Bruges til at tegne UML diagrammer i LaTeX
 
 %Pakker der bruges i forbindelse med tabeller
-\usepackage{booktabs} %Benyttes til at lave bedre horisontale linjer i tabeller.
-\usepackage{dcolumn} %Benyttes til at lave tabelkolonner, hvor decimaladskilleren bruges til at aligne.
-\newcolumntype{d}[1]{D{.}{.}{#1}} %Laver en ny column type som er den der oftest bruges i dette projekt.
-\newcommand\mc[1]{\multicolumn{1}{c}{#1}} %Giver kommandoen mc{tekst} som bruges til at sørge for at teksten i dcolumn kolonner ikke bliver formateret som matematik.
-\usepackage{multirow} %Giver mulighed for celler der strækker sig over flere rækker.
-\renewcommand\multirowsetup{\centering} %Sikre at alt der skrives i multirow er centreret.
+%\usepackage{booktabs} %Benyttes til at lave bedre horisontale linjer i tabeller.
+%\usepackage{dcolumn} %Benyttes til at lave tabelkolonner, hvor decimaladskilleren bruges til at aligne.
+%\newcolumntype{d}[1]{D{.}{.}{#1}} %Laver en ny column type som er den der oftest bruges i dette projekt.
+%\newcommand\mc[1]{\multicolumn{1}{c}{#1}} %Giver kommandoen mc{tekst} som bruges til at sørge for at teksten i dcolumn kolonner ikke bliver formateret som matematik.
+%\usepackage{multirow} %Giver mulighed for celler der strækker sig over flere rækker.
+%\renewcommand\multirowsetup{\centering} %Sikre at alt der skrives i multirow er centreret.
 \usepackage{bigstrut}
 
 %Pakker til brug for matematik samt diverse symboler
@@ -137,8 +137,10 @@
 \newcommand{\codeparagraph}[1]{\paragraph{\texttt{#1}}}
 \newcommand{\klasse}[1]{\texttt{\textit{#1}}}
 \newcommand{\metode}[1]{\texttt{#1}}
+\DeclareOldFontCommand{\it}{\itshape}{\mathit}
 
 %Memoir checkandfixthelayout
+\usepackage{cleveref} %Gives commando \cref to easily make references that include type of object referenced.
 \checkandfixthelayout[nearest] 
 
 %Choosing the bibliography to load
@@ -170,6 +172,11 @@
 %Indholdsfortegnelse slutter
 %%%Herunder begynder selve indholdet%%%
 \input{indledning.tex}
+\input{krav.tex}
+\input{design.tex}
+\input{implementering.tex}
+\input{test.tex}
+\input{konklusion.tex}
 \newpage
 %Slut af indholdet
 %Herunder hentes litteraturlisten fra bib filen, kun de poster der bliver citeret bliver vist

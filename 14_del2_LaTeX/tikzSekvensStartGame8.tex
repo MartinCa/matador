@@ -1,0 +1,25 @@
+\tikzumlset{fill object=white,font=\tiny}
+\begin{tikzpicture}
+	\begin{umlseqdiag}
+	\umlobject[x=0,class=Main]{Main}
+	\umlobject[x=11,y=-8]{BoundaryToPlayer}
+		\umlcreatecall[x=2.5,class=Game]{Main}{game}
+		\umlcreatecall[x=6,class=MatadorRafleBaeger]{game}{baeger}
+		\begin{umlcall}[op=createDice(),padding=1]{baeger}{baeger}
+			\umlcreatecall[x=11.5,class=Die,stereo=multi,dt=2]{baeger}{dice}
+		\end{umlcall}
+		\umlcreatecall[x=7,class=Board,dt=11]{game}{board}
+		\begin{umlcall}[op=initBoard(),padding=1]{board}{board}
+			\umlcreatecall[class=Field,x=11,stereo=multi,dt=2]{board}{boardFields}
+		\end{umlcall}
+		\begin{umlcall}[op=createPlayers(),dt=5.5,padding=1]{game}{game}
+			\umlcreatecall[class=Player,stereo=multi,x=11,dt=2]{game}{players}
+		\end{umlcall}
+		\begin{umlcall}[op=startGame(),dt=34.5,padding=-2]{Main}{game}
+			\begin{umlcall}[op=showString(String),dt=5]{game}{BoundaryToPlayer}
+			\end{umlcall}
+			\begin{umlcallself}[op=oneRound(),padding=1,dt=0]{game}
+			\end{umlcallself}
+		\end{umlcall}
+	\end{umlseqdiag}
+\end{tikzpicture}
