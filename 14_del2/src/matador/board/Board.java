@@ -25,7 +25,7 @@ public class Board {
 	 * 
 	 * @param numFields [int] amount of fields to be created. Must be set to 11 or higher for this game.
 	 */
-	public void initBoard(int numFields) {
+	private void initBoard(int numFields) {
 		boardFields = new Field[numFields]; // sets array length to numFields
 
 		boardFields[0] = new Refuge("Start", 200, 1);
