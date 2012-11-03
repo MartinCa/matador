@@ -63,4 +63,8 @@ public class Konto {
 		this.balance = balance;
 	}
 
+	@Override
+	public String toString() {
+		return "Konto [balance=" + balance + "]";
+	}
 }

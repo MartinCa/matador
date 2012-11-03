@@ -52,6 +52,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return name + ": ";
+		return "Player [carColor=" + carColor + ", name=" + name + ", konto="
+				+ konto + "]";
 	}
 }
