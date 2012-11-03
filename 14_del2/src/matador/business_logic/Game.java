@@ -82,7 +82,7 @@ public class Game {
 			nextPlayer();
 			winner = true;
 		}
-		ShowStatus(baeger, players, actField);
+		ShowStatus(actField);
 		
 		endRoundChecks();
 	}
@@ -112,7 +112,7 @@ public class Game {
 	 * @param players Player[] with the players used in the game.
 	 * @param field Field that the active player landed on.
 	 */
-	private void ShowStatus(MatadorRafleBaeger baeger, Player[] players, Field field) {
+	private void ShowStatus(Field field) {
 		BoundaryToGUI.setCar(field, players[activePlayer]);
 		BoundaryToGUI.setDice(baeger);
 		BoundaryToGUI.setBalance(players);
