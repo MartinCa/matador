@@ -9,7 +9,6 @@ import matador.board.*;
 /**
  * Provides a boundary for communicating with the physical player.
  * @author Martin Caspersen
- * @see GameController
  *
  */
 public class BoundaryToPlayer {
@@ -27,8 +26,8 @@ public class BoundaryToPlayer {
 	 * Asks the physical player to enter a specific int. Checks whether the input matches the given int.
 	 * Keeps trying until the physical player enters the correct int.
 	 * Only accepts ints will throw an exception if anything but an int is entered.
-	 * @param activePlayer the activer Player instances index in the Array.
-	 * @return the int entered by the physical player as an int.
+	 * @param activePlayer the active Player.
+	 * @return True if the player entered the correct int, cannot return false.
 	 */
 	public static boolean getPlayerAccept(Player activePlayer) {
 		int inputInt;
@@ -36,12 +35,18 @@ public class BoundaryToPlayer {
 		
 		do {
 			showString("Det er spiller " + playerInt + "'s tur. Tast " + playerInt + " for at slå:");
-			inputInt = getPlayerInt(input, playerInt);
+			inputInt = getPlayerInt(input);
 		} while (inputInt != playerInt);
 		return inputInt == playerInt;
 	}
 	
-	private static int getPlayerInt(Scanner in, int playerInt) {
+	/**
+	 * Gets the actual input from the physical player.
+	 * Catches exceptions and tries again until the player enters a valid integet.
+	 * @param in Scanner to be used to get input from the physical player.
+	 * @return [int] that the physical player entered.
+	 */
+	private static int getPlayerInt(Scanner in) {
 		int inputInt;
 		
 		try  {
@@ -49,7 +54,7 @@ public class BoundaryToPlayer {
 		} catch (Exception e) {
 			showString("Kun integers er tilladt.");
 			in.nextLine();
-			inputInt = getPlayerInt(in, playerInt);
+			inputInt = getPlayerInt(in);
 		}
 		return inputInt;
 	}
@@ -69,14 +74,18 @@ public class BoundaryToPlayer {
 		input.close();
 	}
 	
+	/**
+	 * Prints what field the player landed on and what effect that has on the balance.
+	 * @param field the player landed on.
+	 */
 	public static void landOnField(Field field) {
 		String fieldName = field.getName();
 		String result = "Det ";
 		
-		System.out.println("Du landede på: " + fieldName + ".");
+		showString("Du landede på: " + fieldName + ".");
 		result += (field.getChangeBalance() >= 0) ? "giver " + field.getChangeBalance(): "koster " + (-field.getChangeBalance());
 		result += ".";
-		System.out.println(result);
+		showString(result);
 	}
 	
 	
@@ -84,9 +93,9 @@ public class BoundaryToPlayer {
 	 * Outputs the status of the Game to the physical player in the console.
 	 * The format of the output is:
 	 * Terning <num>: <facevalue>, . . .
-	 * Spiller <num>: <points>, . . .
-	 * @param facevalues Array of ints containing the facevalue of all the Die instances in the Game.
-	 * @param playerPoints Array of ints containing the points of all the Player instances in the Game.
+	 * Spiller <num>: <balance>, . . .
+	 * @param baeger containing the dice used in the game
+	 * @param players array containing the players in the game.
 	 */
 	public static void showStatus(MatadorRafleBaeger baeger, Player[] players) {
 		int i = 1;
@@ -114,6 +123,11 @@ public class BoundaryToPlayer {
 		System.out.println(toShow);
 	}
 	
+	/**
+	 * Helper method to get the players balance from the array of players.
+	 * @param players array containing the players.
+	 * @return array of int with the players balances.
+	 */
 	private static int[] getPlayerBalances(Player[] players) {
 		int[] returnArray = new int[players.length];
 		int i = 0;

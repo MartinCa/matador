@@ -3,6 +3,7 @@ import java.util.Random;
 
 /**
  * Provides a pseudo random die. The number of sides the Die has can be set using one of the constructors.
+ * Also a constructor that takes a Random object can be called to provide the Random object used to generate random numbers.
  * Rolling the Die is done using the nextInt method provided by java.util.Random.
  * @author Martin Caspersen
  * @see MatadorRafleBaeger
@@ -31,10 +32,14 @@ public class Die {
 		this.rollDie();
 	}
 	
+	/**
+	 * Constructs a Die with 6 sides and uses the provided Random object to generate random numbers.
+	 * Does not roll the Die.
+	 * @param rand Random object to be used for number generation.
+	 */
 	public Die(Random rand) {
 		Die.rand = rand;
 		this.sides = 6;
-		this.facevalue = 1;
 	}
 	
 	/**

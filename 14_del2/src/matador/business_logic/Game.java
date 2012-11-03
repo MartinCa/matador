@@ -4,11 +4,12 @@ import matador.board.*;
 import matador.ui.*;
 
 /**
- * 
+ * Controller for the game that is responsible for running the game using the other classes in the project.
  * @author Martin Caspersen
  * @see Player
  * @see MatadorRafleBaeger
  * @see Die
+ * @see Board
  *
  */
 public class Game {
@@ -21,9 +22,10 @@ public class Game {
 	
 	/**
 	 * Constructor that starts the game, 2 Die and 2 Player instances are created. Creates the baeger using MatadorRafleBaeger and two players of type Player.
-	 * With this constructor all the extra conditions will be on and "Spiller 1" will start the game.
+	 * "Spiller 1" will start the game.
 	 * @see MatadorRafleBaeger
 	 * @see Player
+	 * @see Board
 	 */
 	public Game() {
 		baeger = new MatadorRafleBaeger();
@@ -38,7 +40,7 @@ public class Game {
 	
 	/**
 	 * Helper method to create the right amount of Player instances in the players Array. Also tells GameController to add the Player instances if a GUI is used.
-	 * @see GameController
+	 * @see BoundaryToGUI
 	 */
 	private void createPlayers(int balance) {
 		for (int i = 0; i < players.length; i++) {
@@ -48,7 +50,7 @@ public class Game {
 	}
 	
 	/**
-	 * Starts the game. The game will have the options set by the constructor.
+	 * Starts the game.
 	 */
 	public void startGame() {
 		BoundaryToPlayer.showString("Spillet starter");
@@ -56,10 +58,12 @@ public class Game {
 	}
 	
 	/**
-	 * Used to run one round of the game. As soon as the Dice have been rolled, GameController will be asked to print the Dice to the GUI (if gui is turned on).
-	 * @see GameController
+	 * Used to run one round of the game.
+	 * Uses private helper method ShowStatus to print the status of the game to console and GUI.
+	 * Uses private helper method endRoundChecks to perform checks after the round have played.
 	 * @see MatadorRafleBaeger
 	 * @see Player
+	 * @see BoundaryToPlayer
 	 */
 	private void oneRound() {
 		int balanceChange;
@@ -87,7 +91,7 @@ public class Game {
 	 * Checks conditions at the end of the round to decide if there is a winner or if the Player gets an extra turn.
 	 * Also calls nextPlayer if needed to advance the turn to the next Player.
 	 * This adheres to the selected rules in the constructor.
-	 * @see GameController
+	 * Uses checkWinner to check if there is a winner by balance.
 	 * @see MatadorRafleBaeger
 	 * @see Player
 	 */
@@ -102,6 +106,12 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Prints the status of the game to Console and updates the provided GUI.
+	 * @param baeger MatadorRafleBaeger with the dice used in the game.
+	 * @param players Player[] with the players used in the game.
+	 * @param field Field that the active player landed on.
+	 */
 	private void ShowStatus(MatadorRafleBaeger baeger, Player[] players, Field field) {
 		BoundaryToGUI.setCar(field, players[activePlayer]);
 		BoundaryToGUI.setDice(baeger);
@@ -111,7 +121,7 @@ public class Game {
 	}
 	
 	/**
-	 * 
+	 * Checks to see if there is a winner by balance
 	 */
 	private void checkWinner() {
 		if (players[activePlayer].getKonto().getBalance() >= winpoint) {
@@ -120,7 +130,8 @@ public class Game {
 	}
 	
 	/**
-	 * 
+	 * Closes the Scanner in BoundaryToPlayer
+	 * @see BoundaryToPlayer
 	 */
 	private void gameEnd() {
 		BoundaryToPlayer.closeScanner();

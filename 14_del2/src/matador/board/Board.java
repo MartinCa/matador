@@ -1,12 +1,16 @@
 package matador.board;
 
+/**
+ * Represents the gameboard used in Matador, contains all the fields used in the game.
+ * @author Martin Caspersen
+ * @see Field
+ */
 public class Board {
 	private Field[] boardFields;	// array containing each field on the board 
 
 	/**
-	 * Constructor, calls method for creating game board
+	 * Constructor for creating the game board, makes the board with 11 fields. Calls initBoard to actually create the array and fields.
 	 * 
-	 * @see initBoard
 	 */
 	public Board() {
 		int numFields = 11; // assignment description demands 11 specific instances
@@ -19,7 +23,7 @@ public class Board {
 	 * Sets length of array boardFields to numFields. boardFields contains all fields 
 	 * for matador game board. 
 	 * 
-	 * @param numFields
+	 * @param numFields [int] amount of fields to be created. Must be set to 11 or higher for this game.
 	 */
 	public void initBoard(int numFields) {
 		boardFields = new Field[numFields]; // sets array length to numFields
@@ -37,6 +41,12 @@ public class Board {
 		boardFields[10] = new Refuge("Helle", 20000, 21);
 	}
 	
+	/**
+	 * Retunds the Field with given index in boardFields.
+	 * @param index [int] 0-10, index of Field to get.
+	 * @return Field requested.
+	 * @see Field
+	 */
 	public Field getField(int index) {
 		return boardFields[index];
 	}

@@ -1,10 +1,11 @@
 package matador.business_logic;
 
 /**
- * Provides a Player that is used in a dice game. The Player hold a name, points, carColor, balance and twelveLastTime.
+ * Provides a Player that is used in a dice game. The Player holds a name, carColor and a Konto.
  * Provides necessary functions used by the Game class.
  * @author Martin Caspersen
  * @see Game
+ * @see Konto
  *
  */
 public class Player {
@@ -16,7 +17,7 @@ public class Player {
 	 * Constructs a Player with the provided name, carColor and balance.
 	 * @param name name of the Player as a String.
 	 * @param carColor int describing the color of this Players car [0:5].
-	 * @param balance initial balance of the Player as an int.
+	 * @param balance initial balance of the Players Konto as an int.
 	 */
 	public Player(String name, int carColor, int balance) {
 		this.name = name;
@@ -40,6 +41,11 @@ public class Player {
 		return carColor;
 	}
 
+	/**
+	 * Returns the players Konto.
+	 * @return Konto of the player.
+	 * @see Konto
+	 */
 	public Konto getKonto() {
 		return konto;
 	}

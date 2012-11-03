@@ -9,7 +9,6 @@ import matador.business_logic.Player;
  * Provides a boundary for communicating with the provided GUI.
  * As this is basically a one to one mapping to boundaryToMatador the javadoc is taken from boundaryToMatador.
  * @author Martin Caspersen
- * @see GameController
  *
  */
 public class BoundaryToGUI {
@@ -25,7 +24,7 @@ public class BoundaryToGUI {
 	/**
 	 * Shows two dice on the board, the facevalues for the dice are provided in an Array of ints.
 	 * Only shows the dice if the Array has a length of 2. 
-	 * @param facevalues Array of ints of the length 2.
+	 * @param baeger containing the dice used in the game.
 	 */
 	public static void setDice(MatadorRafleBaeger baeger) {
 		int[] facevalues = baeger.getFacevalues();
@@ -36,9 +35,7 @@ public class BoundaryToGUI {
 	
 	/**
 	 * Adds a Player to the board. A new Player with the same color will replace the old. Max. 6 players.
-	 * @param playerName name of the Player as a String. Mind the length!
-	 * @param balance balance of the Player as an int.
-	 * @param carColor color of the Players car as an int [0:5].
+	 * @param player the player to be added to the GUI board.
 	 */
 	public static void addPlayer(Player player) {
 		String playerName = player.getName();
@@ -50,8 +47,7 @@ public class BoundaryToGUI {
 	
 	/**
 	 * Sets the balance of the Player with the provided carColor to newBalance. The Player must have been added first.
-	 * @param carColor Player represented by this color will get the balance changed.	
-	 * @param newBalance newBalance to set the Players balance to.
+	 * @param players the players to update the balance of.
 	 */
 	public static void setBalance(Player[] players) {
 		for (Player player : players) {
@@ -63,8 +59,8 @@ public class BoundaryToGUI {
 	 * Places a car on the field. All cars can be placed on the same field.
 	 * A car can only be placed if the corresponding player has been added. If a car is placed on the same field multiple times, nothing more happens. 
 	 * A car can not be placed on multiple fields simultaneously.
-	 * @param fieldNumber int [1:40]
-	 * @param carColor int used to reprensent the Player and the color of his car [0:5].
+	 * @param field to place the car on.
+	 * @param player owner of the car to be placed.
 	 */
 	public static void setCar(Field field, Player player) {
 		GUI.setCar(field.getFieldNum(), player.getCarColor());

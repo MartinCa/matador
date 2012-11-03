@@ -7,39 +7,24 @@ import java.util.Random;
 
 import matador.business_logic.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestDie {
 	Die die1;	
 	Die die2;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-		
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	/**
+	 * Tests the normal constructor of the Die.
+	 */
 	@Test
 	public void testDie() {
 		die1 = new Die();
 		assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= 6);
 	}
 
+	/**
+	 * Tests the constructor that takes sides as a parameter.
+	 */
 	@Test
 	public void testDieInt() {
 		int sides = 200;
@@ -47,6 +32,9 @@ public class TestDie {
 		assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= sides);
 	}
 
+	/**
+	 * Tests rollDie using a mock random generator.
+	 */
 	@Test
 	public void testRollDie() {
 		Random mockRand = mock(Random.class);

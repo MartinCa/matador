@@ -3,7 +3,7 @@
 import matador.business_logic.Game;
 
 /**
- * The sole purpose of the class is to start the Game. This is where the extra conditions can be toggled.
+ * The sole purpose of the class is to start the Game.
  * @author Martin Caspersen
  * @see Game
  *
