@@ -1,11 +1,92 @@
-\chapter{Krav}\label{chap:krav}
+\chapter{Krav[1]}\label{chap:krav}
 
 \section{Udgangspunkt}\label{sec:krav:kravUdgangspunkt}
+Som udgangspunkt for starten af dette projekt startede vi med at vælge at bruge koden som Martin havde skrevet i forbindelse med CDIO del 1 i gruppe 14. Derfor var vores kodemæssige udgangspunkt at vi havde en kodebase som levede op til kravene fra CDIO del 1 som de blev fortolket af gruppe 14.
 
-\section{Mål}\label{sec:krav:maal}
+En del af designet af løsningen af CDIO del 2 er altså at finde ud af hvilke dele af koden til del 1 der kan bruges i del 2. Martin valgte under programmeringen af del 1 af opdele spillet i forskellige klasser som havde forskelligt ansvar i forhold til at implementere spillet i del 1. På grund af den måde spillet var kodet på kunne de fleste af klasserne genbruges med få modifikationer. En af de ting vi dog ikke slipper uden om at skulle kode til del 2 er selve spillogikken.
+
+I del 1 havde Martin kodet følgende klasser som havde med selve spillet at gøre:
+\begin{itemize}
+\item \klasse{Die}
+\item \klasse{MatadorRafleBaeger}
+\item \klasse{Player}
+\item \klasse{Game}
+\item \klasse{GameController}
+\item \klasse{BoundaryToPlayer}
+\item \klasse{BoundaryToGUI}
+\item \klasse{Main}
+\end{itemize}
+
+Af disse klasser vidste vi med det samme at \klasse{Game} skulle undergå store ændringer for at kunne bruges i dette spil da denne klasse indeholder selve spillogikken. Det er dog mere interessant at overveje om de andre klasser i spillet kan bruges i dette spil. Af speciel interesse er især klasserne \klasse{Die}, \klasse{MatadorRafleBaeger} og \klasse{Game}. Hvis disse klasser ikke afhænger af \klasse{Game} for deres funktion vil de sandsynligvis kunne anvendes mere eller mindre uændret i dette spil. Heldigvis blev disse klasser kodet med hensyn til lav kobling og ingen af klasserne kender overhovedet til \klasse{Game}. Derfor vil vi være i stand til at bruge klasserne i dette spil hvor \klasse{Game} sandsynligvis vil være fuldstændig ændret. Vi er dog også klar over at især \klasse{Player} indeholder nogle funktioner der ikke er nødvendige i dette spil, senere vil vi komme ind på hvilke ændringer vi har foretaget i \klasse{Player}.
+\fxnote[inline,nomargin]{Sikr at vi rent faktisk beskriver ændringerne af \klasse{Game} senere.}
+
+Med hensyn til resten af klasserne regner vi med at især Boundary klasserne i stor stil vil kunne genbruges. Dette spil kommunikere nemlig også med både GUI og konsol.
+
+Inden vi nærmere kan bedømme hvilke ændringer der eventuelt skal foretages vil vi undersøge hvilke krav der er til dette spil. Dette vil blive behandlet i \vref{sec:krav:kravSpec}.
+
+\section{Kravspecifikation for del 2}\label{sec:krav:kravSpec}
+For at beskrive kravene til spillet i del 2 har vi valgt at benytte os af UP modellen for en kravspecifikation som præsenteret i 02313. I dette afsnit vil vi beskrive kravene til spillet som vi tolker dem, i en virkelig opgave skulle dette selvfølgelig ske i samarbejde med kunden i Elaboration fasen. Vi har dog ingen virkelig kunde og derfor er det også begrænset hvor meget elaboration vi benyttede os af i forbindelse med denne kravspecifikation. Kilde til dette afsnit er \cite{CDIOdel2}, som er opgavebeskrivelsen for CDIO del 2.
+
+\subsection{Formål med systemet}\label{sec:krav:kravSpec:formaal}
+Formålet med systemet er at der skal implementeres to klasser \klasse{Player} og \klasse{Konto}, som henholdsvis beskriver en matadorspiller og en spillers kontantbeholdning. Kravene til begge klasser er at de skal indeholde passende \metode{get}, \metode{set} og \metode{toString} metoder. Derudover skal \klasse{Konto} indeholde to metoder \metode{deposit(amount)} og \metode{withdraw(amount)}.
+
+\metode{deposit(amount)} skal tilføje amount til spillerens kontantbeholdning.
+
+\metode{withdraw(amount)} skal fjerne amount fra spillerens kontantbeholdning dog med den lille tilføjelse at kontantbeholdningen ikke må kunne gå i minus og metode skal fortælle om dette.
+
+Ved at bruge disse klasser samt \klasse{MatadorRafleBaeger} skal designes et lille spil. I spillet ønskes der benyttet en udleveret GUI som viser status af spillet.
+
+\subsection{Funktionelle krav}\label{sec:krav:kravSpec:funkKrav}
+
+\subsubsection{Use case diagram}
+I forbindelse med dette spil er der kun en menneskelig og en system aktør, henholdsvis spilleren og den udleverede GUI. Derudover har vi identificeret to use cases startGame og rollDie som bruges til henholdsvis at starte spillet og for at rulle terningerne i spillet. Begge use cases bruges af spilleren og kommunikere med GUI. Use case diagrammet kan ses i \vref{fig:tikzUseCase}.
 
 \begin{figure}
-\caption{Usecasediagram.}\label{fig:tikzUseCase}
+\caption{Use case diagram.}\label{fig:tikzUseCase}
 \centering
 \input{tikzUseCase.tex}
 \end{figure}
+
+\subsubsection{Use case beskrivelser}
+
+\subsubsection{startGame}
+
+\paragraph{Deltagende aktører:} Initieres af spilleren og interagerer med GUI.
+
+\begin{enumerate}
+\item Spilleren starter spillet.
+\item Systemet sætter systemet op til at køre spillet.
+\item Systemet giver kontrollen tilbage til spilleren og han kan nu rulle terningerne, se use case rollDie.
+\end{enumerate}
+
+\subsubsection{rollDie}
+\paragraph{Deltagende aktører:} Initieres af spilleren, interagerer med GUI.
+
+\paragraph{Pre konditioner:} Spillet er starter jævnfør use case startGame.
+
+Standard forløb uden vinder:
+\begin{enumerate}
+\item Spilleren har kontrollen og systemet er sat op og klar til at spille, se use case startGame.
+\item Spilleren ruller terningerne.
+\item Systemet ruller terningerne som repræsenteret i systemet.
+\item Systemet kontrollerer hvilket felt spilleren er landet på.
+\item Systemet undersøger hvordan spilleren kontantbeholdning påvirkes.
+\item Systemet opdaterer spillerens kontantbeholdning.
+\item Systemet præsenterer status af spillet for spilleren.
+\item Systemet kontroller om der er en vinder.
+\end{enumerate}
+Trin 2 - 8 gentages indtil der bliver fundet en vinder, hver gang trin 2 nås skiftes til den anden spiller.
+
+\begin{enumerate}[8a.]
+\item Der findes en vinder.
+	\begin{enumerate}[1.]
+	\item Systemet præsenterer vinderen af spillet.
+	\item Systemet lukker spillet ned.
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Aktørbeskrivelser}
+
+\paragraph{Spilleren} Det forventes at spilleren starter spillet og at spilleren ruller med terningerne når systemet anmoder om dette. Derudover præsenterer systemet oplysninger for spilleren for at oplyse om status af spillet.
+
+\paragraph{GUI} Det forventes at GUI er i stand til at præsentere de nødvendige oplysninger for at vise spillets status til spilleren.

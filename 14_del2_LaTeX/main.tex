@@ -95,7 +95,7 @@
 \usepackage[danish=quotes]{csquotes} %gør det muligt at bruge \enquote{quote} se evt s. 25 i Introduktion til Latex ellers kan "` quote "' bruges. Dansk indstilling [danish=quotes].
 
 %Pakke der bruges til at lave noter til mig selv i draft
-\usepackage[danish]{fixme} %pakke der bliver brugt til at lave noter til mig selv om ting der skal rettes. \fxfatal, \fxerror, \fxwarning, \fxnote[inline]{text}. Om dokumentet er draft eller final angives ved \documentclass.
+\usepackage[inline,danish]{fixme} %pakke der bliver brugt til at lave noter til mig selv om ting der skal rettes. \fxfatal, \fxerror, \fxwarning, \fxnote[inline]{text}. Om dokumentet er draft eller final angives ved \documentclass.
 
 %Indstillinger af caption
 \captionnamefont{\footnotesize\bfseries}
@@ -151,16 +151,9 @@
 \author{Gruppe 21} %EDIT Her sættes dokumentets forfatter
 \title{CDIO del 2} %EDIT Her sættes dokumentets titel
 %Titelside begynder
-%\maketitle
-%\thispagestyle{empty}
-%\newpage
 \input{titlepage.tex}
 \newpage
 \input{time.tex}
-%Abstract begynder
-%\mainmatter
-%SLETTET\input{abstract.tex}
-%Abstract slutter
 %Titelside slutter
 %Indholdsfortegnelse begynder
 \newpage
