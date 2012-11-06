@@ -1,5 +1,5 @@
 \chapter{Indledning[1]}\label{chap:indledning}
-Denne rapport er udarbejdet i kurserne 02313 Udviklingsmetoder til IT-systemer, 02312 Indledende programmering og 02314 Indledende programmering på første semester af Diplomineniør IT. Opgaven er del et af tre CDIO opgaver på første semester, det overordnede formål med opgaverne på semesteret er at lave et Matador spil. Denne første opgave fokuserer på at implementere en terningklasse og en MatadorRafleBaeger klasse til at holde terning instanser. Den nærmere kravspecificering til opgaven findes i "CDIO\_opgave\_del2.pdf"\cite{CDIOdel2}, de relevante dele fra denne vil blive omhandlet i rapporten. Opgaven bygger i på undervisning modtaget i ovenstående kurser hvor der blev benyttet bøgerne \cite{umlbook} og \cite{javabook}. Igennem opgaverne vil klasser blive vist på følgende måde \klasse{KlasseNavn} og metoder på følgende måde \metode{metodeNavn()}.
+Denne rapport er udarbejdet i kurserne 02313 Udviklingsmetoder til IT-systemer, 02312 Indledende programmering på første semester af Diplomigneniør IT. Opgaven er del to af tre CDIO opgaver på første semester, det overordnede formål med opgaverne på semesteret er at lave et Matador spil. Denne første opgave fokuserer på at implementere klasserne \klasse{Konto} og \klasse{Player} og lave et lille spil. Den nærmere kravspecificering til opgaven findes i "CDIO\_opgave\_del2.pdf"\cite{CDIOdel2}, kravene bliver behandlet i \vref{chap:krav}. Opgaven bygger på undervisning modtaget i ovenstående kurser hvor der blev benyttet bøgerne \cite{umlbook} og \cite{javabook}. Igennem opgaverne vil klasser blive vist på følgende måde \klasse{KlasseNavn} og metoder på følgende måde \metode{metodeNavn()}.
 
 Rapporten er sat med \LaTeX og alle UML diagrammer er lavet med TikZ-UML.
 
@@ -12,7 +12,9 @@ Ansvarsfordelingen i opgaven er anført i overskrifterne til de forskellige afsn
 \item Martin Caspersen
 \item Jesper Engholm Baltzersen
 \end{enumerate}
-Ansvarsfodelingen overskues nemmest i indholdsfortegnelsen. Hvis der er nummer på et af hovedafsnittene og ikke nogen numre på underafsnit er det pågældende medlem ansvarlig for alle underafsnittene også.
+Ansvarsfordelingen overskues nemmest i indholdsfortegnelsen. Hvis der er nummer på et af hovedafsnittene og ikke nogen numre på underafsnit er det pågældende medlem ansvarlig for alle underafsnittene også.
+
+UML diagrammerne er udarbejdet af Martin, men både Martin og Jesper er ansvarlige for indholdet af disse.
 
 Ansvaret for kodningen af de forskellige klasser er beskrevet herunder:
 \begin{itemize}
