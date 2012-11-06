@@ -4,4 +4,22 @@ I forbindelse med implementeringen af spillet har vi valgt nogle områder af vor
 For at køre spillet køres Main.java som starter spillet.
 
 \section{Objekter sendes til boundaries}
-I vore implementering af spillet har vi valgt at sende objekter til boundaries. De to boundaries vi har er så selv ansvarlige for at hente de nødvendige data ud fra objekterne. Vi har valgt dette for at boundaries kan stå for alt med at præsentere data.
+\klasse{BoundaryToPlayer} og \klasse{BoundaryToGUI} er boundaries til henholdsvis den fysiske spiller og GUI. Boundaries er ansvarlige for at præsentere data fra spillet og det er praktisk at have al koden der har med denne præsentation at gøre i selve boundaries. På denne måde kan præsentationen af dataene ændres ved blot at ændre i boundary klasserne. Samtidig kan spillet tilpasses andre systemer, f.eks. en anden GUI, ved blot at ændre i den tilsvarende boundary.
+
+Dette er realiseret ved at objekter sendes direkte til boundaries, boundaries henter på denne måde de nødvendige data ud ved at kalde get metoderne på objekterne. På denne måde holdes al koden i spillet der har med præsentation af data overfor GUI og den fysiske spiller via konsollen i boundaries.
+
+\begin{figure}
+\caption{Eksempel på metoden \metode{landOnField(Field)} i \klasse{BoundaryToPlayer}}
+\label{fig:codeObjektEksempel}
+\begin{lstlisting}
+public static void landOnField(Field field) {
+	String fieldName = field.getName();
+	String result = "Det ";
+	
+	showString("Du landede paa: " + fieldName + ".");
+	result += (field.getChangeBalance() >= 0) ? "giver " + field.getChangeBalance(): "koster " + (-field.getChangeBalance());
+	result += ".";
+	showString(result);
+}
+\end{lstlisting}
+\end{figure}
