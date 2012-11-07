@@ -1,9 +1,9 @@
 \chapter{Krav[1]}\label{chap:krav}
 
 \section{Udgangspunkt}\label{sec:krav:kravUdgangspunkt}
-Som udgangspunkt for starten af dette projekt startede vi med at vælge at bruge koden som Martin havde skrevet i forbindelse med CDIO del 1 i gruppe 14. Derfor var vores kodemæssige udgangspunkt at vi havde en kodebase som levede op til kravene fra CDIO del 1 som de blev fortolket af gruppe 14.
+Som udgangspunkt for starten af dette projekt bruges koden som Martin havde skrevet i forbindelse med CDIO del 1 i gruppe 14. Derfor var det kodemæssige udgangspunkt at kodebasen levede op til kravene fra CDIO del 1 som fortolket af gruppe 14.
 
-En del af designet af løsningen af CDIO del 2 er altså at finde ud af hvilke dele af koden til del 1 der kan bruges i del 2. Martin valgte under programmeringen af del 1 af opdele spillet i forskellige klasser som havde forskelligt ansvar i forhold til at implementere spillet i del 1. På grund af den måde spillet var kodet på kunne de fleste af klasserne genbruges med få modifikationer. En af de ting vi dog ikke slipper uden om at skulle kode til del 2 er selve spillogikken.
+En del af designet af løsningen af CDIO del 2 er altså at finde ud af hvilke dele af koden til del 1 der kan bruges i del 2. Martin valgte under programmeringen af del 1 af opdele spillet i forskellige klasser som havde forskelligt ansvar i forhold til at implementere spillet i del 1. På grund af den måde spillet var kodet på kunne de fleste af klasserne genbruges med få modifikationer. En af de ting vi dog ikke slipper uden om at skulle kode om til del 2 er selve spillogikken.
 
 I del 1 havde Martin kodet følgende klasser som havde med selve spillet at gøre:
 \begin{itemize}
@@ -17,12 +17,12 @@ I del 1 havde Martin kodet følgende klasser som havde med selve spillet at gør
 \item \klasse{Main}
 \end{itemize}
 
-Af disse klasser vidste vi med det samme at \klasse{Game} skulle undergå store ændringer for at kunne bruges i dette spil da denne klasse indeholder selve spillogikken. Det er dog mere interessant at overveje om de andre klasser i spillet kan bruges i dette spil. Af speciel interesse er især klasserne \klasse{Die}, \klasse{MatadorRafleBaeger} og \klasse{Game}. Hvis disse klasser ikke afhænger af \klasse{Game} for deres funktion vil de sandsynligvis kunne anvendes mere eller mindre uændret i dette spil. Heldigvis blev disse klasser kodet med hensyn til lav kobling og ingen af klasserne kender overhovedet til \klasse{Game}. Derfor vil vi være i stand til at bruge klasserne i dette spil hvor \klasse{Game} sandsynligvis vil være fuldstændig ændret. Vi er dog også klar over at især \klasse{Player} indeholder nogle funktioner der ikke er nødvendige i dette spil, senere vil vi komme ind på hvilke ændringer vi har foretaget i \klasse{Player}.
-\fxnote[inline,nomargin]{Sikr at vi rent faktisk beskriver ændringerne af \klasse{Game} senere.}
+Af disse klasser skal især \klasse{Game} undergå store ændringer for at kunne bruges i dette spil da denne klasse indeholder selve spillogikken. Kravene til spillet er ændret fra del 1 til del 2 og spillogikken blev slettet for at starte på ny i del 2. Det er dog mere interessant at overveje om de andre klasser i spillet kan bruges i dette spil. Af speciel interesse er især klasserne \klasse{Die}, \klasse{MatadorRafleBaeger} og \klasse{Game}. Hvis disse klasser ikke afhænger af \klasse{Game} for deres funktion vil de sandsynligvis kunne anvendes mere eller mindre uændret i dette spil. Heldigvis blev disse klasser kodet med hensyn til lav kobling (Low Coupling, se \vref{Chapter:Design patterns:Anvendelse:Low Coupling}) og ingen af klasserne kender overhovedet til \klasse{Game}. Klasserne fra del 1 kan derfor genbruges i dette spil hvor \klasse{Game} sandsynligvis vil være ændret. Visse klasser som \klasse{Player} indeholder informationer der ikke er nødvendige i dette spil, ændringerne til \klasse{Player} vil blive behandlet senere i \vref{chap:implementering}.
+\fxnote[inline,nomargin]{Sikr at vi rent faktisk beskriver ændringerne af \klasse{Game} og \klasse{Player} senere.}
 
-Med hensyn til resten af klasserne regner vi med at især Boundary klasserne i stor stil vil kunne genbruges. Dette spil kommunikere nemlig også med både GUI og konsol.
+Med hensyn til resten af klasserne vil Boundary klasserne i stor stil vil kunne genbruges. Dette spil kommunikere nemlig også med den samme udleverede GUI og konsollen.
 
-Inden vi nærmere kan bedømme hvilke ændringer der eventuelt skal foretages vil vi undersøge hvilke krav der er til dette spil. Dette vil blive behandlet i \vref{sec:krav:kravSpec}.
+Udgangspunktet for projektet er nu mere klart og kravene til det nye spil undersøges i \vref{sec:krav:kravSpec}.
 
 \section{Kravspecifikation for del 2}\label{sec:krav:kravSpec}
 For at beskrive kravene til spillet i del 2 har vi valgt at benytte os af UP modellen for en kravspecifikation som præsenteret i 02313. I dette afsnit vil vi beskrive kravene til spillet som vi tolker dem, i en virkelig opgave skulle dette selvfølgelig ske i samarbejde med kunden i Elaboration fasen. Vi har dog ingen virkelig kunde og derfor er det også begrænset hvor meget elaboration vi benyttede os af i forbindelse med denne kravspecifikation. Kilde til dette afsnit er \cite{CDIOdel2}, som er opgavebeskrivelsen for CDIO del 2.
