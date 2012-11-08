@@ -35,7 +35,7 @@ public class BoundaryToPlayer {
 		
 		do {
 			showString("Det er spiller " + playerInt + "'s tur. Tast " + playerInt + " for at slå:");
-			inputInt = getPlayerInt(input);
+			inputInt = getPlayerInt();
 		} while (inputInt != playerInt);
 		return inputInt == playerInt;
 	}
@@ -46,15 +46,15 @@ public class BoundaryToPlayer {
 	 * @param in Scanner to be used to get input from the physical player.
 	 * @return [int] that the physical player entered.
 	 */
-	private static int getPlayerInt(Scanner in) {
+	private static int getPlayerInt() {
 		int inputInt;
 		
 		try  {
-			inputInt = in.nextInt();
+			inputInt = input.nextInt();
 		} catch (Exception e) {
 			showString("Kun integers er tilladt.");
-			in.nextLine();
-			inputInt = getPlayerInt(in);
+			input.nextLine();
+			inputInt = getPlayerInt();
 		}
 		return inputInt;
 	}
