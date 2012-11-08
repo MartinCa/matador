@@ -1,6 +1,10 @@
-\input{designpatterns.tex}
+\chapter{Design[1]}\label{chap:design}
 
-\chapter{Design}\label{chap:design}
+Hvor sidste afsnit omhandlede design på et mere teoretisk plan ved gennemgang af design patterns vil dette afsnit afsnit fokuserer på den praktiske udførsel i dette system. Hovedsaligt vil dette ske ved hjælp af diagrammer.
+
+\section{Diagrammer for \klasse{Player} og \klasse{Konto}}\label{sec:diagPlayerKonto}
+
+I \vref{fig:tikzKlasseKontoPlayer17} ses designklassediagrammet for \klasse{Player} og \klasse{Konto} som blev designet til CDIO del 2. \klasse{Player} eksisterede i kodebasen som blev brugt som udgangspunkt for dette projekt, den er dog modificeret hovedsaligt ved at fjerne unødige metoder og variabler. Ændringerne i forhold til udgangspunktet vil kort blive gennemgået:
 
 \begin{figure}
 \caption{Designklassediagram der viser \klasse{Player} og \klasse{Konto} klasserne.}\label{fig:tikzKlasseKontoPlayer17}
@@ -8,28 +12,126 @@
 \input{tikzKlasseKontoPlayer17.tex}
 \end{figure}
 
+\begin{itemize}
+\item Fjernet variablerne: point, balance og twelveLastTime.
+\item Fjernet metoderne: \metode{getPoint}, \metode{getTwelveLastTime}, \metode{setTwelveLastTime}, \metode{addPoint}, \metode{setPoint}, \metode{getBalance} og \metode{setBalance}.
+\item Tilføjet variabel: konto.
+\item Tilføjet metode: \metode{getKonto}
+\end{itemize}
+
+Variablerne blev fjernet fordi de ikke skulle bruges i implementeringen af spillet til del 2, balance bliver i stedet repræsenteret af \klasse{Konto}. \klasse{Player} indeholder nu en instans af klassen \klasse{Konto} som har en variabel balance af typen int. Klassen bruges til at repræsentere en spillers kontantbeholdning og har nødvendige metoder til at udføre operationer på denne. To af metoderne er givet fra opgaven af: \metode{deposit(amount)} og \metode{withdraw(amount)}. \klasse{Player} repræsenter en fysisk spiller som deltager i spillet.
+
+\klasse{Player} er ansvarlig for at konstruere sin egen instans af \klasse{Konto}. Dette er i overenstemmelse med design pattern \dpattern{Creator}, se \vref{Chapter:Design patterns:Anvendelse:Creator}, da \klasse{Player} aggregerer \klasse{Konto} som også ses af designklassediagrammet.
+
+I \vref{fig:tikzSekvensKontoPlayer17} ses hvordan interaktionen mellem resten af systemet og \klasse{Player} og \klasse{Konto} foregår. Det ses af diagrammet at når \klasse{Player} konstrueres, konstruerer \klasse{Player} en instans af \klasse{Konto}. Efter begge klasser er konstrueret af systemet kan alle \klasse{Player}s public metoder kaldes direkte fra systemet. For at få adgang til hver spillers kontantbeholdning skal \klasse{Konto} bruges. Denne henter systemet ved at kalde \metode{getKonto()} på den enkelte spiller, denne metode returnerer spillerens instans af \klasse{Konto}. Når systemet har fået denne instans kan alle public metoder i \klasse{Konto} kaldes direkte fra systemet. Denne fremgangsmåde er illustreret i \vref{fig:tikzSekvensKontoPlayer17}.
+
 \begin{figure}
 \caption{Sekvensdiagram der viser \klasse{Player} og \klasse{Konto} klasserne.}\label{fig:tikzSekvensKontoPlayer17}
 \centering
 \input{tikzSekvensKontoPlayer17.tex}
 \end{figure}
+
+\FloatBarrier
+\section{Designklassediagrammer for det samlede system}\label{sec:klasseSamlet}
+I \vref{fig:tikzKlasseMinusFields8} ses designklassediagrammet for det samlede system, for overskuelighedens skyld er undladt \klasse{Field} og dens underklasser, som bruges til at repræsentere felter i matadorspillet. Disse klasser er vist i \vref{fig:tikzKlasseFields8} i \vref{sec:klasseField} hvor de vil blive behandlet nærmere.
+
 \begin{figure}
-\caption{Designklassediagram der viser det meste af spillet. Field og dennes underklasser vises i figur \vref{fig:tikzKlasseFields8}.}\label{fig:tikzKlasseMinusFields8}
+\caption{Designklassediagram der viser det meste af systemet. \klasse{Field} og dennes underklasser vises i figur \vref{fig:tikzKlasseFields8}.}\label{fig:tikzKlasseMinusFields8}
 \centering
 \input{tikzKlasseMinusFields8.tex}
 \end{figure}
 
+I designklassediagrammet i \vref{fig:tikzKlasseFields8} ses at \klasse{Game} aggregerer en instans af \klasse{Board} og \klasse{MatadorRafleBaeger}, derudover aggregerer \klasse{Game} også 0 eller flere instanser af \klasse{Player}, for dette spil vil det være 2 instanser af \klasse{Player}. \klasse{MatadorRafleBaeger} er ansvarlig for at konstruere instanserne af disse klasser fordi den aggregerer dem, i overenstemmelse med design pattern \dpattern{Creator}. Hver af disse klasser aggregerer selv andre klasser og de vil kort blive gennemgået.
+
+\klasse{MatadorRafleBaeger} aggregerer 0 til flere instanser af \klasse{Die} som det ses af diagrammet, for vores spil vil dette være 2 instanser. \klasse{Die} repræsenterer en fysisk terning og indholder metoder for at rulle og hente værdien af slaget ud. \klasse{MatadorRafleBaeger} repræsenterer et fysisk raflebæger som indeholder et antal terninger, den indeholder metoder til at slå med alle terningerne og hente værdien af terningerne ud. \klasse{MatadorRafleBaeger} er ansvarlig for at konstruere instanser af \klasse{Die} i overenstemmelse med design pattern \dpattern{Creator} da \klasse{MatadorRafleBaeger} aggregerer \klasse{Die}.
+
+Hver instans af \klasse{Player} repræsenterer en fysisk spiller og aggregerer hver en instans af \klasse{Konto} som repræsenterer en spillers kontantbeholdning. Disse klasser blev nærmere beskrevet i \vref{sec:diagPlayerKonto}.
+
+\klasse{Board} repræsenterer matadors spilleplade og aggregerer en række felter, disse omtales i \vref{sec:klasseField}.
+
+Udover de ovennævnte klasser indeholder systemet også \klasse{Main}, \klasse{BoundaryToGUI} og \klasse{BoundaryToPlayer}. \klasse{Main} bruges til at starte spillet. \klasse{BoundaryToGUI} er ansvarlig for al kommunikationen mellem systemet og den udleverede GUI. \klasse{BoundaryToPlayer} er ansvarlig for kommunikationen mellem systemet og den fysiske spiller.
+
+\section{Designklassediagram for \klasse{Field} og underklasser}\label{sec:klasseField}
+
+Som beskrevet i \vref{sec:klasseSamlet} er designklassediagrammet for det samlede systemet delt i to. Dette afsnit beskriver designklassediagrammet for \klasse{Board}, \klasse{Field} og \klasse{Field}s underklasser, diagrammet ses i \vref{fig:tikzKlasseFields8}. Repræsentationen af felterne i systemet er delt op i forskellige klasser som hver især repræsenterer en type af felter som findes i et matadorspil.
+
 \begin{figure}
-\caption{Designklassediagram der viser Board, Field og underklasser af Field.}\label{fig:tikzKlasseFields8}
+\caption{Designklassediagram der viser \klasse{Board}, \klasse{Field} og underklasser af \klasse{Field}.}\label{fig:tikzKlasseFields8}
 \centering
 \input{tikzKlasseFields8.tex}
 \end{figure}
+
+\klasse{Board} aggregerer 0 eller flere instanser af \klasse{Field}s underklasser. Ved konstruktionen af \klasse{Board} er \klasse{Board} ansvarlig for at konstruerer alle instanserne som nødvendigt. Dette i overenstemmelse med design pattern \dpattern{Creator}, da \klasse{Board} aggregerer instanserne.
+
+\klasse{Field} er klassen som alle felter arver fra, i denne version af spillet indeholder \klasse{Field} alle variabler og metoder som bruges. Det vil sige at alle metoderne som bliver brugt til del 2s felter er implementeret i \klasse{Field}. \klasse{Field} er abstract da det ikke giver mening at have en instans af \klasse{Field} eftersom der er underklasser til at repræsenterer alle de typer af felter der findes i et matadorspil.
+
+Af direkte underklasser til \klasse{Field} er der \klasse{Refuge}, \klasse{Ownable} og \klasse{Taxes}, hvor \klasse{Ownable} er abstract mens de to andre er normale klasser. \klasse{Refuge} og \klasse{Taxes} repræsenterer to typer af felter i matadorspillet og under starten af spillet vil der blive konstrueret instanser af disse klasser som nødvendigt.
+
+\klasse{Ownable} er som tidligere nævnt en abstract klasse ligesom \klasse{Field} da den ikke repræsenterer én type af matadorfelter. I stedet repræsenterer den fællestræk ved flere typer af matadorfelter, nemlig alle de felter som kan ejes af en spiller. \klasse{Ownable} har tre underklasser, \klasse{Brewery}, \klasse{Shipping} og \klasse{Street} som alle tre har det til fælles at de kan ejes af en matadorspiller. Der vil ved starten af spillet blive konstrueret instanser af disse klasser som nødvendigt.
+
+Som tidligere nævnt er alle metoder og variabler implementeret i \klasse{Field} og ingen af underklasserne overskriver implementeringen. Derfor ville der isoleret set i denne del af CDIO projektet ikke være noget godt argument for at lave denne opbygning. Underklasserne er alle implementeret sådan at de bare kalder deres superklasses konstruktør med \metode{super()}.
+
+Denne opbygning er da også hovedsaligt valgt for at gøre systemet klar til at implementere mere avancerede versioner af et matadorspil. Det er nemlig ikke det samme der sker når man lander på de forskellige typer af matadorfelter ifølge de rigtige matadorregler. Derfor skal de forskellige typer af felter have forskellige implementering af nogle af de metoder der kaldes når man lander på felterne. Alligevel har alle felterne det til fælles at man kan sige at de er et \klasse{Field}. Det er netop et af kravene for at man bruger arv, samtidig har felterne også andre fælles træk. Alle typer af felter har et navn og et fieldNum som repræsenterer deres id i den udleverede GUI.
+
+\section{Sekevensdiagrammer for det samlede system}
+I forbindelse med at opsætte sekvensdiagrammerne er det svært at præsenterer hele systemet i et samlet sekvensdiagram. Derfor er sekvensdiagrammet over forløbet af et spil delt op i to forskellige diagrammer. Et der viser hvordan spillet startes op og et der viser forløbet af en runde af spillet, disse kan ses i henholdsvis \vref{fig:tikzSekvensStartGame8} og \vref{fig:tikzSekvensGame8}.
 
 \begin{figure}
 \caption{Sekvensdiagram som viser opstart af spillet.}\label{fig:tikzSekvensStartGame8}
 \centering
 \input{tikzSekvensStartGame8.tex}
 \end{figure}
+
+I \vref{fig:tikzSekvensStartGame8} ses sekvensdiagrammet for opstart af spillet, dette forløb skal køres inden der kan spilles en runde. Forløbet af sekvensdiagrammet vil herunder blive gennemgået på punktform:
+\begin{enumerate}
+\item \klasse{Main} konstruerer en instans af \klasse{Game}.
+\item \klasse{Game} konstruerer en instans af \klasse{MatadorRafleBaeger} som konstruerer to instanser af \klasse{Die}.
+\item \klasse{Game} konstruerer en instans af \klasse{Board} som konstruerer de 11 instanser af underklasser til \klasse{Field}.
+\item \klasse{Game} konstruerer to instanser af \klasse{Player}, denne konstruktion sker i hjælpemetoden \metode{createPlayers()}.
+\item \klasse{Main} kalder metoden \metode{startGame()} i \klasse{Game}.
+\item \klasse{Game} printer en besked til spilleren og kalder \metode{oneRound()} i sig selv.
+\end{enumerate}
+
+Efter disse sekvenser er gennemløbet er spillet klar til at der kan spilles en runde. Dette vil blive gennemgået herunder.
+
+I figur \vref{fig:tikzSekvensGame8} ses sekvensdiagrammet for forløbet af en runde af spillet og spillet er som gennemgået ovenfor klar til at der kan spilles en runde. Forløbet af sekvensdiagrammet bliver gennemgået herunder:
+\begin{enumerate}
+\item \klasse{Game} printer en besked til spilleren og spilleren anmodes via \klasse{BoundaryToPlayer} om at indtaste en integer for at slå med terningerne.
+\item \klasse{Game} ruller med terningerne \klasse{Die} ved hjælp af \klasse{MatadorRafleBaeger}.
+\item \klasse{Game} henter værdierne af terningerne \klasse{Die} ved hjælp af \klasse{MatadorRafleBaeger}.
+\item På baggrund af det slåede henter \klasse{Game} et \klasse{Field} ved hjælp af \klasse{Board}.
+\item \klasse{Game} kalder \metode{getChangeBalance()} på det hentede \klasse{Field}, dette returnerer en integer som beskriver hvilken ændring der skal ske med spillerens kontantbeholdning.
+\item \klasse{Game} henter en \klasse{Konto} fra den aktive \klasse{Player}.
+\item \klasse{Game} kalder enten \metode{deposit(int)} eller \metode{withdraw(int)} på den hentede \klasse{Konto}.
+\begin{enumerate}
+\item Hvis \metode{withdraw(int)} kaldes og der returneres false har den anden spiller vundet.
+\end{enumerate}
+\item \klasse{Game} kalder \metode{showStatus()} på sig selv.
+\begin{enumerate}
+\item \klasse{Game} kalder \klasse{BoundaryToGUI} med metoderne \metode{setCar(Field, Player)}, \metode{setDice(MRB)} og \metode{setBalance(Player[])}.
+\item \klasse{Game} kalder \klasse{BoundaryToPlayer} med metoderne \metode{showStatus(MRB, Player[])} og \metode{landOnField(Field)}.
+\end{enumerate}
+\item \klasse{Game} kalder endRoundChecks() på sig selv.
+\begin{enumerate}
+\item \klasse{Game} kalder checkWinner() på sig selv.
+\begin{enumerate}
+\item \klasse{Game} kalder \metode{getBalance()} på \klasse{Konto}.
+\end{enumerate}
+\end{enumerate}
+\begin{enumerate}
+\item Hvis der er en vinder:
+\begin{enumerate}
+\item \klasse{Game} kalder \metode{showString(String)} på \klasse{BoundaryToPlayer} for at printe en besked til spilleren.
+\item \klasse{Game} slutter spillet ved at kalde \metode{gameEnd()} på sig selv som kalder \metode{closeScanner()} på \klasse{BoundaryToPlayer}
+\end{enumerate}
+\item Hvis der ikke er en vinder:
+\begin{enumerate}
+\item \klasse{Game} kalder \metode{nextPlayer()} på sig selv, som avancerer turen til næste spiller.
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+Efter forløbet af en runde vil hele sekvensdiagrammet for en runde blive gennemløbet igen nu med den anden spiller. Dette gentages indtil der er fundet en vinder.
 
 \begin{figure}
 \centering
@@ -38,3 +140,5 @@
 \input{tikzSekvensGame8.tex}
 }
 \end{figure}
+
+\FloatBarrier

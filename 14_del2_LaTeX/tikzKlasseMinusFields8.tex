@@ -2,19 +2,19 @@
 \begin{tikzpicture}
  \umlclass{Die}{-facevalue : int\\-sides : int\\\umlstatic{-rand : Random}}{+Die()\\+Die(int)\\+Die(Random)\\+rollDie()\\+getFacevalue() : int}
  \umlclass[x=6.5]{MatadorRafleBaeger}{}{+MatadorRafleBaeger()\\+MatadorRafleBaeger(int)\\-createDice()\\+getEns() : bool\\+getSum() : int\\+rollDice()\\+getFacevalues : int[]}
- \umlclass[x=11]{TestMatadorRafleBaeger}{}{\umlstatic{main(String[])}}
+ %\umlclass[x=11]{TestMatadorRafleBaeger}{}{\umlstatic{main(String[])}}
  \umlclass[x=6.5,y=-6]{Game}{-activePlayer : int\\-winpoint : int\\-winner : bool}{+Game()\\-createPlayers(int)\\+startGame()\\-oneRound()\\-endRoundChecks()\\-showStatus(Field)\\-checkWinner()\\-gameEnd()\\-nextPlayer()}
  \umlclass[y=-6]{Player}{-carColor : int\\-name : String}{+Player(String, int, int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto}
  \umlclass[y=-10]{Konto}{-balance : int}{+Konto()\\+Konto(int)\\+deposit(int)\\+withdraw(int) : bool\\+getBalance() : int\\+setBalance(int)}
  \umlclass[x=11, y=-3]{Main}{}{\umlstatic{+main(String[])}}
  \umlclass[y=-11, x=5]{BoundaryToGUI}{}{\umlstatic{+main(String[])}\\\umlstatic{+setDice(MatadorRafleBaeger)}\\\umlstatic{+addPlayer(Player)}\\\umlstatic{+setBalance(Player[])}\\\umlstatic{+setCar(Field, Player)}}
- \umlclass[y=-11,x=11]{BoundaryToPlayer}{\umlstatic{-input : Scanner}}{\umlstatic{+main(String[])}\\\umlstatic{+getPlayerAccept(Player) : bool}\\\umlstatic{-getPlayerInt(Scanner) : int}\\\umlstatic{+showString(String)}\\\umlstatic{+closeScanner()}\\\umlstatic{+landOnField(Field)}\\\umlstatic{+showStatus(int[],int[])}\\\umlstatic{-getPlayerBalances(Player[]) : int[]}}
+ \umlclass[y=-11,x=11]{BoundaryToPlayer}{\umlstatic{-input : Scanner}}{\umlstatic{+main(String[])}\\\umlstatic{+getPlayerAccept(Player) : bool}\\\umlstatic{-getPlayerInt() : int}\\\umlstatic{+showString(String)}\\\umlstatic{+closeScanner()}\\\umlstatic{+landOnField(Field)}\\\umlstatic{+showStatus(int[],int[])}\\\umlstatic{-getPlayerBalances(Player[]) : int[]}}
  \umlclass[y=-6,x =11.7]{Board}{-boardFields : Field[]}{+Board()\\-initBoard(int)\\+getField(int) : Field}
  
  \umlcompo[mult1=1,arg2=-dice,mult2=0..*]{MatadorRafleBaeger}{Die}
  \umlcompo[mult1=1,mult2=0..1,arg2=-baeger]{Game}{MatadorRafleBaeger}
  \umlcompo[mult1=1,mult2=0..*,arg2=-players]{Game}{Player}
- \umldep{TestMatadorRafleBaeger}{MatadorRafleBaeger}
+ %\umldep{TestMatadorRafleBaeger}{MatadorRafleBaeger}
  \umldep[]{Main}{Game}
  \umldep{Game}{BoundaryToGUI}
  \umldep{Game}{BoundaryToPlayer}

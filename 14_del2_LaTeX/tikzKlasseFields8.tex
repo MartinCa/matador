@@ -10,7 +10,7 @@
  \umlclass[y=-8.5,x=4.5]{Taxes}{}{+Taxes(String, int\\+Taxes(String, int, int))}
  \umlclass[y=-8.5,type=abstract]{Ownable}{}{+Ownable(String, int\\+Ownable(String, int, int))}
  
- \umlcompo[mult2=1,arg2=-boardFields,pos2=1.0,align2=right]{Board}{Field}
+ \umlcompo[mult2=0..*,arg2=-boardFields,pos2=1.0,align2=right]{Board}{Field}
  \umlinherit{Ownable}{Field}
  \umlinherit{Taxes}{Field}
  \umlinherit{Refuge}{Field}

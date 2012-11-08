@@ -131,6 +131,12 @@
 %For code formatting
 \usepackage[final]{listings}
 \lstset{language=Java, numbers=left, numberstyle=\tiny}
+\lstset{prebreak=\raisebox{-1ex}[0ex][0ex]
+        {\ensuremath{\hookleftarrow}}}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+        {\ensuremath{\hookrightarrow\space}}}
+\lstset{breaklines=true, breakatwhitespace=true}
+\lstset{numbers=left, numberstyle=\scriptsize}
 \usepackage{listingsutf8}
 
 \newcommand{\iv}[1]{\paragraph{#1}\fancybreak{}}
@@ -172,6 +178,7 @@
 %%%Herunder begynder selve indholdet%%%
 \input{indledning.tex}
 \input{krav.tex}
+\input{designpatterns.tex}
 \input{design.tex}
 \input{implementering.tex}
 \input{test.tex}
