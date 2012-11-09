@@ -51,6 +51,8 @@ Hver instans af \klasse{Player} repræsenterer en fysisk spiller og aggregerer h
 
 Udover de ovennævnte klasser indeholder systemet også \klasse{Main}, \klasse{BoundaryToGUI} og \klasse{BoundaryToPlayer}. \klasse{Main} bruges til at starte spillet. \klasse{BoundaryToGUI} er ansvarlig for al kommunikationen mellem systemet og den udleverede GUI. \klasse{BoundaryToPlayer} er ansvarlig for kommunikationen mellem systemet og den fysiske spiller.
 
+Det bemærkes at de dependencies der stammer fra at boundaries modtager objekter er undladt. Boundaries afhænger derfor af de objekter de modtager som parametre, dependencies er undladt for ikke at forstyrre diagrammet unødigt.
+
 \section{Designklassediagram for \klasse{Field} og underklasser}\label{sec:klasseField}
 
 Som beskrevet i \vref{sec:klasseSamlet} er designklassediagrammet for det samlede systemet delt i to. Dette afsnit beskriver designklassediagrammet for \klasse{Board}, \klasse{Field} og \klasse{Field}s underklasser, diagrammet ses i \vref{fig:tikzKlasseFields8}. Repræsentationen af felterne i systemet er delt op i forskellige klasser som hver især repræsenterer en type af felter som findes i et matadorspil.
@@ -108,8 +110,8 @@ I figur \vref{fig:tikzSekvensGame8} ses sekvensdiagrammet for forløbet af en ru
 \end{enumerate}
 \item \klasse{Game} kalder \metode{showStatus()} på sig selv.
 \begin{enumerate}
-\item \klasse{Game} kalder \klasse{BoundaryToGUI} med metoderne \metode{setCar(Field, Player)}, \metode{setDice(MRB)} og \metode{setBalance(Player[])}.
-\item \klasse{Game} kalder \klasse{BoundaryToPlayer} med metoderne \metode{showStatus(MRB, Player[])} og \metode{landOnField(Field)}.
+\item \klasse{Game} kalder \klasse{BoundaryToGUI} med metoderne \metode{setCar(Field, Player)}, \\\metode{set\-Dice\-(MRB)} og \metode{setBalance(Player[])}.
+\item \klasse{Game} kalder \klasse{BoundaryToPlayer} med metoderne \metode{showStatus(MRB, \\Player[])} og \metode{landOnField(Field)}.
 \end{enumerate}
 \item \klasse{Game} kalder endRoundChecks() på sig selv.
 \begin{enumerate}
@@ -122,7 +124,7 @@ I figur \vref{fig:tikzSekvensGame8} ses sekvensdiagrammet for forløbet af en ru
 \item Hvis der er en vinder:
 \begin{enumerate}
 \item \klasse{Game} kalder \metode{showString(String)} på \klasse{BoundaryToPlayer} for at printe en besked til spilleren.
-\item \klasse{Game} slutter spillet ved at kalde \metode{gameEnd()} på sig selv som kalder \metode{closeScanner()} på \klasse{BoundaryToPlayer}
+\item \klasse{Game} slutter spillet ved at kalde \metode{gameEnd()} på sig selv som kalder \metode{close\-Scanner()} på \klasse{BoundaryToPlayer}
 \end{enumerate}
 \item Hvis der ikke er en vinder:
 \begin{enumerate}
