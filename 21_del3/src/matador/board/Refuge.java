@@ -1,5 +1,7 @@
 package matador.board;
 
+import matador.business_logic.Player;
+
 /**
  * Represents the Refuge from Matador.
  * @author Martin Caspersen
@@ -13,17 +15,18 @@ public class Refuge extends Field{
 	 * @param name String with field name.
 	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
 	 */
-	public Refuge(String name, int changeBalance) {
-		super(name, changeBalance);
+	public Refuge(String name, int fieldNum, int bonus) {
+		super(name, fieldNum);
+		this.bonus = bonus;
+	}
+	
+	public void landOnField(Player player) {
+		player.getKonto().deposit(bonus);
 	}
 
-	/**
-	 * Constructor that sets name, changeBalance and fieldNum.
-	 * @param name String with field name.
-	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
-	 * @param fieldNum int representing the fields id in the provided GUI.
-	 */
-	public Refuge(String name, int changeBalance, int fieldNum) {
-		super(name, changeBalance, fieldNum);
+	@Override
+	public String toString() {
+		return "Refuge [bonus=" + bonus + ", name=" + name + ", fieldNum="
+				+ fieldNum + ", owner=" + owner.getName() + "]";
 	}
 }
