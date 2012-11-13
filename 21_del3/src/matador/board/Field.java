@@ -1,5 +1,7 @@
 package matador.board;
 
+import board.codeBehind.Player;
+
 /**
  * Abstract class that all the fields used in Matador inherits from.
  * In this current implementation all the fields have the same behviour and use the methods as implemented here.
@@ -10,6 +12,7 @@ public abstract class Field {
 	protected String name;
 	protected int changeBalance;
 	protected int fieldNum;
+	private Player owner;
 
 	/**
 	 * Constructor that sets name and changeBalance.

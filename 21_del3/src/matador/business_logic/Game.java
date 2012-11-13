@@ -76,6 +76,8 @@ public class Game {
 		actField = board.getField(baeger.getSum() - 2);
 		balanceChange = actField.getChangeBalance();
 		
+		optToBuy(actField, actPlayer);
+		
 		if (balanceChange >= 0) {
 			actPlayer.getKonto().deposit(balanceChange);
 		} else if (!actPlayer.getKonto().withdraw(-balanceChange)) {
@@ -87,6 +89,21 @@ public class Game {
 		endRoundChecks();
 	}
 	
+	/**
+	 * Checks if player can and will buy field he landed on. 
+	 * 
+	 * @param actField
+	 * @param actPlayer
+	 */
+	private void optToBuy(Field actField, Player actPlayer) {
+		if (actField.getOwner() == null){									//If nobody owns the field
+			if (actPlayer.getKonto().getBalance() <= actField.getPrice()){	//If player has enough money
+				if (BoundaryToPlayer.optToBuy(actField));					//If player wants to buy
+					actPlayer.buyField(actField);							//Actually buy the field
+			}
+		}
+	}
+
 	/**
 	 * Checks conditions at the end of the round to decide if there is a winner or if the Player gets an extra turn.
 	 * Also calls nextPlayer if needed to advance the turn to the next Player.
