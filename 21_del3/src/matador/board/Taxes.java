@@ -6,6 +6,7 @@ package matador.board;
  *
  */
 public class Taxes extends Field{
+	private int tax;
 
 	/**
 	 * Constructor that sets name and changeBalance.

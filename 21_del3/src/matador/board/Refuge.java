@@ -6,6 +6,7 @@ package matador.board;
  *
  */
 public class Refuge extends Field{
+	private int bonus;
 
 	/**
 	 * Constructor that sets name and changeBalance.

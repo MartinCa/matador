@@ -6,6 +6,7 @@ package matador.board;
  *
  */
 public class Street extends Ownable{
+	private int rent;
 	
 	/**
 	 * Constructor that sets name and changeBalance.
