@@ -138,4 +138,24 @@ public class BoundaryToPlayer {
 		}
 		return returnArray;
 	}
-}
+
+	/**
+	 * Presents player with option to field he has landed on.
+	 * Returns Boolean true if yes and false if no.
+	 *  
+	 * @param actField
+	 * @return Boolean
+	 */
+	public static Boolean optToBuy(Field actField) {
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("You landed on " + actField + ". Would you like to buy it for " + actField.getPrice() + "?");
+		System.out.println("Press Y, then Enter for Yes or any key, then Enter for No.");
+		
+		if (scan.next() == "Y"){
+			return true;	//If players accepts to buy field true is returned
+		return false;	//If player does not accept to buy field, false is returned.
+			}
+		}
+	}
+
