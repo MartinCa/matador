@@ -25,7 +25,7 @@ public class Shipping extends Ownable {
 		int numFields = 0;
 		
 		for (Field field : ownedFields) {
-			if (Refuge.class.isInstance(field)) {
+			if (Shipping.class.isInstance(field)) {
 				numFields++;
 			}
 		}
