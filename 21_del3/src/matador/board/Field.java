@@ -1,5 +1,7 @@
 package matador.board;
 
+import matador.business_logic.Player;
+
 /**
  * Abstract class that all the fields used in Matador inherits from.
  * In this current implementation all the fields have the same behviour and use the methods as implemented here.
@@ -8,38 +10,25 @@ package matador.board;
  */
 public abstract class Field {
 	protected String name;
-	protected int changeBalance;
 	protected int fieldNum;
+	protected Player owner;
 
 	/**
-	 * Constructor that sets name and changeBalance.
-	 * @param name String with field name.
-	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
 	 */
-	public Field(String name, int changeBalance) {
+	public Field(String name, int fieldNum) {
 		this.name = name;
-		this.changeBalance = changeBalance; // Added to simplify part 2.
-	}
-	
-	/**
-	 * Constructor that sets name, changeBalance and fieldNum.
-	 * @param name String with field name.
-	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
-	 * @param fieldNum int representing the fields id in the provided GUI.
-	 */
-	public Field(String name, int changeBalance, int fieldNum) {
-		this.name = name;
-		this.changeBalance = changeBalance; // Added to simplify part 2.
 		this.fieldNum = fieldNum;
 	}
+
+	public abstract void landOnField(Player player);
 	
-	/**
-	 * Returns changeBalance, which represents what should happen to a players balance upon landing on a given field.
-	 * @return [int] representing the change to a players balance as a result of landing on the field.
-	 */
-	public int getChangeBalance() {
-		return changeBalance;
-	}
+//	/**
+//	 * Returns changeBalance, which represents what should happen to a players balance upon landing on a given field.
+//	 * @return [int] representing the change to a players balance as a result of landing on the field.
+//	 */
+//	public int getChangeBalance() {
+//		return changeBalance;
+//	}
 	
 	/**
 	 * Returns the name of a field.
@@ -55,5 +44,11 @@ public abstract class Field {
 	 */
 	public int getFieldNum() {
 		return fieldNum;
+	}
+
+	@Override
+	public String toString() {
+		return "Field [name=" + name + ", fieldNum=" + fieldNum + ", owner="
+				+ owner.getName() + "]";
 	}
 }

@@ -1,5 +1,7 @@
 package matador.board;
 
+import matador.business_logic.Player;
+
 /**
  * Represents the streets from Matador.
  * @author Martin Caspersen
@@ -13,17 +15,27 @@ public class Street extends Ownable{
 	 * @param name String with field name.
 	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
 	 */
-	public Street(String name, int changeBalance) {
-		super(name, changeBalance);
+	public Street(String name, int fieldNum, int price, int rent) {
+		super(name, fieldNum, price);
+		this.rent = rent;
+	}
+	
+	public void landOnField(Player player) {
+		int currentRent = rent();
+		if (player.getKonto().withdraw(currentRent)) {
+			owner.getKonto().deposit(currentRent);
+		} else {
+			// NEED LOSER THING HERE
+		}
+	}
+	
+	protected int rent() {
+		return rent;
 	}
 
-	/**
-	 * Constructor that sets name, changeBalance and fieldNum.
-	 * @param name String with field name.
-	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
-	 * @param fieldNum int representing the fields id in the provided GUI.
-	 */
-	public Street(String name, int changeBalance, int fieldNum) {
-		super(name, changeBalance, fieldNum);
+	@Override
+	public String toString() {
+		return "Street [rent=" + rent + ", price=" + price + ", name=" + name
+				+ ", fieldNum=" + fieldNum + ", owner=" + owner.getName() + "]";
 	}
 }

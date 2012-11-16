@@ -1,5 +1,10 @@
 package matador.business_logic;
 
+import java.util.*;
+
+import board.fields.Field;
+import matador.board.*;
+
 /**
  * Provides a Player that is used in a dice game. The Player holds a name, carColor and a Konto.
  * Provides necessary functions used by the Game class.
@@ -12,6 +17,7 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
+	private List<Field> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -49,10 +55,22 @@ public class Player {
 	public Konto getKonto() {
 		return konto;
 	}
-
+	
+	/**
+	 * Handles processes of buying a Field.
+	 * Withdraws the price of the field from the players account.
+	 * Adds bought field to arrayList of players owned fields.
+	 * 
+	 * @param field
+	 */
+	public void buyField(Field field){
+		this.konto.withdraw(field.getPrice());	
+		this.ownedFields.add(field);			
+	}
+	
 	@Override
 	public String toString() {
 		return "Player [carColor=" + carColor + ", name=" + name + ", konto="
 				+ konto + "]";
-	}
+	}	
 }

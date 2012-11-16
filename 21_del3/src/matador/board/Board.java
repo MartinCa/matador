@@ -28,17 +28,17 @@ public class Board {
 	private void initBoard(int numFields) {
 		boardFields = new Field[numFields]; // sets array length to numFields
 
-		boardFields[0] = new Refuge("Start", 200, 1);
-		boardFields[1] = new Street("Rødovervej", -200, 2);
-		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100, 39);
-		boardFields[3] = new Street("Hvidovrevej", -20, 4);
-		boardFields[4] = new Shipping("D.F.D.S.", -75, 16);
-		boardFields[5] = new Refuge("Prøv lykken", 0, 3);
-		boardFields[6] = new Taxes("Fængsel", -500, 11);
-		boardFields[7] = new Street("Strandvejen", -60, 20);
-		boardFields[8] = new Street("Grønningen", -80, 25);
+		boardFields[0] = new Refuge("Start", 1, 200); //Okay
+		boardFields[1] = new Street("Rødovervej", -200, 2); //Needs price
+		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100, 39); //Needs price
+		boardFields[3] = new Street("Hvidovrevej", -20, 4); //Needs price
+		boardFields[4] = new Shipping("D.F.D.S.", -75, 16); //Needs price
+		boardFields[5] = new Refuge("Prøv lykken", 3, 0); //Okay
+		boardFields[6] = new Taxes("Fængsel", 11, 500); //Okay
+		boardFields[7] = new Street("Strandvejen", -60, 20); //Needs price
+		boardFields[8] = new Street("Grønningen", -80, 25); //Needs price
 		boardFields[9] = new Street("Rådhuspladsen", -150, 40);
-		boardFields[10] = new Refuge("Helle", 20000, 21);
+		boardFields[10] = new Refuge("Helle", 21, 20000); //Okay
 	}
 	
 	/**
