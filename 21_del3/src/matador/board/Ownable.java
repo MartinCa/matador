@@ -25,4 +25,6 @@ public abstract class Ownable extends Field {
 	public Ownable(String name, int changeBalance, int fieldNum) {
 		super(name, changeBalance, fieldNum);
 	}
+	
+	public abstract int rent();
 }
