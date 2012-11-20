@@ -80,12 +80,8 @@ public class BoundaryToPlayer {
 	 */
 	public static void landOnField(Field field) {
 		String fieldName = field.getName();
-		String result = "Det ";
 		
 		showString("Du landede på: " + fieldName + ".");
-		result += (field.getChangeBalance() >= 0) ? "giver " + field.getChangeBalance(): "koster " + (-field.getChangeBalance());
-		result += ".";
-		showString(result);
 	}
 	
 	
