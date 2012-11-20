@@ -16,7 +16,7 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
-	private List<Ownable> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
+	private ArrayList<Ownable> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -65,6 +65,15 @@ public class Player {
 	public void buyField(Ownable field){
 		this.konto.withdraw(field.getPrice());	
 		this.ownedFields.add(field);			
+	}
+	/**
+	 * Returns the ownedFields ArrayList.
+	 * This ArrayList holds references to all fields owned by the player.
+	 *  
+	 * @return ownedFields
+	 */
+	public ArrayList<Ownable> getOwnedFields() {
+		return ownedFields;		
 	}
 	
 	@Override
