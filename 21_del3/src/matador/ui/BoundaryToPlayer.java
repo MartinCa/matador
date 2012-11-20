@@ -19,9 +19,9 @@ public class BoundaryToPlayer {
 	 * @param args not used.
 	 */
 	public static void main(String[] args) {
-		
+
 	}
-	
+
 	/**
 	 * Asks the physical player to enter a specific int. Checks whether the input matches the given int.
 	 * Keeps trying until the physical player enters the correct int.
@@ -32,14 +32,14 @@ public class BoundaryToPlayer {
 	public static boolean getPlayerAccept(Player activePlayer) {
 		int inputInt;
 		int playerInt = activePlayer.getCarColor() + 1;
-		
+
 		do {
 			showString("Det er spiller " + playerInt + "'s tur. Tast " + playerInt + " for at slå:");
 			inputInt = getPlayerInt();
 		} while (inputInt != playerInt);
 		return inputInt == playerInt;
 	}
-	
+
 	/**
 	 * Gets the actual input from the physical player.
 	 * Catches exceptions and tries again until the player enters a valid integet.
@@ -48,7 +48,7 @@ public class BoundaryToPlayer {
 	 */
 	private static int getPlayerInt() {
 		int inputInt;
-		
+
 		try  {
 			inputInt = input.nextInt();
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class BoundaryToPlayer {
 		}
 		return inputInt;
 	}
-	
+
 	/**
 	 * Prints a given String to the console.
 	 * @param output String to print to the console.
@@ -66,14 +66,14 @@ public class BoundaryToPlayer {
 	public static void showString(String output) {
 		System.out.println(output);
 	}
-	
+
 	/**
 	 * Closes the Scanner used to get input from the physical player.
 	 */
 	public static void closeScanner() {
 		input.close();
 	}
-	
+
 	/**
 	 * Prints what field the player landed on and what effect that has on the balance.
 	 * @param field the player landed on.
@@ -83,8 +83,8 @@ public class BoundaryToPlayer {
 		
 		showString("Du landede på: " + fieldName + ".");
 	}
-	
-	
+
+
 	/**
 	 * Outputs the status of the Game to the physical player in the console.
 	 * The format of the output is:
@@ -98,7 +98,7 @@ public class BoundaryToPlayer {
 		String toShow = "\nStatus\n";
 		int[] facevalues = baeger.getFacevalues();
 		int[] playerBalances = getPlayerBalances(players);
-		
+
 		for (int facevalue : facevalues) {
 			toShow += "Terning " + i + ": " + facevalue;
 			if (i < facevalues.length) {
@@ -106,7 +106,7 @@ public class BoundaryToPlayer {
 			}
 			i++;
 		}
-		
+
 		i = 1;
 		toShow += "\n";
 		for (int playerBalance : playerBalances) {
@@ -118,7 +118,7 @@ public class BoundaryToPlayer {
 		}
 		System.out.println(toShow);
 	}
-	
+
 	/**
 	 * Helper method to get the players balance from the array of players.
 	 * @param players array containing the players.
@@ -127,7 +127,7 @@ public class BoundaryToPlayer {
 	private static int[] getPlayerBalances(Player[] players) {
 		int[] returnArray = new int[players.length];
 		int i = 0;
-				
+
 		for (Player player : players) {
 			returnArray[i] = player.getKonto().getBalance();
 			i++;
@@ -142,16 +142,14 @@ public class BoundaryToPlayer {
 	 * @param actField
 	 * @return Boolean
 	 */
-	public static Boolean optToBuy(Field actField) {
-		Scanner scan = new Scanner(System.in);
-		
+	public static Boolean optToBuy(Ownable actField) {
 		System.out.println("You landed on " + actField + ". Would you like to buy it for " + actField.getPrice() + "?");
 		System.out.println("Press Y, then Enter for Yes or any key, then Enter for No.");
-		
-		if (scan.next() == "Y"){
+
+		if (input.next() == "Y"){
 			return true;	//If players accepts to buy field true is returned
-		return false;	//If player does not accept to buy field, false is returned.
-			}
 		}
+		return false;	//If player does not accept to buy field, false is returned.
 	}
+}
 
