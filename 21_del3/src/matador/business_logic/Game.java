@@ -19,7 +19,7 @@ public class Game {
 	private Player[] players;
 	private Board board;
 	private boolean winner = false;
-	
+
 	/**
 	 * Constructor that starts the game, 2 Die and 2 Player instances are created. Creates the baeger using MatadorRafleBaeger and two players of type Player.
 	 * "Spiller 1" will start the game.
@@ -34,10 +34,10 @@ public class Game {
 		activePlayer = 0; // Player one starts
 		int initBalance = 10000; // Initial balance
 		board = new Board();
-		
+
 		createPlayers(initBalance);
 	}
-	
+
 	/**
 	 * Helper method to create the right amount of Player instances in the players Array. Also tells GameController to add the Player instances if a GUI is used.
 	 * @see BoundaryToGUI
@@ -48,7 +48,7 @@ public class Game {
 			BoundaryToGUI.addPlayer(players[i]);
 		}
 	}
-	
+
 	/**
 	 * Starts the game.
 	 */
@@ -56,7 +56,7 @@ public class Game {
 		BoundaryToPlayer.showString("Spillet starter");
 		oneRound();
 	}
-	
+
 	/**
 	 * Used to run one round of the game.
 	 * Uses private helper method ShowStatus to print the status of the game to console and GUI.
@@ -69,15 +69,15 @@ public class Game {
 		int balanceChange;
 		Player actPlayer = players[activePlayer];
 		Field actField;
-		
+
 		BoundaryToPlayer.showString("\n" + actPlayer.getName() + " har turen.");
 		BoundaryToPlayer.getPlayerAccept(actPlayer);
 		baeger.rollDice();
 		actField = board.getField(baeger.getSum() - 2);
 		balanceChange = actField.getChangeBalance();
-		
+
 		optToBuy(actField, actPlayer);
-		
+
 		if (balanceChange >= 0) {
 			actPlayer.getKonto().deposit(balanceChange);
 		} else if (!actPlayer.getKonto().withdraw(-balanceChange)) {
@@ -85,10 +85,10 @@ public class Game {
 			winner = true;
 		}
 		ShowStatus(actField);
-		
+
 		endRoundChecks();
 	}
-	
+
 	/**
 	 * Checks if player can and will buy field he landed on. 
 	 * 
@@ -96,12 +96,15 @@ public class Game {
 	 * @param actPlayer
 	 */
 	private void optToBuy(Field actField, Player actPlayer) {
-		if (actField.getOwner() == null){									//If nobody owns the field
-			if (actPlayer.getKonto().getBalance() <= actField.getPrice()){	//If player has enough money
-				if (BoundaryToPlayer.optToBuy(actField));					//If player wants to buy
+		if (Ownable.class.isInstance(actField)) {
+			actField = (Ownable) actField ;
+			if (actField.getOwner() == null){									//If nobody owns the field
+				if (actPlayer.getKonto().getBalance() <= actField.getPrice()){	//If player has enough money
+					if (BoundaryToPlayer.optToBuy(actField));					//If player wants to buy
 					actPlayer.buyField(actField);							//Actually buy the field
+				}
 			}
-		}
+		} 
 	}
 
 	/**
@@ -122,7 +125,7 @@ public class Game {
 			oneRound();
 		}
 	}
-	
+
 	/**
 	 * Prints the status of the game to Console and updates the provided GUI.
 	 * @param baeger MatadorRafleBaeger with the dice used in the game.
@@ -136,7 +139,7 @@ public class Game {
 		BoundaryToPlayer.showStatus(baeger, players);
 		BoundaryToPlayer.landOnField(field);
 	}
-	
+
 	/**
 	 * Checks to see if there is a winner by balance
 	 */
@@ -145,7 +148,7 @@ public class Game {
 			winner = true;
 		}
 	}
-	
+
 	/**
 	 * Closes the Scanner in BoundaryToPlayer
 	 * @see BoundaryToPlayer
@@ -153,7 +156,7 @@ public class Game {
 	private void gameEnd() {
 		BoundaryToPlayer.closeScanner();
 	}
-	
+
 
 
 	/**
@@ -172,7 +175,7 @@ public class Game {
 	public String toString() {
 		String retString = "";
 		int i = 1;
-		
+
 		retString += baeger + "\n";
 		for (Player player : players) {
 			retString += player;
