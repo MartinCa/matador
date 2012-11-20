@@ -29,6 +29,4 @@ public abstract class Ownable extends Field {
 		return "Ownable [price=" + price + ", name=" + name + ", fieldNum="
 				+ fieldNum + ", owner=" + owner.getName() + "]";
 	}
-	
-	public abstract int rent();
 }
