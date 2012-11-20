@@ -16,7 +16,7 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
-	private ArrayList<Ownable> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
+	private ArrayList<Ownable> ownedFields = new ArrayList<Ownable>(); 	//Array af fields den enkelte spiller ejer.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.

@@ -19,6 +19,7 @@ public class Game {
 	private Player[] players;
 	private Board board;
 	private boolean winner = false;
+	private static Game game;
 
 	/**
 	 * Constructor that starts the game, 2 Die and 2 Player instances are created. Creates the baeger using MatadorRafleBaeger and two players of type Player.
@@ -27,7 +28,7 @@ public class Game {
 	 * @see Player
 	 * @see Board
 	 */
-	public Game() {
+	private Game() {
 		baeger = new MatadorRafleBaeger();
 		players = new Player[2]; // This game will be played with two players
 		winpoint = 30000; // Winner at balance of 30000
@@ -36,6 +37,13 @@ public class Game {
 		board = new Board();
 
 		createPlayers(initBalance);
+	}
+	
+	public static Game getGame() {
+		if (game == null) {
+			game = new Game();
+		}
+		return game ;
 	}
 
 	/**
@@ -66,7 +74,6 @@ public class Game {
 	 * @see BoundaryToPlayer
 	 */
 	private void oneRound() {
-		int balanceChange;
 		Player actPlayer = players[activePlayer];
 		Field actField;
 
@@ -74,16 +81,10 @@ public class Game {
 		BoundaryToPlayer.getPlayerAccept(actPlayer);
 		baeger.rollDice();
 		actField = board.getField(baeger.getSum() - 2);
-		balanceChange = actField.getChangeBalance();
+		actField.landOnField(actPlayer);
 
 		optToBuy(actField, actPlayer);
 
-		if (balanceChange >= 0) {
-			actPlayer.getKonto().deposit(balanceChange);
-		} else if (!actPlayer.getKonto().withdraw(-balanceChange)) {
-			nextPlayer();
-			winner = true;
-		}
 		ShowStatus(actField);
 
 		endRoundChecks();
@@ -99,10 +100,11 @@ public class Game {
 		Ownable actOwnable; 
 		if (Ownable.class.isInstance(actField)) {
 			actOwnable = (Ownable) actField ;
-			if (actOwnable.getOwner() == null){									//If nobody owns the field
-				if (actPlayer.getKonto().getBalance() <= actOwnable.getPrice()){	//If player has enough money
+			if (actOwnable.getOwner() == null) {	//If nobody owns the field
+				if (actPlayer.getKonto().getBalance() >= actOwnable.getPrice()) {	//If player has enough money
 					if (BoundaryToPlayer.optToBuy(actOwnable));					//If player wants to buy
-						actPlayer.buyField(actOwnable);							//Actually buy the field
+						actPlayer.buyField(actOwnable);//Actually buy the field
+						actOwnable.setOwner(actPlayer);
 				}
 			}
 		} 
@@ -167,6 +169,10 @@ public class Game {
 		if (++activePlayer >= players.length) {
 			activePlayer = 0;
 		}
+	}
+	
+	public MatadorRafleBaeger getBaeger() {
+		return baeger;
 	}
 
 	/* (non-Javadoc)

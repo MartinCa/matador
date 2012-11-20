@@ -29,6 +29,10 @@ public abstract class Ownable extends Field {
 		return owner;
 	}
 	
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+	
 	protected abstract int rent();
 
 	@Override

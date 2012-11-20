@@ -30,9 +30,9 @@ public class Board {
 
 		boardFields[0] = new Refuge("Start", 1, 200); //Okay
 		boardFields[1] = new Street("Rødovervej", 2, 200, 60); //Needs price
-		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100, 39); //Needs price
+		boardFields[2] = new Taxes("Ekstraordinær statsskat", 39, 100); //Needs price
 		boardFields[3] = new Street("Hvidovrevej", 4, 20, 60); //Needs price
-		boardFields[4] = new Shipping("D.F.D.S.", -75, 16); //Needs price
+		boardFields[4] = new Shipping("D.F.D.S.", 16, 200); //Needs price
 		boardFields[5] = new Refuge("Prøv lykken", 3, 0); //Okay
 		boardFields[6] = new Taxes("Fængsel", 11, 500); //Okay
 		boardFields[7] = new Street("Strandvejen", 20, 60, 180); //Needs price

@@ -23,7 +23,9 @@ public class Street extends Ownable{
 	public void landOnField(Player player) {
 		int currentRent = rent();
 		if (player.getKonto().withdraw(currentRent)) {
-			owner.getKonto().deposit(currentRent);
+			if (owner != null) {
+				owner.getKonto().deposit(currentRent);
+			}
 		} else {
 			// NEED LOSER THING HERE
 		}
@@ -36,6 +38,6 @@ public class Street extends Ownable{
 	@Override
 	public String toString() {
 		return "Street [rent=" + rent + ", price=" + price + ", name=" + name
-				+ ", fieldNum=" + fieldNum + ", owner=" + owner.getName() + "]";
+				+ ", fieldNum=" + fieldNum + "]";
 	}
 }

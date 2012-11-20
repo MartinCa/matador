@@ -14,7 +14,7 @@ public class Main {
 	 * @param args not used.
 	 */
 	public static void main(String[] args) {
-		Game game = new Game();
+		Game game = Game.getGame();
 		
 		game.startGame();
 	}

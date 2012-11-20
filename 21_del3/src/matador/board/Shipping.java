@@ -1,6 +1,6 @@
 package matador.board;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import matador.business_logic.Player;
 
@@ -23,21 +23,31 @@ public class Shipping extends Ownable {
 	}
 	
 	protected int rent() {
-		ArrayList<Ownable> ownedFields = owner.getOwnedFields();
-		int numFields = 0;
-		
-		for (Ownable field : ownedFields) {
-			if (Refuge.class.isInstance(field)) {
-				numFields++;
+		if (owner != null && owner.getOwnedFields() != null) {
+			ArrayList<Ownable> ownedFields = owner.getOwnedFields();
+			int numFields = 0;
+			System.out.println(ownedFields.get(0));
+			Iterator<Ownable> ownIter = ownedFields.iterator();
+
+			while (ownIter.hasNext()) {
+				if (Shipping.class.isInstance(ownIter.next())) {
+					numFields++;
+				}
+			System.out.println(numFields);
 			}
+
+			return (int)(basisFare * Math.pow(2, numFields - 1));
+		} else {
+			return 0;
 		}
-		return (int)(basisFare * Math.pow(basisFare, numFields));
 	}
 	
 	public void landOnField(Player player) {
 		int currentFare = rent();
 		if (player.getKonto().withdraw(currentFare)) {
-			owner.getKonto().deposit(currentFare);
+			if (owner != null) {
+				owner.getKonto().deposit(currentFare);
+			}
 		} else {
 			// NEED LOSER THING HERE
 		}

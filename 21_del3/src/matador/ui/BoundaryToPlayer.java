@@ -143,13 +143,16 @@ public class BoundaryToPlayer {
 	 * @return Boolean
 	 */
 	public static Boolean optToBuy(Ownable actField) {
-		System.out.println("You landed on " + actField + ". Would you like to buy it for " + actField.getPrice() + "?");
+		System.out.println("You landed on " + actField.getName() + ". Would you like to buy it for " + actField.getPrice() + "?");
 		System.out.println("Press Y, then Enter for Yes or any key, then Enter for No.");
 
-		if (input.next() == "Y"){
+		if (getPlayerInt() == 1){
+			showString("Du har købt " + actField.getName());
 			return true;	//If players accepts to buy field true is returned
+		} else  {
+			showString("Du købte ikke " + actField.getName());
+			return false;	//If player does not accept to buy field, false is returned.
 		}
-		return false;	//If player does not accept to buy field, false is returned.
 	}
 }
 
