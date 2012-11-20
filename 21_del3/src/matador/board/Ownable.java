@@ -1,5 +1,7 @@
 package matador.board;
 
+import matador.business_logic.Player;
+
 /**
  * Abstract class that all the ownable fields used in Matador inherits from.
  * @author Martin Caspersen
@@ -7,6 +9,7 @@ package matador.board;
  */
 public abstract class Ownable extends Field {
 	protected int price;
+	protected Player owner;
 
 	/**
 	 * Constructor that sets name and changeBalance.
@@ -20,6 +23,10 @@ public abstract class Ownable extends Field {
 	
 	public int getPrice() {
 		return price;
+	}
+	
+	public Player getPlayer() {
+		return owner;
 	}
 	
 	protected abstract int rent();

@@ -15,7 +15,7 @@ public class Street extends Ownable{
 	 * @param name String with field name.
 	 * @param changeBalance int representing what should happen with a players balance upon landing on the field.
 	 */
-	public Street(String name, int fieldNum, int price, int rent) {
+	public Street(String name, int fieldNum, int rent, int price) {
 		super(name, fieldNum, price);
 		this.rent = rent;
 	}

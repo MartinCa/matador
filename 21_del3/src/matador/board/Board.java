@@ -29,15 +29,15 @@ public class Board {
 		boardFields = new Field[numFields]; // sets array length to numFields
 
 		boardFields[0] = new Refuge("Start", 1, 200); //Okay
-		boardFields[1] = new Street("Rødovervej", -200, 2); //Needs price
+		boardFields[1] = new Street("Rødovervej", 2, 200, 60); //Needs price
 		boardFields[2] = new Taxes("Ekstraordinær statsskat", -100, 39); //Needs price
-		boardFields[3] = new Street("Hvidovrevej", -20, 4); //Needs price
+		boardFields[3] = new Street("Hvidovrevej", 4, 20, 60); //Needs price
 		boardFields[4] = new Shipping("D.F.D.S.", -75, 16); //Needs price
 		boardFields[5] = new Refuge("Prøv lykken", 3, 0); //Okay
 		boardFields[6] = new Taxes("Fængsel", 11, 500); //Okay
-		boardFields[7] = new Street("Strandvejen", -60, 20); //Needs price
-		boardFields[8] = new Street("Grønningen", -80, 25); //Needs price
-		boardFields[9] = new Street("Rådhuspladsen", -150, 40);
+		boardFields[7] = new Street("Strandvejen", 20, 60, 180); //Needs price
+		boardFields[8] = new Street("Grønningen", 25, 80, 240); //Needs price
+		boardFields[9] = new Street("Rådhuspladsen", 40, 150, 400);
 		boardFields[10] = new Refuge("Helle", 21, 20000); //Okay
 	}
 	
