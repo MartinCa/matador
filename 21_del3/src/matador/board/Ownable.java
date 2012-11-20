@@ -25,7 +25,7 @@ public abstract class Ownable extends Field {
 		return price;
 	}
 	
-	public Player getPlayer() {
+	public Player getOwner() {
 		return owner;
 	}
 	
