@@ -96,12 +96,13 @@ public class Game {
 	 * @param actPlayer
 	 */
 	private void optToBuy(Field actField, Player actPlayer) {
+		Ownable actOwnable; 
 		if (Ownable.class.isInstance(actField)) {
-			actField = (Ownable) actField ;
-			if (actField.getOwner() == null){									//If nobody owns the field
-				if (actPlayer.getKonto().getBalance() <= actField.getPrice()){	//If player has enough money
-					if (BoundaryToPlayer.optToBuy(actField));					//If player wants to buy
-					actPlayer.buyField(actField);							//Actually buy the field
+			actOwnable = (Ownable) actField ;
+			if (actOwnable.getOwner() == null){									//If nobody owns the field
+				if (actPlayer.getKonto().getBalance() <= actOwnable.getPrice()){	//If player has enough money
+					if (BoundaryToPlayer.optToBuy(actOwnable));					//If player wants to buy
+						actPlayer.buyField(actOwnable);							//Actually buy the field
 				}
 			}
 		} 

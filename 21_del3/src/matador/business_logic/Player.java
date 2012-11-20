@@ -2,7 +2,6 @@ package matador.business_logic;
 
 import java.util.*;
 
-import board.fields.Field;
 import matador.board.*;
 
 /**
@@ -17,7 +16,7 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
-	private List<Field> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
+	private List<Ownable> ownedFields = new ArrayList(); 	//Array af fields den enkelte spiller ejer.
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -63,7 +62,7 @@ public class Player {
 	 * 
 	 * @param field
 	 */
-	public void buyField(Field field){
+	public void buyField(Ownable field){
 		this.konto.withdraw(field.getPrice());	
 		this.ownedFields.add(field);			
 	}
@@ -72,5 +71,6 @@ public class Player {
 	public String toString() {
 		return "Player [carColor=" + carColor + ", name=" + name + ", konto="
 				+ konto + "]";
-	}	
+	}
+
 }
