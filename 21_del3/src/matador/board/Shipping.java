@@ -21,7 +21,7 @@ public class Shipping extends Ownable {
 	}
 	
 	protected int rent() {
-		Field[] ownedFields = owner.getFields();
+		Field[] ownedFields = owner.getOwnedFields();
 		int numFields = 0;
 		
 		for (Field field : ownedFields) {
