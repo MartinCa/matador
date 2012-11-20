@@ -1,6 +1,7 @@
 package matador.board;
 
 import matador.business_logic.*;
+import java.util.*;
 
 /**
  * Reprensents the breweries in Matador, subclass of Field and Ownable.
@@ -22,10 +23,10 @@ public class Brewery extends Ownable {
 	}
 	
 	protected int rent() {
-		Field[] ownedFields = owner.getOwnedFields();
+		ArrayList<Ownable> ownedFields = owner.getOwnedFields();
 		int numFields = 0;
 		
-		for (Field field : ownedFields) {
+		for (Ownable field : ownedFields) {
 			if (Refuge.class.isInstance(field)) {
 				numFields++;
 			}

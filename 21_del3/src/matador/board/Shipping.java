@@ -1,5 +1,7 @@
 package matador.board;
 
+import java.util.ArrayList;
+
 import matador.business_logic.Player;
 
 /**
@@ -21,11 +23,11 @@ public class Shipping extends Ownable {
 	}
 	
 	protected int rent() {
-		Field[] ownedFields = owner.getOwnedFields();
+		ArrayList<Ownable> ownedFields = owner.getOwnedFields();
 		int numFields = 0;
 		
-		for (Field field : ownedFields) {
-			if (Shipping.class.isInstance(field)) {
+		for (Ownable field : ownedFields) {
+			if (Refuge.class.isInstance(field)) {
 				numFields++;
 			}
 		}
