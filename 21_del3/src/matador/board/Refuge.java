@@ -27,6 +27,6 @@ public class Refuge extends Field{
 	@Override
 	public String toString() {
 		return "Refuge [bonus=" + bonus + ", name=" + name + ", fieldNum="
-				+ fieldNum + ", owner=" + owner.getName() + "]";
+				+ fieldNum + "]";
 	}
 }

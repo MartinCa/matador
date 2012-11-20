@@ -33,24 +33,29 @@ public class Brewery extends Ownable {
 				if (Shipping.class.isInstance(ownIter.next())) {
 					numFields++;
 				}
-			System.out.println(numFields);
+				System.out.println(numFields);
 			}
-			
+
 			return numFields * 100 * Game.getGame().getBaeger().getSum(); // This class cannot get the dice values at the moment, this needs to be fixed.
 		} else {
 			return 0;
 		}
-		
-		
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Brewery [price=" + price + ", owner=" + owner + ", name="
+				+ name + ", fieldNum=" + fieldNum + "]";
+	}
+
 	public void landOnField(Player player) {
 		int currentRent = rent();
-		if (player.getKonto().withdraw(currentRent)) {
-			owner.getKonto().deposit(currentRent);
-		} else {
-			// NEED LOSER THING HERE
+		if (owner != player) {
+			if (player.getKonto().withdraw(currentRent)) {
+				owner.getKonto().deposit(currentRent);
+			} else {
+				player.setLoser();
+			}
 		}
-		
 	}
 }

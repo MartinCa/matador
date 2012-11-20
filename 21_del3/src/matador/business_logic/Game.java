@@ -18,7 +18,6 @@ public class Game {
 	private MatadorRafleBaeger baeger;
 	private Player[] players;
 	private Board board;
-	private boolean winner = false;
 	private static Game game;
 
 	/**
@@ -119,12 +118,11 @@ public class Game {
 	 * @see Player
 	 */
 	private void endRoundChecks() {
-		checkWinner();
-		if (winner) {
+		nextPlayer();
+		if (checkWinner()) {
 			BoundaryToPlayer.showString("" + players[activePlayer].getName() + " vandt spillet.");
 			gameEnd();
 		} else {
-			nextPlayer();
 			oneRound();
 		}
 	}
@@ -146,10 +144,21 @@ public class Game {
 	/**
 	 * Checks to see if there is a winner by balance
 	 */
-	private void checkWinner() {
-		if (players[activePlayer].getKonto().getBalance() >= winpoint) {
-			winner = true;
+	private boolean checkWinner() {
+		int numPlayers = players.length;
+		int numLosers = 0;
+		int indexPlayer = 0;
+		
+		for (Player player : players) {
+			if (player.isLoser()) {
+				numLosers++;
+			} else if (player.getKonto().getBalance() >= winpoint) {
+				activePlayer = indexPlayer;
+				return true;
+			}
+			indexPlayer++;
 		}
+		return numLosers == numPlayers - 1;
 	}
 
 	/**
@@ -168,6 +177,9 @@ public class Game {
 	private void nextPlayer() {
 		if (++activePlayer >= players.length) {
 			activePlayer = 0;
+		}
+		if (players[activePlayer].isLoser()) {
+			nextPlayer();
 		}
 	}
 	

@@ -11,7 +11,6 @@ import matador.business_logic.Player;
 public abstract class Field {
 	protected String name;
 	protected int fieldNum;
-	protected Player owner;
 
 	/**
 	 */
@@ -48,7 +47,6 @@ public abstract class Field {
 
 	@Override
 	public String toString() {
-		return "Field [name=" + name + ", fieldNum=" + fieldNum + ", owner="
-				+ owner.getName() + "]";
+		return "Field [name=" + name + ", fieldNum=" + fieldNum + "]";
 	}
 }

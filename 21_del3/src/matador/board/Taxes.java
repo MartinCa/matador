@@ -25,7 +25,13 @@ public class Taxes extends Field{
 		if (player.getKonto().withdraw(tax)) {
 			
 		} else {
-			// Need loser thing here
+			player.setLoser();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Taxes [tax=" + tax + ", name=" + name + ", fieldNum="
+				+ fieldNum + "]";
 	}
 }

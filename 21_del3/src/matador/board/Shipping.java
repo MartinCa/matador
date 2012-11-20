@@ -41,15 +41,24 @@ public class Shipping extends Ownable {
 			return 0;
 		}
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Shipping [basisFare=" + basisFare + ", price=" + price
+				+ ", owner=" + owner + ", name=" + name + ", fieldNum="
+				+ fieldNum + "]";
+	}
+
 	public void landOnField(Player player) {
 		int currentFare = rent();
-		if (player.getKonto().withdraw(currentFare)) {
-			if (owner != null) {
-				owner.getKonto().deposit(currentFare);
+		if (owner != player) {
+			if (player.getKonto().withdraw(currentFare)) {
+				if (owner != null) {
+					owner.getKonto().deposit(currentFare);
+				}
+			} else {
+				player.setLoser();
 			}
-		} else {
-			// NEED LOSER THING HERE
 		}
 	}
 }

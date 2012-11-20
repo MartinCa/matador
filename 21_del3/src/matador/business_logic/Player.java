@@ -17,6 +17,7 @@ public class Player {
 	private String name;
 	private Konto konto;
 	private ArrayList<Ownable> ownedFields = new ArrayList<Ownable>(); 	//Array af fields den enkelte spiller ejer.
+	private boolean loser = false;
 
 	/**
 	 * Constructs a Player with the provided name, carColor and balance.
@@ -76,6 +77,14 @@ public class Player {
 		return ownedFields;		
 	}
 	
+	public boolean isLoser() {
+		return loser;
+	}
+
+	public void setLoser() {
+		this.loser = true;
+	}
+
 	@Override
 	public String toString() {
 		return "Player [carColor=" + carColor + ", name=" + name + ", konto="
