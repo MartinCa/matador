@@ -1,29 +1,29 @@
 \tikzumlset{fill class=white, font=\tiny}
 \begin{tikzpicture}
  \umlclass[x=-4.5,y=-6]{Board}{}{}
- \umlclass[y=-6,type=abstract]{Field}{\#name : String\\\#fieldNum : int}{}
+ \umlclass[y=-6,type=abstract]{Field}{name\\number}{}
  \umlclass[y=-12,x=2.3]{Brewery}{}{}
- \umlclass[y=-9,x=-4.5]{Refuge}{}{}
+ \umlclass[y=-9,x=-4.5]{Refuge}{bonus}{}
  \umlclass[y=-12]{Shipping}{}{}
  \umlclass[y=-12,x=4.6]{Street}{}{}
- \umlclass[y=-9,x=-2.2]{Taxes}{}{}
- \umlclass[y=-9,x=4,type=abstract]{Ownable}{}{}
- \umlclass[y=-2,x=1]{Player}{}{}
+ \umlclass[y=-9,x=-2.2]{Taxes}{tax}{}
+ \umlclass[y=-9,x=4.8,type=abstract]{Ownable}{price\\rent}{}
+ \umlclass[y=-2,x=1]{Player}{name}{}
  \umlclass[y=-2,x=4]{Bank}{}{}
  \umlclass[x=-4]{MatadorRafleBaeger}{}{}
- \umlclass[x=-4,y=2]{Die}{}{}
- \umlclass[y=-3.5,x=6]{House}{}{}
+ \umlclass[x=-4,y=2]{Die}{value}{}
+ \umlclass[y=-5,x=6]{House}{}{}
  \umlclass[x=3]{Money}{}{}
  \umlclass[y=-2,x=-4.5]{Game}{}{}
  \umlclass[y=-3.5,x=-2.5]{Car}{color}{}
- \umlclass[y=0.5]{LuckyCard}{}{}
+ \umlclass[y=0.5]{LuckyCard}{action}{}
  \umlclass[y=-9]{Luck}{}{}
  \umlclass[y=-9,x=2]{Prison}{}{}
  
- \umlcompo[mult2=0..*,arg2=-boardFields,pos2=1.0,align2=right]{Board}{Field}
+ \umlcompo[mult2=40]{Board}{Field}
  \umlinherit[mult1=28]{Ownable}{Field}
- \umlinherit{Taxes}{Field}
- \umlinherit{Refuge}{Field}
+ \umlinherit[arg1=2]{Taxes}{Field}
+ \umlinherit[arg1=3]{Refuge}{Field}
  \umlinherit[mult1=2]{Brewery}{Ownable}
  \umlinherit[mult1=4]{Shipping}{Ownable}
  \umlinherit[mult1=22]{Street}{Ownable}
@@ -33,15 +33,15 @@
  \umlcompo{MatadorRafleBaeger}{Die}
  \umlaggreg[mult2=*]{Bank}{Money}
  \umlaggreg[mult2=0..*]{Player}{Money}
- \umlaggreg[geometry=-|]{Street}{House}
+ \umlaggreg[geometry=-|,mult2=0..5,pos2=1.95]{Street}{House}
  \umlaggreg[name=owns]{Player}{Ownable}
  \umlassoc[stereo=rolls]{Player}{MatadorRafleBaeger}
  \umlassoc{Game}{Player}
  \umlcompo[mult2=1]{Player}{Car}
- \umlassoc{Car}{Field}
+ \umlassoc[mult1=0..*,mult2=1]{Car}{Field}
  \umlassoc{Game}{LuckyCard}
  \umlassoc[stereo=draws]{Player}{LuckyCard}
- \umlCNassoc[stereo=buys]{Player}{3.5,-3.5}{House}
- \umlinherit{Luck}{Field}
- \umlinherit{Prison}{Field}
+ \umlassoc[stereo=buys]{Player}{House}
+ \umlinherit[mult1=6]{Luck}{Field}
+ \umlinherit[mult1=1]{Prison}{Field}
 \end{tikzpicture}
