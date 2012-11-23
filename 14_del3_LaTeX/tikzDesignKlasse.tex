@@ -1,0 +1,24 @@
+\tikzumlset{fill class=white, font=\tiny}
+\begin{tikzpicture}
+
+ \umlclass[x=-5]{Game}{-activePlayer : int\\-winpoint : int\\-baeger : MatadorRafleBaeger}{+Game()\\-createPlayers(int)\\+startGame()\\-oneRound()\\-endRoundChecks()\\-showStatus(Field)\\-checkWinner()\\-gameEnd()\\-nextPlayer()}
+ \umlclass[x=2]{Player}{-carColor : int\\-name : String\\-konto : Konto}{+Player(String, int, int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto}
+ \umlclass[x=-5,y=-4.5]{Board}{}{+Board()\\-initBoard(int)\\+getField(int) : Field}
+ \umlclass[y=-4.5,x=1,type=abstract]{Field}{\#name : String\\\#changeBalance : int\\\#fieldNum : int}{+Field(String, int)\\+Field(String, int, int)\\+getName() : String\\+getFieldNum() : int}
+ \umlclass[y=-11.5,x=-4.5]{Brewery}{}{+Brewery(String, int\\+Brewery(String, int, int))}
+ \umlclass[y=-8.5,x=-4.5]{Refuge}{}{+Refuge(String, int\\+Refuge(String, int, int))}
+ \umlclass[y=-11.5]{Shipping}{}{+Shipping(String, int\\+Shipping(String, int, int))}
+ \umlclass[y=-11.5,x=4.5]{Street}{}{+Street(String, int\\+Street(String, int, int))}
+ \umlclass[y=-8.5,x=4.5]{Taxes}{}{+Taxes(String, int\\+Taxes(String, int, int))}
+ \umlclass[y=-8.5,type=abstract]{Ownable}{}{+Ownable(String, int\\+Ownable(String, int, int))}
+ 
+ \umlcompo[mult2=0..*,arg2=-boardFields,pos2=1.0,align2=right]{Board}{Field}
+ \umlinherit{Ownable}{Field}
+ \umlinherit{Taxes}{Field}
+ \umlinherit{Refuge}{Field}
+ \umlinherit{Brewery}{Ownable}
+ \umlinherit{Shipping}{Ownable}
+ \umlinherit{Street}{Ownable}
+ \umlaggreg[arg2=-players,mult2=2]{Game}{Player}
+ \umlcompo[arg2=-board,mult2=1]{Game}{Board}
+\end{tikzpicture}

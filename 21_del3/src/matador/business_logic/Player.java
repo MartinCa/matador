@@ -77,10 +77,17 @@ public class Player {
 		return ownedFields;		
 	}
 	
+	/**
+	 * Returns whether the player is a loser or not.
+	 * @return True if the player is a loser.
+	 */
 	public boolean isLoser() {
 		return loser;
 	}
 
+	/**
+	 * Sets the Player as a loser.
+	 */
 	public void setLoser() {
 		this.loser = true;
 	}
