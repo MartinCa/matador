@@ -1,0 +1,192 @@
+\documentclass[final,12pt,a4paper,oneside,article,danish]{memoir} %Her sættes document classen samt indstillinger for classen, her er den sat til at efterligne article. Her angives også om dokumentet er final eller draft. Angiv også sprog her.
+
+%%%Tjek liste for brug af denne template
+%%%%%%Indsæt forfatter istedet for Insert Author
+%%%%%%Indsæt titel istedet for Insert Title
+%%%%%%Vælg sprog ved babel, comment pakken dk-bib.
+%%%%%%Vælg om der skal indholdsfortegnelse med ved at kommentere eller beholde de relevante linier: \tableofcontents
+%%%%%%Vælg om der skal litteraturliste med ved at fjerne kommenttegn eller beholde dem: \bibliography
+%%%%%%Husk at ændre draft til final når dokumentet er færdigt
+
+%Specielle pakker for dansk support
+\usepackage[utf8]{inputenc} %Her sørger jeg for at der er mulighed for at anvende danske bogstaver som æøå
+\usepackage[danish]{babel} %Sørger for at ting som litteraturliste er på dansk. Husk at dansk support skal installeres fra MIKTEX settings
+\renewcommand{\danishhyphenmins}{22} % bedre orddeling
+\usepackage[T1]{fontenc} %Bedre support for europæiske accenterede tegn.
+\linespread{1.1} %linjeafstanden stilles her
+
+%Pakke der retter fejl i LaTeX kernen
+\usepackage{fixltx2e}
+
+%Set margin
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{2.5cm}{*}
+
+
+%Pakke for brug af anden font
+\usepackage[sc]{mathpazo}
+\usepackage{tgpagella}
+
+%Pakker for opsætning af udseendet på siden
+\nouppercaseheads %Sørger for at sidehoved er med små bogstaver
+
+%Pakker der bruges i forbindelse med grafik og grafer
+\usepackage[final]{graphicx} %Pakke som bruges til at inkludere grafik i dokumenterne
+\graphicspath{{img/}}
+
+%Tikz pakker til plotning, figurer og diagrammer
+%\usepackage{pgfplots} %Bruges til at kunne plotte data på en graf i LaTeX, virker ikke med tikz-uml
+%\pgfplotsset{compat=1.3} %Sætter pgfplots til at bruge ny standard med hensyn til placering af elementer.
+\usepackage{xcolor} %Pakke der muligøre brugen af farver i pgfplots.
+\usepackage{tikz} %Pakke til at plotte ting i LaTeX, se pgfmanual.pdf
+\usetikzlibrary{positioning} %Bruges til bedre positionering af nodes.
+\usetikzlibrary{intersections} %Bruges til at lave enhedscirklen.
+\usetikzlibrary{calc}
+\usepackage{tikz-uml} %Bruges til at tegne UML diagrammer i LaTeX
+
+%Pakker der bruges i forbindelse med tabeller
+%\usepackage{booktabs} %Benyttes til at lave bedre horisontale linjer i tabeller.
+%\usepackage{dcolumn} %Benyttes til at lave tabelkolonner, hvor decimaladskilleren bruges til at aligne.
+%\newcolumntype{d}[1]{D{.}{.}{#1}} %Laver en ny column type som er den der oftest bruges i dette projekt.
+%\newcommand\mc[1]{\multicolumn{1}{c}{#1}} %Giver kommandoen mc{tekst} som bruges til at sørge for at teksten i dcolumn kolonner ikke bliver formateret som matematik.
+%\usepackage{multirow} %Giver mulighed for celler der strækker sig over flere rækker.
+%\renewcommand\multirowsetup{\centering} %Sikre at alt der skrives i multirow er centreret.
+\usepackage{bigstrut}
+
+%Pakker til brug for matematik samt diverse symboler
+\usepackage{amsmath} %Til brug for matematik.
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sistyle} %Se side 263 Introduktion til Latex giver mulighed for \SI{nummer}{enhed} kommandoen, som sørger for at enhederne og tallene er stillet rigtigt op.
+\SIstyle{German} %Sætter stylen for enheder og numre til tysk.
+\usepackage{textcomp} %Ekstra symboler
+
+%Pakker som ordner nummereringen af formler og figurer Disse kommer fra amsmath
+\numberwithin{equation}{chapter} %For at få sektions numre på formler til henvisninger.
+\numberwithin{figure}{chapter} %For at få sektions numre på figure til henvisninger.
+\numberwithin{table}{chapter} %For at få sektions numre på tabeller til henvisninger.
+\usepackage{placeins} %Kan bruges til at stoppe floats fra at passerer sections
+
+%Make sure all figures are placed with htbp
+\makeatletter
+\renewcommand\fps@figure{htbp} %Sørger for at alle figurer bliver placeret i forhold til htbp.
+\renewcommand\fps@table{htbp} %Sørger for at alle tabeller bliver placeret i forhold til htbp.
+\g@addto@macro{\quote}{\itshape} %Laver tekst i quote environmentet kursiv.
+\makeatother
+
+%Misc
+%\usepackage[final]{pdfpages} %Enables insertion of external multipage pdf files.
+
+%Pakker som kan bruges til at angives hvor langt ned LaTeX skal nummere sektioner%%%
+\setsecnumdepth{subsection} % Nummerering ned til subsection hvis den sættes til subsection
+
+%Pakker der bruges til litteraturlister%%%
+\usepackage[backend=biber,style=alphabetic]{biblatex} 
+
+%Pakker der bruges til at lave referencer i dokumentet
+\usepackage{prettyref}
+\usepackage[danish]{varioref} %Giver adgang til kommandoen \vref som giver nummer og sidehenvisning > 0.1 på side 4
+
+%Pakker der bruges for at lave klikbare links i pdf filer
+\usepackage[pdftex, colorlinks=false, pdfauthor={Gruppe 21}, pdftitle={CDIO del 2}]{hyperref} %EDIT Til hyperlinks i dokumentet [colorlinks] kan tilføjes for farver, klikbare links i pdf filerne. citecolor=black
+\usepackage{memhfixc} %Løser problemer med hyperref i memoir, skal loades efter hyperref.
+
+%Pakker der bruges for at sikre at der bruges de korrekte kvotationstegn
+\usepackage[danish=quotes]{csquotes} %gør det muligt at bruge \enquote{quote} se evt s. 25 i Introduktion til Latex ellers kan "` quote "' bruges. Dansk indstilling [danish=quotes].
+
+%Pakke der bruges til at lave noter til mig selv i draft
+\usepackage[inline,danish]{fixme} %pakke der bliver brugt til at lave noter til mig selv om ting der skal rettes. \fxfatal, \fxerror, \fxwarning, \fxnote[inline]{text}. Om dokumentet er draft eller final angives ved \documentclass.
+
+%Indstillinger af caption
+\captionnamefont{\footnotesize\bfseries}
+\captiontitlefont{\footnotesize\itshape}
+%\setsecheadstyle{\bfseries\large\itshape}
+
+%Sidehoved og -fod herunder
+\makeatletter
+\makepagestyle{bachstyle}
+\makeoddhead{bachstyle}{\small \leftmark}{}{\small CDIO del 2}
+\makeoddfoot{bachstyle}{}{}{\small\thepage}
+\makepsmarks {bachstyle}{
+\createmark{chapter}{both} {shownumber} {\@chapapp\ }{. \ }
+\createmark{section} {right}{nonumber} {} {. \ }
+\createmark{subsection} {right}{nonumber} {} {. \ }
+\createmark{subsubsection}{right}{nonumber} {} {. \ }
+\createplainmark{toc} {both}{\contentsname}
+\createplainmark{lof} {both}{\listfigurename}
+\createplainmark{lot} {both}{\listtablename}
+\createplainmark{bib} {both}{\bibname}
+\createplainmark{index} {both}{\indexname}
+}
+\nouppercaseheads % ingen rene kapitaler
+\makeatother
+\copypagestyle{plain}{bachstyle}
+\makeevenhead{plain}{}{}{} % slet venstre sidehoved
+\makeoddhead{plain}{}{}{}% slet højre sidehoved
+
+%Giver kommandoer for at bruge \Re og \Im til komplekse tal.
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+%For code formatting
+\usepackage[final]{listings}
+\lstset{language=Java, numbers=left, numberstyle=\tiny}
+\lstset{prebreak=\raisebox{-1ex}[0ex][0ex]
+        {\ensuremath{\hookleftarrow}}}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+        {\ensuremath{\hookrightarrow\space}}}
+\lstset{breaklines=true, breakatwhitespace=true}
+\lstset{numbers=left, numberstyle=\scriptsize}
+\usepackage{listingsutf8}
+
+\newcommand{\iv}[1]{\paragraph{#1}\fancybreak{}}
+\usepackage{soul}
+\sodef\an{}{0.2em}{.9em plus.6em}{1em plus.1em minus.1em}
+\newcommand\stext[1]{\an{\scshape#1}}
+
+%Nye kommandoer til kode
+\newcommand{\codeparagraph}[1]{\paragraph{\texttt{#1}}}
+\newcommand{\klasse}[1]{\texttt{\textit{#1}}}
+\newcommand{\metode}[1]{\texttt{#1}}
+\newcommand{\dpattern}[1]{\textsc{#1}}
+\DeclareOldFontCommand{\it}{\itshape}{\mathit}
+
+%Memoir checkandfixthelayout
+\usepackage{cleveref} %Gives commando \cref to easily make references that include type of object referenced.
+\checkandfixthelayout[nearest] 
+
+%Choosing the bibliography to load
+\bibliography{main}
+
+\begin{document} %Dokumentet begynder herunder 
+\pagestyle{bachstyle}
+\author{Gruppe 21} %EDIT Her sættes dokumentets forfatter
+\title{CDIO del 2} %EDIT Her sættes dokumentets titel
+%Titelside begynder
+\input{titlepage.tex}
+\newpage
+%\input{time.tex}
+%Titelside slutter
+%Indholdsfortegnelse begynder
+\newpage
+%\thispagestyle{empty}
+\FloatBarrier
+\tableofcontents
+%\thispagestyle{empty}
+\newpage
+%Indholdsfortegnelse slutter
+%%%Herunder begynder selve indholdet%%%
+\input{indledning.tex}
+%\input{krav.tex}
+\input{design.tex}
+%\input{implementering.tex}
+%\input{test.tex}
+%\input{konklusion.tex}
+\newpage
+%Slut af indholdet
+%Herunder hentes litteraturlisten fra bib filen, kun de poster der bliver citeret bliver vist
+\printbibliography
+%Litteraturliste slut
+\listoffixmes %liste af rettelser fra fixme
+%Herunder er slutningen af dokumentet
+\end{document}

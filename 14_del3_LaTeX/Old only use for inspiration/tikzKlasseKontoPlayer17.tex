@@ -1,0 +1,6 @@
+\tikzumlset{fill class=white, font=\tiny}
+\begin{tikzpicture}
+\umlclass{Player}{-carColor : int\\-name : String}{+Player(String, int , int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto}
+\umlclass[x=5]{Konto}{-balance : int}{+Konto()\\+Konto(int)\\+deposit(int)\\+withdraw(int) : bool\\+getBalance() : int\\+setBalance(int)}
+\umlcompo[mult2=1, arg2=-konto,pos2=0.7]{Player}{Konto}
+\end{tikzpicture}

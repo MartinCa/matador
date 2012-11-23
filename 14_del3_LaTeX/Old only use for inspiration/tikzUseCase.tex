@@ -1,0 +1,14 @@
+\tikzumlset{fill usecase=white,font=\tiny}
+\begin{tikzpicture}
+	\umlactor[x=0, y=0.5]{Spiller}
+	\umlactor[x=6,y=0.5]{<<system>>GUI}
+	\begin{umlsystem}[]{Spillet}
+		\umlusecase[x=3, y=0]{rollDie}
+		\umlusecase[x=3, y=1]{startGame}
+	\end{umlsystem}
+	
+	\umlassoc{Spiller}{usecase-1}
+	\umlassoc{Spiller}{usecase-2}
+	\umlassoc{usecase-1}{<<system>>GUI}
+	\umlassoc{usecase-2}{<<system>>GUI}
+\end{tikzpicture}

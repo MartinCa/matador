@@ -1,0 +1,39 @@
+\chapter{Test[1]}\label{chap:test}
+I forbindelse med CDIO del 2 er det meste af testningen foregået ved at spillet er blevet kørt. Mens spillet kørte er det kontrolleret at spillet udfører de rigtige handlinger i forhold til de værdier der bliver slået med terningerne.
+
+Det er valgt at lave en unittest for en klasse ai systemet for at få lidt erfaring med udførelsen af unittests.
+
+\section{Unittest af \klasse{Die}[2]}\label{sec:test:unitTestDie}
+Til unit test er JUnit anvendt som plugin til Eclipse. JUnit giver en række muligheder for at teste hvordan et program opfører sig. Til at lave mock's benyttes mockito som er et mocking framework. Til tests af \klasse{Die} er anvendt \textit{assertions}. Alle tests ligger i \klasse{TestDie}. Der er foretaget 2 typer af tests. I den første verificeres det, med \textit{assertTrue}, først at terningens værdi ligger i intervallet 1-6 (\vref{TestDie1-6}) og efterfølgende at terningen også kan oprettes med 200 sider. 
+
+\begin{figure}
+\caption{Test terning \textit{facevalue} har interval 1-6}
+\label{TestDie1-6}
+\begin{lstlisting}
+@Test
+public void testDie() {
+  die1 = new Die();
+  assertTrue(die1.getFacevalue() >=1 && die1.getFacevalue() <= 6);
+}
+\end{lstlisting}
+\end{figure}   
+
+Den anden del af testen illustrerer en anden måde at opsætte testen på. Her laves et mock objekt af \klasse{Random} fra Java's standard API. Dette mock objekt bliver kodet til at returnere 3 når metoden \metode{nextInt()} kaldes med parameteren 6. Efterfølgende injiceres det mock'ede objekt i en instansiering af \klasse{Die}. Det er således nu muligt, at bestemme udfaldet af et kald til \klasse{Random}. Dermed kan det testes at den \klasse{Die} rent faktisk benytter \klasse{Random} til at bestemme værdien af \textit{facevalue}. Yderliere bruges \textit{verify} til at sikre at der har fundet et kald af \metode{Random.nextInt(6)} sted. Hele denne del af testen kan ses på \vref{TestRollDie}.
+
+\begin{figure}
+\caption{Test \metode{rollDie()}}
+\label{TestRollDie}
+\begin{lstlisting}
+@Test
+public void testRollDie() {
+  Random mockRand = mock(Random.class);
+  when(mockRand.nextInt(6)).thenReturn(3);
+  Die die = new Die(mockRand); 
+
+  die.rollDie();
+
+  assertTrue(die.getFacevalue() == 3+1);
+  verify(mockRand).nextInt(6);
+}
+\end{lstlisting}
+\end{figure}     

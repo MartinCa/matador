@@ -1,0 +1,23 @@
+\tikzumlset{fill object=white,font=\tiny}
+\begin{tikzpicture}
+	\begin{umlseqdiag}
+	\umlobject{System}
+	\umlcreatecall[x=4, class=Player]{System}{player}
+	\umlcreatecall[x=8, class=Konto]{player}{konto}
+	
+	\begin{umlcall}[op={getName()},return={String name},dt=7]{System}{player}
+	\end{umlcall}
+	\begin{umlcall}[op={getCarColor()},return={int carColor}]{System}{player}
+	\end{umlcall}
+	\begin{umlcall}[op={getKonto()},return={Konto konto}]{System}{player}
+	\end{umlcall}
+	\begin{umlcall}[op={deposit(int)}]{System}{konto}
+	\end{umlcall}	
+	\begin{umlcall}[op={withdraw(int)},return=bool]{System}{konto}
+	\end{umlcall}
+	\begin{umlcall}[op={getBalance()},return=int balance]{System}{konto}
+	\end{umlcall}
+	\begin{umlcall}[op={setBalance(int)}]{System}{konto}
+	\end{umlcall}							
+	\end{umlseqdiag}
+\end{tikzpicture}

@@ -1,0 +1,55 @@
+\chapter{Implementering[1]}\label{chap:implementering}
+For præsentation af implementeringen af spillet i kode er valgt nogle interessante elementer af koden ud. Disse elementer vi blive behandlet i dette afsnit. Al koden til spillet kan findes i det vedlagte Eclipse projekt. 
+I forbindelse med implementeringen af spillet har vi valgt nogle områder af vores kode ud som vi finder specielt interessant. Disse områder vil blive behandlet i dette afsnit. Al koden til spillet kan ses i det vedlagte Eclipse projekt.
+
+For at køre spillet køres Main.java som starter spillet.
+
+\section{Objekter sendes til boundaries} \label{sec:implementering:objektToBoundary}
+\klasse{BoundaryToPlayer} og \klasse{BoundaryToGUI} er boundaries til henholdsvis den fysiske spiller og GUI. Boundaries er ansvarlige for at præsentere data fra spillet og det er praktisk at have al koden der har med denne præsentation at gøre i selve boundaries. På denne måde kan præsentationen af dataene ændres ved blot at ændre i boundary klasserne. Samtidig kan spillet tilpasses andre systemer, f.eks. en anden GUI, ved blot at ændre i den tilsvarende boundary.
+
+Dette er realiseret ved at objekter sendes direkte til boundaries, boundaries henter på denne måde de nødvendige data ud ved at kalde get metoderne på objekterne. På denne måde holdes al koden i spillet der har med præsentation af data overfor GUI og den fysiske spiller via konsollen i boundaries.
+
+Eksempel på en metode i \klasse{BoundaryToPlayer} som tager imod et objekt som parameter er \metode{landOnField(Field)}, koden for metoden ses i \vref{fig:codeObjektEksempel}. Denne metode tager imod et objekt af typen \klasse{Field}, der er her tale om det felt der netop er landet på. På feltet kaldes der \metode{getName()} og \metode{getChangeBalance()} for at få henholdsvis navnet fra feltet og ændringen til spillerens konto. \metode{landOnField(Field)} bruger oplysninger til at printe information om feltet til den fysiske spiller i konsollen.
+
+\begin{figure}
+\caption{Eksempel på metoden \metode{landOnField(Field)} i \klasse{BoundaryToPlayer}}
+\label{fig:codeObjektEksempel}
+\begin{lstlisting}
+public static void landOnField(Field field) {
+  String fieldName = field.getName();
+  String result = "Det ";
+
+  showString("Du landede paa: " + fieldName + ".");
+  
+  result += (field.getChangeBalance() >= 0) ? "giver " + field.getChangeBalance(): "koster " + (-field.getChangeBalance());
+  result += ".";
+  showString(result);
+}
+\end{lstlisting}
+\end{figure}
+
+\section{Exception handling} \label{sec:implementering:exception}
+I implementeringen af spillet benyttes et \klasse{Scanner} objekt konstrueret med parameteren System.in til at hente indtastninger fra den fysiske spiller via konsollen. På dette objekt benyttes metoden \metode{nextInt()} for at hente en integer fra den fysiske spiller. At benytte \metode{nextInt()} har nogle fordele og ulemper, en fordel er at man får en int med det samme uden at skulle omdanne en String til int. En af ulemperne er at \metode{nextInt()} thrower en exception hvis der tastes andet end en int ind. Den exception der throwes er af typen \klasse{InputMismatchException}, exceptionen betyder at den token der blev modtaget af scanner ikke er i den range der blev angivet\cite{javaExceptionInputMismatchException}. Denne exception fremkommer for eksempel hvis der indtastes en String.
+
+Det at der kommer en exception er ikke i sig selv dårligt, hvis der ikke kom en exception ville det være umuligt for Java at afgøre hvad der skulle ske eftersom koden antager at den modtager en int. Problemet er at spillet stopper når det møder en exception der ikke bliver håndteret. For at undgå dette er der indført exception håndtering i koden der er ansvarlig for at modtage en int fra den fysiske spiller.
+
+I \vref{fig:codeExceptionHandling} ses \metode{getPlayerInt()}, det ses at metoden \metode{nextInt()} kaldes på input, input er en \klasse{Scanner}, inde i en try blok. Koden i try blokken forsøges kørt hvis der kommer en exception på grund af koden i try blokken, vil den blive fanget af catch (Exception e). Her er den sat op til at fange alle exceptions, normal praksis er at man sættet den op til at fange specifikke exceptions, på den måde kan man håndtere forskellige typer exceptions på den forskellige måder. For at forenkle koden lidt er her valgt at fange alle exceptions. Hvis en exception bliver fanget printes en besked og man får mulighed for at forsøge at taste en int ind endnu en gang.
+
+\begin{figure}
+\caption{Exception handling i \metode{getPlayerInt()} i \klasse{BoundaryToPlayer}}
+\label{fig:codeExceptionHandling}
+\begin{lstlisting}
+private static int getPlayerInt() {
+  int inputInt;
+
+  try  {
+    inputInt = input.nextInt();
+  } catch (Exception e) {
+    showString("Kun integers er tilladt.");
+    input.nextLine();
+    inputInt = getPlayerInt();
+  }
+  return inputInt;
+}
+\end{lstlisting}
+\end{figure}
