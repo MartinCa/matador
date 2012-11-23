@@ -65,7 +65,7 @@ public class MatadorRafleBaeger {
 		for (Die die : dice) {
 			sum += die.getFacevalue();
 		}
-		return 8; // sum;
+		return sum;
 	}
 
 	/**
