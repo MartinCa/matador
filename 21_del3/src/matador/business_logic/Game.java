@@ -44,9 +44,6 @@ public class Game {
 	 * @return instance of {@link Game}.
 	 */
 	public static Game getGame() {
-		if (game == null) {
-			game = new Game();
-		}
 		return game ;
 	}
 
