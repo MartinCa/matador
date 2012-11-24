@@ -1,7 +1,87 @@
 \chapter{Implementering}\label{chap:Implementering}
 
-\section{Brug af Iterator}
+\section{\dpattern{Singleton Pattern}}
+Som beskrevet i \vref{sec:DesignSingleton} anvender implementeringen af spillet \dpattern{Singleton} design pattern for at sikre at der kun findes en instans af \klasse{Game}. Derudover giver implementeringen mulighed for at andre klasser kan tilgå denne instans af \klasse{Game} ved at kalde \metode{getGame()} som er en statisk metode i \klasse{Game}. \dpattern{Singleton} blev valgt for at sikre at \klasse{Brewery} kunne tilgå \klasse{Game} for at få adgang til terningerne som skal bruges til at regne ud hvad det koster at lande på feltet.
 
-\section{Singleton Pattern}
+\begin{figure}
+\caption{Koden som implementerer \dpattern{Singleton} i \klasse{Game}.}
+\label{fig:CodeSingleton}
+\centering
+\begin{lstlisting}
+public class Game {
+  (...)
+  private static Game game = new Game();
 
-\section{ArrayList}
+  private Game() {
+    (...)
+  }
+
+  public static Game getGame() {
+    return game ;
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+Koden som implementerer \dpattern{Singleton} ses i \vref{fig:CodeSingleton}. Implementeringen bygger på at der defineres en statisk variabel Kaldet game som bliver initialiseret til at indeholder en instans af \klasse{Game}. Initialiseringen af variablen kunne også være udført i getGame() hvor man kunne kontrollere om der allerede fandtes en instans. Som hjælpelæren påpegede og litteratur omkring emnet også påpeger kan dette give problemer i forbindelse med multithreaded applikationer. I sådanne tilfælde er det muligt at to kald til \metode{getGame()} det sker simultant giver to forskellige instanser af \klasse{Game}. Vores applikation er ikke multithreaded så vi kunne ligeså godt have valgt den implementering.
+
+Konstruktøren sættes til private sådan at andre klasser ikke kan lave en ny instans af \klasse{Game} ved at kalde \metode{new Game()}.
+
+Metoden \metode{getGame()} er ansvarlig for at returnere instansen af \klasse{Game}.
+
+\section{\klasse{ArrayList}}\label{sec:ImplArrayList}
+\klasse{Player} som repræsenterer den fysiske spiller holder styr på hvilke felter en spiller ejer. Denne information bliver holdt i en \klasse{ArrayList} af \klasse{Ownable} objekter. Fordelen ved at bruge \klasse{ArrayList} er at \klasse{ArrayList} er et sandt objekt som har metoder til at lave forskellige operationer. Implementeringen i Java bruger \klasse{Array} men størrelsen af listen vokser automatisk efter behov, fra starten af har arrayet en størrelse på 10. I spillet vides det ikke fra starten af hvor mange felter en spiller kommer til at eje derfor er det en fordel at bruge \klasse{ArrayList}.
+
+\begin{figure}
+\caption{Koden som implementerer \klasse{ArrayList} i \klasse{Player}.}
+\label{fig:CodeArrayList}
+\centering
+\begin{lstlisting}
+public class Player {
+  (...)
+  private List<Ownable> ownedFields = new ArrayList<Ownable>();
+  (...)
+  public void buyField(Ownable field){
+    this.konto.withdraw(field.getPrice());	
+    this.ownedFields.add(field);
+  }
+  (...)
+}
+\end{lstlisting}
+\end{figure}
+
+Koden som implementerer \klasse{ArrayList} ses i \vref{fig:CodeArrayList}. Det ses at listen at den private variabel ownedFields peger på den \klasse{ArrayList} som holder de felter som den pågældende spiller ejer, altså felter af typen \klasse{Ownable}. Det ses at ownedFields er af typen \klasse{List}, \klasse{List} er en interface some \klasse{ArrayList} og andre lister implementerer. Fordelen ved dette er at en anden type liste senere kan vælges så længe den også implementerer \klasse{List} interfacen.
+
+Når en spiller køber et felt tilføjes det pågældende felt til listen af ownedFields ved at kalde metoden \metode{add(field)} på \klasse{ArrayList}en.
+
+
+
+\section{Brug af \klasse{Iterator}}
+Listen af ejede felter som omtales i \vref{sec:ImplArrayList} over ejede felter bruges for at undersøge hvor mange felter af en type en given spiller ejer. Dette er nødvendigt fordi felter af typen \klasse{Brewery} og \klasse{Shipping} har en leje der afhænger af hvor mange felter af den givne type ejeren har.
+
+\begin{figure}
+\caption{Koden som implementerer \klasse{Iterator} i \klasse{Shipping}.}
+\label{fig:CodeIterator}
+\centering
+\begin{lstlisting}
+protected int rent() {
+  if (owner != null) {
+    List<Ownable> ownedFields = owner.getOwnedFields();
+    int numFields = 0;
+    Iterator<Ownable> ownIter = ownedFields.iterator();
+
+    while (ownIter.hasNext()) {
+      if (Shipping.class.isInstance(ownIter.next())) {
+        numFields++;
+      }
+    }
+    (...)
+  }
+\end{lstlisting}
+\end{figure}
+
+Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \klasse{Shipping}, næsten ens kode bruges i \klasse{Brewery}. Det ses at listen af ejede felter hentes ved at kalde \metode{getOwnedFields()} på owner som er en henvisning til ejeren af det pågældende felt. Der laves en \klasse{Iterator} af ejede felter ved at kalde \metode{iterator()} på listen af ejede felter. \klasse{Iterator} har tre metoder, men vi bruger kun to: \metode{hasNext()} og \metode{next()}. \metode{hasNext()} returnerer true hvis der er et næste element som iteratoren kan returnere, vi bruger denne metode til kun at kalde \metode{next()} så længe der er flere elementer.
+
+\metode{next()} returnerer det næste element fra iteratoren, det undersøges herefter om det returnerede element er en instans af den pågældende klasse \klasse{Shipping} eller \klasse{Brewery}. Hvis det er tilfældet øges numFields med 1. Når iteratoren er færdig vil numFields indholde en int svarende til mængden af samme type felter som ejeren af feltet ejer.
+
+I den udladte kode som er forskellig for de to klasser bruges numFields til at regne ud hvor dyrt det er at lande på feltet.
