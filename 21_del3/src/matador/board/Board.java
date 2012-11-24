@@ -9,13 +9,12 @@ public class Board {
 	private Field[] boardFields;	// array containing each field on the board 
 
 	/**
-	 * Constructor for creating the game board, makes the board with 11 fields. Calls initBoard to actually create the array and fields.
+	 * Constructor for creating the game board, makes the board with 11 fields.
+	 * Calls initBoard to actually create the array and fields.
 	 * 
 	 */
 	public Board() {
-		int numFields = 11; // assignment description demands 11 specific instances
-		
-		initBoard(numFields);
+		initBoard();
 	}
 
 	/**
@@ -25,7 +24,8 @@ public class Board {
 	 * 
 	 * @param numFields [int] amount of fields to be created. Must be set to 11 or higher for this game.
 	 */
-	private void initBoard(int numFields) {
+	private void initBoard() {
+		int numFields = 11; // assignment description demands 11 specific instances
 		boardFields = new Field[numFields]; // sets array length to numFields
 
 		boardFields[0] = new Refuge("Start", 1, 200); //Okay
@@ -42,7 +42,7 @@ public class Board {
 	}
 	
 	/**
-	 * Retunds the Field with given index in boardFields.
+	 * Returns the Field with given index in boardFields.
 	 * @param index [int] 0-10, index of Field to get.
 	 * @return Field requested.
 	 * @see Field
