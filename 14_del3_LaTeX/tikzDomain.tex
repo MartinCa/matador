@@ -21,16 +21,16 @@
  \umlclass[y=-9,x=2]{Prison}{}{}
  
  \umlcompo[mult2=40]{Board}{Field}
- \umlinherit[mult1=28]{Ownable}{Field}
- \umlinherit[arg1=2]{Taxes}{Field}
- \umlinherit[arg1=3]{Refuge}{Field}
- \umlinherit[mult1=2]{Brewery}{Ownable}
- \umlinherit[mult1=4]{Shipping}{Ownable}
- \umlinherit[mult1=22]{Street}{Ownable}
- \umlassoc{Game}{Board}
+ \umlinherit[arg1=28,pos1=0.05]{Ownable}{Field}
+ \umlinherit[arg1=2,pos1=0.03]{Taxes}{Field}
+ \umlinherit[arg1=3,pos1=0.03]{Refuge}{Field}
+ \umlinherit[arg1=2,pos1=0.02]{Brewery}{Ownable}
+ \umlinherit[arg1=4,pos1=0.05]{Shipping}{Ownable}
+ \umlinherit[mult1=22,pos1=0.3]{Street}{Ownable}
+ \umlassoc[mult2=1,pos2=0.9]{Game}{Board}
  \umlaggreg{Bank}{Field}
  \umlassoc{Game}{MatadorRafleBaeger}
- \umlcompo{MatadorRafleBaeger}{Die}
+ \umlcompo[mult2=2,pos2=0.7]{MatadorRafleBaeger}{Die}
  \umlaggreg[mult2=*]{Bank}{Money}
  \umlaggreg[mult2=0..*]{Player}{Money}
  \umlaggreg[geometry=-|,mult2=0..5,pos2=1.95]{Street}{House}
@@ -43,5 +43,5 @@
  \umlassoc[stereo=draws]{Player}{LuckyCard}
  \umlassoc[stereo=buys]{Player}{House}
  \umlinherit[mult1=6]{Luck}{Field}
- \umlinherit[mult1=1]{Prison}{Field}
+ \umlinherit[mult1=1,pos1=0.01]{Prison}{Field}
 \end{tikzpicture}
