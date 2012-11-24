@@ -27,17 +27,15 @@ public class Brewery extends Ownable {
 	 */
 	@Override
 	protected int rent() {
-		if (owner != null && owner.getOwnedFields() != null) {
+		if (owner != null) {
 			List<Ownable> ownedFields = owner.getOwnedFields();
 			int numFields = 0;
-			System.out.println(ownedFields.get(0));
 			Iterator<Ownable> ownIter = ownedFields.iterator();
 
 			while (ownIter.hasNext()) {
 				if (Shipping.class.isInstance(ownIter.next())) {
 					numFields++;
 				}
-				System.out.println(numFields);
 			}
 
 			return numFields * 100 * Game.getGame().getBaeger().getSum(); // This class cannot get the dice values at the moment, this needs to be fixed.

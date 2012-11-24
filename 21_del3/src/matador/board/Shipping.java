@@ -27,17 +27,15 @@ public class Shipping extends Ownable {
 	 */
 	@Override
 	protected int rent() {
-		if (owner != null && owner.getOwnedFields() != null) {
+		if (owner != null) {
 			List<Ownable> ownedFields = owner.getOwnedFields();
 			int numFields = 0;
-			System.out.println(ownedFields.get(0));
 			Iterator<Ownable> ownIter = ownedFields.iterator();
 
 			while (ownIter.hasNext()) {
 				if (Shipping.class.isInstance(ownIter.next())) {
 					numFields++;
 				}
-			System.out.println(numFields);
 			}
 
 			return (int)(basisFare * Math.pow(2, numFields - 1));
