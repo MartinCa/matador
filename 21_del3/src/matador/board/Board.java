@@ -9,8 +9,8 @@ public class Board {
 	private Field[] boardFields;	// array containing each field on the board 
 
 	/**
-	 * Constructor for creating the game board, makes the board with 11 fields.
-	 * Calls initBoard to actually create the array and fields.
+	 * Constructor for creating the game board.
+	 * Calls {@link #initBoard} to actually create the array and fields.
 	 * 
 	 */
 	public Board() {
@@ -19,10 +19,8 @@ public class Board {
 
 	/**
 	 * Main architect method of board creation.
-	 * Sets length of array boardFields to numFields. boardFields contains all fields 
+	 * Sets length of array boardFields to 11. boardFields contains all fields 
 	 * for matador game board. 
-	 * 
-	 * @param numFields [int] amount of fields to be created. Must be set to 11 or higher for this game.
 	 */
 	private void initBoard() {
 		int numFields = 11; // assignment description demands 11 specific instances
@@ -42,7 +40,7 @@ public class Board {
 	}
 	
 	/**
-	 * Returns the Field with given index in boardFields.
+	 * Returns the {@link Field} with given index in boardFields.
 	 * @param index [int] 0-10, index of Field to get.
 	 * @return Field requested.
 	 * @see Field
