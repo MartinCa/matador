@@ -1,44 +1,29 @@
 \chapter{krav}\label{chap:krav}
 
 \section{Krav overblik}\label{sec:krav:kravOverblik}
-Kravene til CDIO-opgave del 3 bliver behandlet gennem UP-modellen for en kravspecifikation som præsenteret i kursus 02313. Hvor der er uklarheder i den udleverede tekst er de tolket efter bedste evne. Uklarheder i beskrivelsen bør naturligvis afklares med kunden i et virkeligt projekt. Kilde til dette afsnit er [Nyb12], som er opgavebeskrivelsen for CDIO-opgave del 3.
+Kravene til CDIO-opgave del 3 bliver behandlet gennem UP-modellen for en kravspecifikation som præsenteret i kursus 02313. Hvor der er uklarheder i den udleverede tekst er de tolket efter bedste evne. Uklarheder i beskrivelsen bør naturligvis afklares med kunden i et virkeligt projekt. Kilde til dette afsnit er \cite{CDIOdel3}, som er opgavebeskrivelsen for CDIO-opgave del 3.
 
 \subsection{Formål}\label{sec:krav:formål}
 Kendskab til arv og polymorfisme skal demonstreres gennem implementering af fields i et matadorspil. Yderligere skal det demonstreres at gruppen kan anvende arrays i forbindelse med instanser af egne typer. Derudover skal det illustreres at der kan arbejdes på et mere abstrakt niveau gennem udarbejdelse af en domænemodel over hele spillet. 
 
 \subsection{Specificering af krav}\label{sec:krav:kravSpec}
-Udfra den udleverede opgavebeskrivelse \cite{Nyb12} \fixme{henvisning?} er der udarbejdet følgende liste af opgaver. De områder der fremgår klart og utvetydige i opgavebeskrivelsen er blot overført til denne liste, mens andre dele er uddybet og afklaret.
-
-\begin{enumerate}
-\item \metode{toString} føjes til alle klasser
-\item \klasse{Field} skal have attributterne \textit{number} og \textit{name} samt \metode{landOnField()} der skal tage \textit{Player} som argument.
-\item \klasse{Refuge} skal have attribut \textit{bonus} (kontant beløb) som overføres til spiller hvis denne lander på feltet.
-\item \klasser{Tax} skal have attribut \textit{tax} (kontant beløb) som fratrækkes spillerens konto hvis denne lander på feltet.
-\item \klasse{Ownable} implementeres som abstrakt klasse der definerer alle felter der kan ejes. Hvis der landes på et felt tilhørende denne kategori kan spilleren enten købe feltet, hvis han har råd, såfremt feltet ikke allerede ejes af en anden spiller. Hvis en anden spiller ejer feltet betales leje til denne spiller.
-\item \klasse{Street} simplificeres til kun at have en leje \fixme{hvad har vi gjort/gør vi her?}
-\item Hvis der landes på \klasse{Shipping} betales der leje til ejeren af feltet alt efter hvor mange \klasse{Shipping}-felter (\textit{rederier} i formel) denne ejer. Lejen udregnes som $leje=2^{(rederier)}*500$.
-\item Hvis der landes på \klasse{Brewery} betales der leje til ejeren udfra antallet af øjne i slaget der bragte ham til feltet (\textit{slag} i formel) samt hvor mange bryggerier denne ejer (\textit{bryggerier} i formel. Lejen udregnes som $leje=(slag)*(bryggerier)*100$.
-\item Modificer CDIO-opgave del 2 så denne anvender det nye arveheiraki.
-\item Deklarér klasserne \klasse{Field} og \klasse{Ownable} som abstrakte og deres metoder \metode{landOnField()} og \metode{rent()} skal ligeledes være abstrakte. Forklar hvilken betydning det har.
-\item Lav et program  som indeholder et array af typen Field, som udskriver indholdet af hvert objekt i array’et. Du skal minimum oprette en instans af hver klasse.
-\item Domænemodel skal fuldt udvikles og kommenteres.  
-\item De beskrevne udvidelser blev implementeret i CDIO-opgave del 2 og er således stadig en del af systemet. 
-\end{enumerate}
+Udfra den udleverede opgavebeskrivelse \cite{CDIOdel3} er der udarbejdet en længere liste med specificering af kravene. De områder der fremgår klare og utvetydige i opgavebeskrivelsen er blot overført, mens andre dele er uddybet og afklaret. Da gruppen forsøger at arbejde efter UP modellen og denne er Use Case driven, er de dele af kravene der kunne overføres til Use Case's indført i \ref{sec:krav:funkKrav:UC1} og \ref{sec:krav:funkKrav:UC2}. De krav der ikke kunne overføres til Use Case's er placeret i \ref{chap:suppSpec} som er UP's artefakt til krav der ikke kan placeres i Use Case's.
  
 \subsection{Funktionelle krav}\label{sec:krav:funkKrav}
 \subsubsection{Use Case Diagram}\label{sec:krav:funkKrav:useCaseDia}
-Til udarbejdelsen af et Use Case Diagram er identificeret 3 Use Cases. 
+Til udarbejdelsen af et Use Case Diagram er identificeret 4 Use Cases. 
 
 \begin{itemize}
 \item startGame
 \item rollDie
 \item optToBuy
+\item landOnField
 \end{itemize}
 
 Spillet interagerer med to aktører, spilleren og den udleverede GUI. Således fremgår begge disse af Use Case Diagram'et (\vref{use case diagram} \fixme{henvisning til use case diagram}.
 
 \subsubsection{Use Case beskrivelser}\label{sec:krav:funkKrav:useCaseBeskriv}
-Der henvises til CDIO-opgave del 2 for de to Use Case: \textit{startGame} og \textit{rollDie}. I \ref{sec:krav:funkKrav:UC1} behandles Use Case UC1 - optToBuy.
+Der henvises til CDIO-opgave del 2 for de to Use Case's: \textit{startGame} og \textit{rollDie}. I \ref{sec:krav:funkKrav:UC1} behandles Use Case UC1 - optToBuy \ref{sec:krav:funkKrav:UC1} og UC2 - landOnField \ref{sec:krav:funkKrav:UC2}.
 
 \subsubsection{Use Case UC1 : optToBuy}\label{sec:krav:funkKrav:UC1}
 
@@ -76,6 +61,78 @@ Spilleren foretager positivt valg gennem konsol dialog. Hvis han ønsker at køb
 	\end{enumerate}
 \end{enumerate}
 
+\subsubsection{Use Case UC2 : landOnField}\label{sec:krav:funkKrav:UC2}
+
+\paragraph{Primær aktør:} 
+System
+
+\paragraph{Beskrivelse af aktør:} 
+System foretager opgaver i forbindelse med at spiller lander på et felt.
+
+\paragraph{Ansvar:} 
+Skal anvende korrekt algoritme i forhold til det felt der er landet på.
+ 
+\paragraph{Prekonditioner:} 
+Spilleren er landet på et felt.
+
+\paragraph{Postkondition/Succeskriterie:}
+System har enten foretaget en transaktion eller intet gjort afhængig af hvad reglerne foreskriver for det enkelte felt.
+
+\paragraph{Main Success Scenario:} 
+
+\begin{enumerate}
+\item Spiller lander på felttypen Street, Shipping eller Brewery.
+\item System finder ud af at spiller ikke ejer feltet.
+\item System finder ud af at en anden spiller ejer feltet.
+\item System trækker leje fra spillers konto og overfører til ejers konto.
+\item System giver turen videre til næste spiller
+
+\begin{enumerate}[1a]
+\fixme{1a står som aa. Jeg ved ikke hvad der går galt}
+\item Spiller lander på felttypen Refuge.
+	\begin{enumerate}[1.]
+	\item System overfører bonus til spillers konto
+	\item Tilbage til MSS: 5
+	\end{enumerate}
+\end{enumerate} 
+
+\begin{enumerate}[1b]
+\item Spiller lander på felttypen Tax.
+	\begin{enumerate}[1.]
+	\item System trækker tax fra spillers konto 
+	\item Tilbage til MSS: 5
+	\end{enumerate}
+\end{enumerate} 
+
+\begin{enumerate}[2a]
+\item System finder ud af at spiller ejer feltet.
+	\begin{enumerate}[1.]
+	\item System foretager ingen transaktioner
+	\item Tilbage til MSS: 5
+	\end{enumerate}
+\end{enumerate} 
+
+\begin{enumerate}[3a]
+\item System finder ud af at ingen ejer feltet.
+	\begin{enumerate}[1.]
+	\item System foretager ingen transaktioner
+	\item Tilbage til MSS: 5
+	\end{enumerate}
+\end{enumerate} 
+ 
+\begin{enumerate}[4a]
+\item Spiller har ikke penge nok på konto til at betale leje.
+	\begin{enumerate}[1.]
+	\item System sætter spiller som loser
+	\item Tilbage til MSS: 5
+	\end{enumerate}
+\end{enumerate} 
+
+
+ 
+ 
+ 
+ 
 
 
 
