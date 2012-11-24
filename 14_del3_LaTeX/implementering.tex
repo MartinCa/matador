@@ -30,7 +30,7 @@ Konstruktøren sættes til private sådan at andre klasser ikke kan lave en ny i
 Metoden \metode{getGame()} er ansvarlig for at returnere instansen af \klasse{Game}.
 
 \section{\klasse{ArrayList}}\label{sec:ImplArrayList}
-\klasse{Player} som repræsenterer den fysiske spiller holder styr på hvilke felter en spiller ejer. Denne information bliver holdt i en \klasse{ArrayList} af \klasse{Ownable} objekter. Fordelen ved at bruge \klasse{ArrayList} er at \klasse{ArrayList} er et sandt objekt som har metoder til at lave forskellige operationer. Implementeringen i Java bruger \klasse{Array} men størrelsen af listen vokser automatisk efter behov, fra starten af har arrayet en størrelse på 10. I spillet vides det ikke fra starten af hvor mange felter en spiller kommer til at eje derfor er det en fordel at bruge \klasse{ArrayList}.
+\klasse{Player} som repræsenterer den fysiske spiller holder styr på hvilke felter en spiller ejer. Denne information bliver holdt i en \klasse{ArrayList} af \klasse{Ownable} objekter. Fordelen ved at bruge \klasse{ArrayList} er at \klasse{ArrayList} er et sandt objekt som har metoder til at lave forskellige operationer. Implementeringen i Java bruger \klasse{Array} men størrelsen af listen vokser automatisk efter behov, fra starten af har arrayet en størrelse på 10. I spillet vides det ikke fra starten af hvor mange felter en spiller kommer til at eje derfor er det en fordel at bruge \klasse{ArrayList}.\cite{headfirstjava}
 
 \begin{figure}
 \caption{Koden som implementerer \klasse{ArrayList} i \klasse{Player}.}
@@ -50,7 +50,7 @@ public class Player {
 \end{lstlisting}
 \end{figure}
 
-Koden som implementerer \klasse{ArrayList} ses i \vref{fig:CodeArrayList}. Det ses at listen at den private variabel ownedFields peger på den \klasse{ArrayList} som holder de felter som den pågældende spiller ejer, altså felter af typen \klasse{Ownable}. Det ses at ownedFields er af typen \klasse{List}, \klasse{List} er en interface some \klasse{ArrayList} og andre lister implementerer. Fordelen ved dette er at en anden type liste senere kan vælges så længe den også implementerer \klasse{List} interfacen.
+Koden som implementerer \klasse{ArrayList} ses i \vref{fig:CodeArrayList}. Det ses at listen at den private variabel ownedFields peger på den \klasse{ArrayList} som holder de felter som den pågældende spiller ejer, altså felter af typen \klasse{Ownable}. Det ses at ownedFields er af typen \klasse{List}, \klasse{List} er en interface some \klasse{ArrayList} og andre lister implementerer. Fordelen ved dette er at en anden type liste senere kan vælges så længe den også implementerer \klasse{List} interfacen.\cite{javaUtilList}
 
 Når en spiller køber et felt tilføjes det pågældende felt til listen af ownedFields ved at kalde metoden \metode{add(field)} på \klasse{ArrayList}en.
 
@@ -80,7 +80,7 @@ protected int rent() {
 \end{lstlisting}
 \end{figure}
 
-Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \klasse{Shipping}, næsten ens kode bruges i \klasse{Brewery}. Det ses at listen af ejede felter hentes ved at kalde \metode{getOwnedFields()} på owner som er en henvisning til ejeren af det pågældende felt. Der laves en \klasse{Iterator} af ejede felter ved at kalde \metode{iterator()} på listen af ejede felter. \klasse{Iterator} har tre metoder, men vi bruger kun to: \metode{hasNext()} og \metode{next()}. \metode{hasNext()} returnerer true hvis der er et næste element som iteratoren kan returnere, vi bruger denne metode til kun at kalde \metode{next()} så længe der er flere elementer.
+Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \klasse{Shipping}, næsten ens kode bruges i \klasse{Brewery}. Det ses at listen af ejede felter hentes ved at kalde \metode{getOwnedFields()} på owner som er en henvisning til ejeren af det pågældende felt. Der laves en \klasse{Iterator} af ejede felter ved at kalde \metode{iterator()} på listen af ejede felter. \klasse{Iterator} har tre metoder, men vi bruger kun to: \metode{hasNext()} og \metode{next()}. \metode{hasNext()} returnerer true hvis der er et næste element som iteratoren kan returnere, vi bruger denne metode til kun at kalde \metode{next()} så længe der er flere elementer.\cite{javaUtilIterator}
 
 \metode{next()} returnerer det næste element fra iteratoren, det undersøges herefter om det returnerede element er en instans af den pågældende klasse \klasse{Shipping} eller \klasse{Brewery}. Hvis det er tilfældet øges numFields med 1. Når iteratoren er færdig vil numFields indholde en int svarende til mængden af samme type felter som ejeren af feltet ejer.
 
