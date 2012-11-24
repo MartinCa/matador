@@ -16,7 +16,7 @@ public class Player {
 	private int carColor;
 	private String name;
 	private Konto konto;
-	private ArrayList<Ownable> ownedFields = new ArrayList<Ownable>(); 	//Array af fields den enkelte spiller ejer.
+	private List<Ownable> ownedFields = new ArrayList<Ownable>(); 	//Array af fields den enkelte spiller ejer.
 	private boolean loser = false;
 
 	/**
@@ -73,7 +73,7 @@ public class Player {
 	 *  
 	 * @return ownedFields {@link java.util.ArrayList}
 	 */
-	public ArrayList<Ownable> getOwnedFields() {
+	public List<Ownable> getOwnedFields() {
 		return ownedFields;		
 	}
 	

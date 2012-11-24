@@ -28,7 +28,7 @@ public class Brewery extends Ownable {
 	@Override
 	protected int rent() {
 		if (owner != null && owner.getOwnedFields() != null) {
-			ArrayList<Ownable> ownedFields = owner.getOwnedFields();
+			List<Ownable> ownedFields = owner.getOwnedFields();
 			int numFields = 0;
 			System.out.println(ownedFields.get(0));
 			Iterator<Ownable> ownIter = ownedFields.iterator();
