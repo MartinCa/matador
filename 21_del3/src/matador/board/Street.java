@@ -23,6 +23,14 @@ public class Street extends Ownable{
 	}
 
 	/* (non-Javadoc)
+	 * @see matador.board.Ownable#rent()
+	 */
+	@Override
+	protected int rent() {
+		return rent;
+	}
+	
+	/* (non-Javadoc)
 	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
 	 */
 	@Override
@@ -38,15 +46,6 @@ public class Street extends Ownable{
 			}
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see matador.board.Ownable#rent()
-	 */
-	@Override
-	protected int rent() {
-		return rent;
-	}
-
 	/* (non-Javadoc)
 	 * @see matador.board.Ownable#toString()
 	 */

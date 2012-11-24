@@ -45,16 +45,7 @@ public class Brewery extends Ownable {
 			return 0;
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see matador.board.Ownable#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Brewery [price=" + price + ", owner=" + owner + ", name="
-				+ name + ", fieldNum=" + fieldNum + "]";
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
 	 */
@@ -69,5 +60,14 @@ public class Brewery extends Ownable {
 				player.setLoser();
 			}
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see matador.board.Ownable#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Brewery [price=" + price + ", owner=" + owner + ", name="
+				+ name + ", fieldNum=" + fieldNum + "]";
 	}
 }
