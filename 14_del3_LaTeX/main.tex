@@ -88,7 +88,7 @@
 \usepackage[danish]{varioref} %Giver adgang til kommandoen \vref som giver nummer og sidehenvisning > 0.1 på side 4
 
 %Pakker der bruges for at lave klikbare links i pdf filer
-\usepackage[pdftex, colorlinks=false, pdfauthor={Gruppe 21}, pdftitle={CDIO del 2}]{hyperref} %EDIT Til hyperlinks i dokumentet [colorlinks] kan tilføjes for farver, klikbare links i pdf filerne. citecolor=black
+\usepackage[pdftex, colorlinks=false, pdfauthor={Gruppe 21}, pdftitle={CDIO del 3}]{hyperref} %EDIT Til hyperlinks i dokumentet [colorlinks] kan tilføjes for farver, klikbare links i pdf filerne. citecolor=black
 \usepackage{memhfixc} %Løser problemer med hyperref i memoir, skal loades efter hyperref.
 
 %Pakker der bruges for at sikre at der bruges de korrekte kvotationstegn
@@ -105,7 +105,7 @@
 %Sidehoved og -fod herunder
 \makeatletter
 \makepagestyle{bachstyle}
-\makeoddhead{bachstyle}{\small \leftmark}{}{\small CDIO del 2}
+\makeoddhead{bachstyle}{\small \leftmark}{}{\small CDIO del 3}
 \makeoddfoot{bachstyle}{}{}{\small\thepage}
 \makepsmarks {bachstyle}{
 \createmark{chapter}{both} {shownumber} {\@chapapp\ }{. \ }
@@ -179,7 +179,7 @@
 \input{indledning.tex}
 \input{krav.tex}
 \input{design.tex}
-%\input{implementering.tex}
+\input{implementering.tex}
 %\input{test.tex}
 %\input{konklusion.tex}
 \newpage
