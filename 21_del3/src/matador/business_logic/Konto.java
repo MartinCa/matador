@@ -17,7 +17,7 @@ public class Konto {
 	
 	/**
 	 * Constructor that sets the balance to the provided balance.
-	 * @param balance [int] initial balance.
+	 * @param balance {@link java.lang.int} initial balance.
 	 */
 	public Konto(int balance) {
 		this.balance = balance;
@@ -25,16 +25,16 @@ public class Konto {
 	
 	/**
 	 * Adds the provided amount to the Konto balance.
-	 * @param amount [int] to be added to balance.
+	 * @param amount {@link java.lang.int} to be added to balance.
 	 */
 	public void deposit(int amount) {
 		balance += amount;
 	}
 	
 	/**
-	 * Subtracts the provided amount from Konto. Only subtracts if the resulting balance will not be negative, otherwise balance is set to zero..
+	 * Subtracts the provided amount from Konto. Only subtracts if the resulting balance will not be negative, otherwise balance is set to zero.
 	 * Returns True if the full amount could be subtracted.
-	 * @param amount [int] to be subtracted.
+	 * @param amount {@link java.lang.int} to be subtracted.
 	 * @return True if amount did not exceed balance.
 	 */
 	public boolean withdraw(int amount) {
@@ -49,7 +49,7 @@ public class Konto {
 
 	/**
 	 * Returns the balance.
-	 * @return balance.
+	 * @return {@link java.lang.int} balance.
 	 */
 	public int getBalance() {
 		return balance;
@@ -57,12 +57,15 @@ public class Konto {
 
 	/**
 	 * Sets the balance to the provided balance.
-	 * @param balance [int] to set the balance to.
+	 * @param balance {@link java.lang.int} to set the balance to.
 	 */
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Konto [balance=" + balance + "]";

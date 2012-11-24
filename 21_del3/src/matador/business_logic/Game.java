@@ -18,7 +18,7 @@ public class Game {
 	private MatadorRafleBaeger baeger;
 	private Player[] players;
 	private Board board;
-	private static Game game;
+	private static Game game = new Game();
 
 	/**
 	 * Constructor that starts the game, 2 Die and 2 Player instances are created. Creates the baeger using MatadorRafleBaeger and two players of type Player.
@@ -38,6 +38,11 @@ public class Game {
 		createPlayers(initBalance);
 	}
 	
+	/**
+	 * Returns an instance of Game, if one does not exist it makes one.
+	 * Used to implement the Singleton pattern.
+	 * @return instance of {@link Game}.
+	 */
 	public static Game getGame() {
 		if (game == null) {
 			game = new Game();
@@ -66,8 +71,8 @@ public class Game {
 
 	/**
 	 * Used to run one round of the game.
-	 * Uses private helper method ShowStatus to print the status of the game to console and GUI.
-	 * Uses private helper method endRoundChecks to perform checks after the round have played.
+	 * Uses private helper method {@link #ShowStatus(Field)} to print the status of the game to console and GUI.
+	 * Uses private helper method {@link #endRoundChecks()} to perform checks after the round have played.
 	 * @see MatadorRafleBaeger
 	 * @see Player
 	 * @see BoundaryToPlayer
@@ -101,19 +106,19 @@ public class Game {
 			actOwnable = (Ownable) actField ;
 			if (actOwnable.getOwner() == null) {	//If nobody owns the field
 				if (actPlayer.getKonto().getBalance() >= actOwnable.getPrice()) {	//If player has enough money
-					if (BoundaryToPlayer.optToBuy(actOwnable));					//If player wants to buy
+					if (BoundaryToPlayer.optToBuy(actOwnable)) {					//If player wants to buy
 						actPlayer.buyField(actOwnable);//Actually buy the field
 						actOwnable.setOwner(actPlayer);
+					}
 				}
 			}
 		} 
 	}
 
 	/**
-	 * Checks conditions at the end of the round to decide if there is a winner or if the Player gets an extra turn.
-	 * Also calls nextPlayer if needed to advance the turn to the next Player.
-	 * This adheres to the selected rules in the constructor.
-	 * Uses checkWinner to check if there is a winner by balance.
+	 * Checks conditions at the end of the round to decide if there is a winner.
+	 * Also calls {@link #nextPlayer()} if needed to advance the turn to the next Player.
+	 * Uses {@link #checkWinner()} to check if there is a winner by balance.
 	 * @see MatadorRafleBaeger
 	 * @see Player
 	 */
@@ -128,7 +133,7 @@ public class Game {
 	}
 
 	/**
-	 * Prints the status of the game to Console and updates the provided GUI.
+	 * Prints the status of the game to the console and updates the provided GUI.
 	 * @param baeger MatadorRafleBaeger with the dice used in the game.
 	 * @param players Player[] with the players used in the game.
 	 * @param field Field that the active player landed on.
@@ -142,7 +147,9 @@ public class Game {
 	}
 
 	/**
-	 * Checks to see if there is a winner by balance
+	 * Checks to see if there is a winner.
+	 * Checks to see if there is a winner by balance.
+	 * Checks to see if there is a winner by all the other players having lost.
 	 */
 	private boolean checkWinner() {
 		int numPlayers = players.length;
@@ -183,6 +190,10 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Returns the {@link MatadorRafleBaeger} being used.
+	 * @return {@link MatadorRafleBaeger} being used.
+	 */
 	public MatadorRafleBaeger getBaeger() {
 		return baeger;
 	}

@@ -136,21 +136,24 @@ public class BoundaryToPlayer {
 	}
 
 	/**
-	 * Presents player with option to field he has landed on.
-	 * Returns Boolean true if yes and false if no.
+	 * Presents player with option to buy the field he has landed on.
+	 * Returns Boolean true if player opts to buy.
 	 *  
-	 * @param actField
-	 * @return Boolean
+	 * @param actField {@link matador.board.Ownable} field to buy. 
+	 * @return True if player opts to buy the field.
 	 */
 	public static Boolean optToBuy(Ownable actField) {
-		System.out.println("You landed on " + actField.getName() + ". Would you like to buy it for " + actField.getPrice() + "?");
-		System.out.println("Press Y, then Enter for Yes or any key, then Enter for No.");
+		String fieldName = actField.getName();
+		int fieldPrice = actField.getPrice();
+		
+		showString("You landed on " + fieldName + ". Would you like to buy it for " + fieldPrice + "?");
+		showString("Press 1, then Enter to buy, or any other integer, then Enter to not buy.");
 
-		if (getPlayerInt() == 1){
-			showString("Du har købt " + actField.getName());
+		if (getPlayerInt() == 1) {
+			showString("Du har købt " + fieldName);
 			return true;	//If players accepts to buy field true is returned
-		} else  {
-			showString("Du købte ikke " + actField.getName());
+		} else {
+			showString("Du købte ikke " + fieldName);
 			return false;	//If player does not accept to buy field, false is returned.
 		}
 	}
