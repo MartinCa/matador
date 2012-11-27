@@ -1,8 +1,9 @@
 \chapter{Implementering}\label{chap:Implementering}
-Dette afsnit vil gennemgå ting i koden som er særligt interessante, al koden kan ses i Eclipse projektet. Implementeringen af \dpattern{Singleton} design pattern, brug af \klasse{ArrayList} og brug af \klasse{Iterator}. Derudover er der brug exception håndtering i boundaryen, dette blev behandlet i rapporten til del 2.
+Dette afsnit vil gennemgå ting i koden som er særligt interessante, al koden kan ses i Eclipse projektet. Implementeringen af \dpattern{Singleton} design pattern, brug af \klasse{ArrayList} og brug af \klasse{Iterator}. Derudover er der brugt exception håndtering i boundaryen, dette blev behandlet i rapporten til del 2. Eneste ændring der er blevet lavet i forbindelse med exception håndteringen i forhold til del 2 er at kun exception af typen \klasse{InputMismatchException} fanges. Det er nemlig denne type exceptions der throwes hvis der indtastes noget der ikke kan matches som en \klasse{Integer}. \cite{javaExceptionInputMismatchException}
 
 \section{\dpattern{Singleton Pattern}}
 Som beskrevet i \vref{sec:DesignSingleton} anvender implementeringen af spillet \dpattern{Singleton} design pattern for at sikre at der kun findes en instans af \klasse{Game}. Derudover giver implementeringen mulighed for at andre klasser kan tilgå denne instans af \klasse{Game} ved at kalde \metode{getGame()} som er en statisk metode i \klasse{Game}. \dpattern{Singleton} blev valgt for at sikre at \klasse{Brewery} kunne tilgå \klasse{Game} for at få adgang til terningerne som skal bruges til at regne ud hvad det koster at lande på feltet.
+\fxfatal{Henvisning til Design pattern eller design afsnit}
 
 \begin{figure}
 \caption{Koden som implementerer \dpattern{Singleton} i \klasse{Game}.}

@@ -5,14 +5,14 @@
 		\umlobject[x=4,class=Player,stereo=multi]{player}
 		\umlobject[x=8,class=Konto]{konto}
 		
-		\begin{umlcallself}[op={rent=rent()}]{field}
+		\begin{umlcallself}[op={rent=rent()},padding=1]{field}
 		\end{umlcallself}
-		\begin{umlcall}[op=getKonto(),return=konto]{field}{player}
+		\begin{umlcall}[op=getKonto(),return=konto,padding=2]{field}{player}
 		\end{umlcall}
 		\begin{umlcall}[op=withdraw(rent),return=bool success]{field}{konto}
 		\end{umlcall}
 		\begin{umlfragment}[type=alt,label=owner]
-			\begin{umlcall}[op=deposit(rent),dt=4]{field}{player}
+			\begin{umlcall}[op=deposit(rent),dt=5]{field}{player}
 			\end{umlcall}
 		\end{umlfragment}
 		\begin{umlfragment}[type=alt,label=not success]

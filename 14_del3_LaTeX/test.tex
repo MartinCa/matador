@@ -2,37 +2,93 @@
 Test blev behandlet i kurset 02313 Development methods for IT-Systems, kravet var at der skulle laves bruger-/systemtest af systemet til spillet. Denne skulle ydermere laves uden at testeren kender til implementeringen.
 
 \section{Brugertest}
-
-\subsection{Ækvivalensklasser}
 Det eneste eksterne system som matadorspillet modtager input fra er den fysiske spiller som sender input til systemet igennem konsollen. Systemet tager imod input fra spilleren to gange, når en spiller skal slå med terningerne og når en spiller skal vælge om vedkommende vil købe en grund.
 
+\subsection{Slå med terninger}
 Med hensyn til at slå med terningerne skal spilleren indtaste sit spillernummer for at slå med terningerne, dvs spiller 1 skal indtaste 1 for at slå med terningerne når det er vedkommendes tur. \enquote{Kontrakten} med den fysiske spiller ligger i den tekst som bliver printet til spilleren når vedkommende skal taste: \enquote{Det er spiller 1's tur. Tast 1 for at slå:}.
 
-Som tester ses det altså at der kun er én gyldig ækvivalensklasse, nemlig 1. Der er dog adskillige ugyldige ækvivalensklasser som vil blive vist herunder:
+Som tester ses det altså at der kun er én gyldig ækvivalensklasse, nemlig 1. Der er dog adskillige ugyldige ækvivalensklasser, ækvivalensklasserne kan ses i \vref{fig:EkviTerninger}.
 \begin{figure}
 \caption{Ækvivalensklasser for \enquote{Slå med terningerne} for Spiller 1.}
 \label{fig:EkviTerninger}
 \centering
 \begin{tabular}{cccc}
-Ækvivalensklasser & gyldighed & Input  & Forventet Resultat \\ 
+Ækvivalensklasser & Gyldighed & Input  & Forventet Resultat \\
+\hline
 input == 1 & gyldig & 1 & "slår med terninger"\\ 
-input != 1 & ugydlig & 2 & "slår ikke"\\ 
-input != int & ugydlig & "test" & "slår ikke"\\
-input != int & ugyldig & 0.5 & "slår ikke" \\
+input != 1 & ugydlig & 2 & "Slår ikke"\\ 
+input != int & ugydlig & "test" & "Slår ikke"\\
+input != int & ugyldig & 0.5 & "Slår ikke" \\
 \end{tabular} 
 \end{figure}
 
 Tilsvarende ækvivalensklasser vil selvfølgelig findes for spiller 2 hvor det gyldige input i stedet for er 2.
+
+Selve testning af de forskellige ækvivalensklasser blev udført ved at spillet blev kørt i Eclipse og de forskellige indtastninger forsøgt. De forskellige indtastninger og resultater er listet i \vref{fig:TestTerninger}.
+
+\begin{figure}
+\caption{Test af ækvivalensklasser for \enquote{Slå med terningerne} for Spiller 1.}
+\label{fig:TestTerninger}
+\centering
+\begin{tabular}{cccc}
+Ækvivalensklasser & Gyldighed & Input  & Resultat \\
+\hline
+input == 1 & gyldig & 1 & "Status, Terning 1: 5, Terning 2: 6"\\ 
+input != 1 & ugyldig & 2 & "Det er spiller 1's tur. Tast 1 for at slå:"\\ 
+input != int & ugyldig & "test" & "Kun integers er tilladt, prøv igen:"\\
+input != int & ugyldig & 0.5 & "Kun integers er tilladt, prøv igen:" \\
+\end{tabular} 
+\end{figure}
+
+Det ses fra testen at når det gyldige input 1 bliver tastet ind bliver terningerne slået.
+
+Hvis der tastes en int som ikke er lig med spillerens nummer så får spilleren igen en mulighed for at taste sit nummer ind. Dette gentager sig indtil spilleren taster sit nummer ind, spilleren har altså ikke mulighed for at undlade at slå.
+
+Hvis der derimod tastes noget som ikke kan fortolkes som en int, som bogstaver eller kommatal, så vil resultatet være at spillet vil anmode spilleren om at taste en integer ind i stedet for.
+
+\subsection{Køb af grund}
+Hvis spilleren ønsker at købe en grund skal spilleren indtaste 1 for at købe grunden. Hvis spilleren ikke ønsker at købe grunden skal spilleren indtaste en anden int end 1. Kun ints er gyldige inputs. \enquote{Kontrakten} med den fysiske spiller er givet i tekst som bliver printet til konsollen. Teksten der bliver printet lyder som følger: \enquote{Du landede på: <feltNavn>. Ønsker du at købe feltet for <Pris>?, Tryk 1, derefter Enter for at købe, tryk en anden int og derefter Enter for ikke at købe.}.
+
+I modsætning til tilfældet hvor der skal slås med terninger er alle ints nu gyldige ækvivalensklasser, den eneste int der forårsager et køb af et felt er dog 1. Ækvivalensklasserne ses i \vref{fig:EkviGrund}.
 
 \begin{figure}
 \caption{Ækvivalensklasser for \enquote{Køb af grund}.}
 \label{fig:EkviGrund}
 \centering
 \begin{tabular}{cccc}
-Ækvivalensklasser & gyldighed & Input  & Forventet Resultat \\ 
+Ækvivalensklasser & Gyldighed & Input  & Forventet Resultat \\ 
+\hline
 input == 1 & gyldig & 1 & "Køber grund"\\ 
-input != 1 & ugydlig & 2 & "Køber ikke"\\ 
-input != int & ugydlig & "test" & "Køber ikke"\\
+input != 1 & gyldig & 2 & "Køber ikke"\\ 
+input != int & ugyldig & "test" & "Køber ikke"\\
 input != int & ugyldig & 0.5 & "Køber ikke" \\
 \end{tabular} 
 \end{figure}
+
+Selve testningen blev foretaget ved at spillet blev kørt og de forskellige input testet manuelt. De forskellige indtastnigner og resultater er listet i \vref{fig:TestGrund}.
+
+\begin{figure}
+\caption{Ækvivalensklasser for \enquote{Køb af grund}.}
+\label{fig:TestGrund}
+\centering
+\begin{tabular}{cccc}
+Ækvivalensklasser & Gyldighed & Input  & Resultat \\ 
+\hline
+input == 1 & gyldig & 1 & "Du har købt <feltNavn>"\\ 
+input != 1 & gyldig & 2 & "Du købte ikke <feltNavn>"\\ 
+input != int & ugyldig & "test" & "Kun integers er tilladt, prøv igen:"\\
+input != int & ugyldig & 0.5 & "Kun integers er tilladt, prøv igen:" \\
+\end{tabular} 
+\end{figure}
+
+Det ses fra resultatet af testningen at hvis der tastes 1 så købes feltet som kontrakten også foreskrev.
+
+Hvis der indtastes andre ints end 1 så købes feltet ikke men spillet fortsætter.
+
+Hvis der tastes noget ind som ikke kan fortolkes som en int så vil spilleren blive anmodet om at taste en int ind inden at spillet vil fortsætte.
+
+
+\subsection{Test af spillets funktion}
+Udover testning af de forskellige input som blev gennemgået i de foregående afsnit blev spillet også testet ved at køre spillet gentagende gange. Hvad der sker i spillet er tilfældigt ved hjælp Javas java.util.Random. Derfor fungerede denne del af testning ved at det blev kontrolleret at spillet reagerede korrekt på de forskellige værdier som terningerne antog under testningen.
+
+På samme måde blev det kontrolleret at spillet overførte prisen for at lande på et felt til ejeren af feltet hvis feltet var ejet.
