@@ -1,5 +1,6 @@
 package matador.ui;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import matador.business_logic.MatadorRafleBaeger;
@@ -51,8 +52,8 @@ public class BoundaryToPlayer {
 
 		try  {
 			inputInt = input.nextInt();
-		} catch (Exception e) {
-			showString("Kun integers er tilladt.");
+		} catch (InputMismatchException e) {
+			showString("Kun integers er tilladt, prøv igen:");
 			input.nextLine();
 			inputInt = getPlayerInt();
 		}
@@ -146,8 +147,8 @@ public class BoundaryToPlayer {
 		String fieldName = actField.getName();
 		int fieldPrice = actField.getPrice();
 		
-		showString("You landed on " + fieldName + ". Would you like to buy it for " + fieldPrice + "?");
-		showString("Press 1, then Enter to buy, or any other integer, then Enter to not buy.");
+		showString("Du landede på: " + fieldName + ". Ønsker du at købe feltet for " + fieldPrice + "?");
+		showString("Tryk 1, derefter Enter for at købe, tryk en anden int og derefter Enter for ikke at købe.");
 
 		if (getPlayerInt() == 1) {
 			showString("Du har købt " + fieldName);
