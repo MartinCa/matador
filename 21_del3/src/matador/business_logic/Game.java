@@ -39,7 +39,7 @@ public class Game {
 	}
 	
 	/**
-	 * Returns an instance of Game, if one does not exist it makes one.
+	 * Returns the instance of Game.
 	 * Used to implement the Singleton pattern.
 	 * @return instance of {@link Game}.
 	 */
@@ -177,6 +177,7 @@ public class Game {
 
 	/**
 	 * Sets the next activePlayer in the game.
+	 * Only players that have not lost can get the turn.
 	 */
 	private void nextPlayer() {
 		if (++activePlayer >= players.length) {

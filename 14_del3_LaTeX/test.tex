@@ -1,1 +1,38 @@
 \chapter{Test} \label{chap:Test}
+Test blev behandlet i kurset 02313 Development methods for IT-Systems, kravet var at der skulle laves bruger-/systemtest af systemet til spillet. Denne skulle ydermere laves uden at testeren kender til implementeringen.
+
+\section{Brugertest}
+
+\subsection{Ækvivalensklasser}
+Det eneste eksterne system som matadorspillet modtager input fra er den fysiske spiller som sender input til systemet igennem konsollen. Systemet tager imod input fra spilleren to gange, når en spiller skal slå med terningerne og når en spiller skal vælge om vedkommende vil købe en grund.
+
+Med hensyn til at slå med terningerne skal spilleren indtaste sit spillernummer for at slå med terningerne, dvs spiller 1 skal indtaste 1 for at slå med terningerne når det er vedkommendes tur. \enquote{Kontrakten} med den fysiske spiller ligger i den tekst som bliver printet til spilleren når vedkommende skal taste: \enquote{Det er spiller 1's tur. Tast 1 for at slå:}.
+
+Som tester ses det altså at der kun er én gyldig ækvivalensklasse, nemlig 1. Der er dog adskillige ugyldige ækvivalensklasser som vil blive vist herunder:
+\begin{figure}
+\caption{Ækvivalensklasser for \enquote{Slå med terningerne} for Spiller 1.}
+\label{fig:EkviTerninger}
+\centering
+\begin{tabular}{cccc}
+Ækvivalensklasser & gyldighed & Input  & Forventet Resultat \\ 
+input == 1 & gyldig & 1 & "slår med terninger"\\ 
+input != 1 & ugydlig & 2 & "slår ikke"\\ 
+input != int & ugydlig & "test" & "slår ikke"\\
+input != int & ugyldig & 0.5 & "slår ikke" \\
+\end{tabular} 
+\end{figure}
+
+Tilsvarende ækvivalensklasser vil selvfølgelig findes for spiller 2 hvor det gyldige input i stedet for er 2.
+
+\begin{figure}
+\caption{Ækvivalensklasser for \enquote{Køb af grund}.}
+\label{fig:EkviGrund}
+\centering
+\begin{tabular}{cccc}
+Ækvivalensklasser & gyldighed & Input  & Forventet Resultat \\ 
+input == 1 & gyldig & 1 & "Køber grund"\\ 
+input != 1 & ugydlig & 2 & "Køber ikke"\\ 
+input != int & ugydlig & "test" & "Køber ikke"\\
+input != int & ugyldig & 0.5 & "Køber ikke" \\
+\end{tabular} 
+\end{figure}

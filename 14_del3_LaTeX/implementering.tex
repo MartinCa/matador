@@ -1,4 +1,5 @@
 \chapter{Implementering}\label{chap:Implementering}
+Dette afsnit vil gennemgå ting i koden som er særligt interessante, al koden kan ses i Eclipse projektet. Implementeringen af \dpattern{Singleton} design pattern, brug af \klasse{ArrayList} og brug af \klasse{Iterator}. Derudover er der brug exception håndtering i boundaryen, dette blev behandlet i rapporten til del 2.
 
 \section{\dpattern{Singleton Pattern}}
 Som beskrevet i \vref{sec:DesignSingleton} anvender implementeringen af spillet \dpattern{Singleton} design pattern for at sikre at der kun findes en instans af \klasse{Game}. Derudover giver implementeringen mulighed for at andre klasser kan tilgå denne instans af \klasse{Game} ved at kalde \metode{getGame()} som er en statisk metode i \klasse{Game}. \dpattern{Singleton} blev valgt for at sikre at \klasse{Brewery} kunne tilgå \klasse{Game} for at få adgang til terningerne som skal bruges til at regne ud hvad det koster at lande på feltet.
@@ -85,3 +86,5 @@ Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \
 \metode{next()} returnerer det næste element fra iteratoren, det undersøges herefter om det returnerede element er en instans af den pågældende klasse \klasse{Shipping} eller \klasse{Brewery}. Hvis det er tilfældet øges numFields med 1. Når iteratoren er færdig vil numFields indholde en int svarende til mængden af samme type felter som ejeren af feltet ejer.
 
 I den udladte kode som er forskellig for de to klasser bruges numFields til at regne ud hvor dyrt det er at lande på feltet.
+
+\section{Brug af isinstance()}

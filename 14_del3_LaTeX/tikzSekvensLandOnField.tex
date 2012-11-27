@@ -1,0 +1,23 @@
+\tikzumlset{fill object=white,font=\tiny}
+\begin{tikzpicture}
+	\begin{umlseqdiag}
+		\umlobject[x=0,class=Field,stereo=multi]{field}
+		\umlobject[x=4,class=Player,stereo=multi]{player}
+		\umlobject[x=8,class=Konto]{konto}
+		
+		\begin{umlcallself}[op={rent=rent()}]{field}
+		\end{umlcallself}
+		\begin{umlcall}[op=getKonto(),return=konto]{field}{player}
+		\end{umlcall}
+		\begin{umlcall}[op=withdraw(rent),return=bool success]{field}{konto}
+		\end{umlcall}
+		\begin{umlfragment}[type=alt,label=owner]
+			\begin{umlcall}[op=deposit(rent),dt=4]{field}{player}
+			\end{umlcall}
+		\end{umlfragment}
+		\begin{umlfragment}[type=alt,label=not success]
+			\begin{umlcall}[op=setLoser(),dt=6]{field}{player}
+			\end{umlcall}
+		\end{umlfragment}
+	\end{umlseqdiag}
+\end{tikzpicture}

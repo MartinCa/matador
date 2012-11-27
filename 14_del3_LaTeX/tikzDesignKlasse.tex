@@ -2,7 +2,7 @@
 \begin{tikzpicture}
 
  \umlclass[x=-5,y=0.5]{Game}{-activePlayer : int\\-winpoint : int\\-baeger : MatadorRafleBaeger\\\umlstatic{-game : Game}}{\umlstatic{+getGame()}\\-createPlayers(int)\\+startGame()\\-oneRound()\\-optToBuy(Field, Player)\\-endRoundChecks()\\-showStatus(Field)\\-checkWinner()\\-gameEnd()\\-nextPlayer()\\+getBaeger() : MatadorRafleBaeger}
- \umlclass[x=2,y=0.5]{Player}{-carColor : int\\-name : String\\-konto : Konto\\-ownedFields : ArrayList<Ownable>\\-loser : bool}{+Player(String, int, int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto\\+buyField(Ownable)\\+getOwnedFields() : ArrayList<Ownable>\\+isLoser() : bool\\+setLoser()}
+ \umlclass[x=2,y=0.5]{Player}{-carColor : int\\-name : String\\-konto : Konto\\-ownedFields : List<Ownable>\\-loser : bool}{+Player(String, int, int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto\\+buyField(Ownable)\\+getOwnedFields() : List<Ownable>\\+isLoser() : bool\\+setLoser()}
  \umlclass[x=-5,y=-4.5]{Board}{}{-initBoard(int)\\+getField(int) : Field}
  \umlclass[y=-4.5,x=1,type=abstract]{Field}{\#name : String\\\#fieldNum : int}{\textit{+landOnField(Player)}\\+getName() : String\\+getFieldNum() : int}
  \umlclass[y=-11.5,x=-4.5]{Brewery}{}{\#rent() : int\\+landOnField(Player)}
