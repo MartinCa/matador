@@ -99,7 +99,7 @@ public class Game {
 	 */
 	private void optToBuy(Field actField, Player actPlayer) {
 		Ownable actOwnable; 
-		if (Ownable.class.isInstance(actField)) {
+		if (actField instanceof Ownable) {
 			actOwnable = (Ownable) actField ;
 			if (actOwnable.getOwner() == null) {	//If nobody owns the field
 				if (actPlayer.getKonto().getBalance() >= actOwnable.getPrice()) {	//If player has enough money
