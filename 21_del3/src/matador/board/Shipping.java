@@ -33,7 +33,7 @@ public class Shipping extends Ownable {
 			Iterator<Ownable> ownIter = ownedFields.iterator();
 
 			while (ownIter.hasNext()) {
-				if (Shipping.class.isInstance(ownIter.next())) {
+				if (ownIter.next() instanceof Shipping) {
 					numFields++;
 				}
 			}
