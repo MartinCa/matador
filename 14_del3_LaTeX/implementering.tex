@@ -1,4 +1,4 @@
-\chapter{Implementering}\label{chap:Implementering}
+\chapter{Implementering[1]}\label{chap:Implementering}
 Dette afsnit vil gennemgå ting i koden som er særligt interessante, al koden kan ses i Eclipse projektet. Implementeringen af \dpattern{Singleton} design pattern, brug af \klasse{ArrayList} og brug af \klasse{Iterator}. Derudover er der brugt exception håndtering i boundaryen, dette blev behandlet i rapporten til del 2. Eneste ændring der er blevet lavet i forbindelse med exception håndteringen i forhold til del 2 er at kun exception af typen \klasse{InputMismatchException} fanges. Det er nemlig denne type exceptions der throwes hvis der indtastes noget der ikke kan matches som en \klasse{Integer}. \cite{javaExceptionInputMismatchException}
 
 \section{\dpattern{Singleton Pattern}}
@@ -58,7 +58,7 @@ Når en spiller køber et felt tilføjes det pågældende felt til listen af own
 
 
 
-\section{Brug af \klasse{Iterator}}
+\section{Brug af \klasse{Iterator}}\label{sec:iterator}
 Listen af ejede felter som omtales i \vref{sec:ImplArrayList} over ejede felter bruges for at undersøge hvor mange felter af en type en given spiller ejer. Dette er nødvendigt fordi felter af typen \klasse{Brewery} og \klasse{Shipping} har en leje der afhænger af hvor mange felter af den givne type ejeren har.
 
 \begin{figure}
@@ -73,7 +73,7 @@ protected int rent() {
     Iterator<Ownable> ownIter = ownedFields.iterator();
 
     while (ownIter.hasNext()) {
-      if (Shipping.class.isInstance(ownIter.next())) {
+      if (ownIter.next() instanceof Shipping) {
         numFields++;
       }
     }
@@ -84,8 +84,11 @@ protected int rent() {
 
 Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \klasse{Shipping}, næsten ens kode bruges i \klasse{Brewery}. Det ses at listen af ejede felter hentes ved at kalde \metode{getOwnedFields()} på owner som er en henvisning til ejeren af det pågældende felt. Der laves en \klasse{Iterator} af ejede felter ved at kalde \metode{iterator()} på listen af ejede felter. \klasse{Iterator} har tre metoder, men vi bruger kun to: \metode{hasNext()} og \metode{next()}. \metode{hasNext()} returnerer true hvis der er et næste element som iteratoren kan returnere, vi bruger denne metode til kun at kalde \metode{next()} så længe der er flere elementer.\cite{javaUtilIterator}
 
-\metode{next()} returnerer det næste element fra iteratoren, det undersøges herefter om det returnerede element er en instans af den pågældende klasse \klasse{Shipping} eller \klasse{Brewery}. Hvis det er tilfældet øges numFields med 1. Når iteratoren er færdig vil numFields indholde en int svarende til mængden af samme type felter som ejeren af feltet ejer.
+\metode{next()} returnerer det næste element fra iteratoren, det undersøges herefter om det returnerede element er en instans af den pågældende klasse \klasse{Shipping} eller \klasse{Brewery}. Hvis det er tilfældet øges numFields med 1. Når iteratoren er færdig vil numFields indeholde en int svarende til mængden af samme type felter som ejeren af feltet ejer.
 
-I den udladte kode som er forskellig for de to klasser bruges numFields til at regne ud hvor dyrt det er at lande på feltet.
+I den udeladte kode som er forskellig for de to klasser bruges numFields til at regne ud hvor dyrt det er at lande på feltet.
 
-\section{Brug af isinstance()}
+\section{Brug af instanceof operatøren}
+Til at regne ud hvad det skal koste at lande på \klasse{Shipping} og \klasse{Brewery} er der brug for at vide hvor mange felter af samme type ejeren af det pågældende felt ejer. Udregningen af dette er implementeret ved hjælp af instanceof operatøren og \klasse{Iterator} som er omtalt i \vref{sec:iterator}.
+
+instanceof operatøren kontrollerer om et givent objekt er en instans af en given klasse, eller underklasser af den givne klasse. Koden som implementerer dette kan ses i \vref{fig:CodeIterator} i linie 8. <instans> instanceof <klasse> vil altså returnerer true hvis <instans> er en instans af klasse <klasse>. Vedhjælp af \klasse{Iterator} gåes alle felterne som spilleren ejer igennem og antallet af felter der er en instans af det pågældende felt tælles. På denne måde har vi mulighed for at tælle hvor mange felter af en given type en spiller ejer.\cite{javaOperators}

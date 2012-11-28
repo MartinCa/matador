@@ -1,10 +1,25 @@
-\chapter{Design}\label{chap:Design}
+\chapter{Design[2]}\label{chap:Design}
+
+\section{Domænemodel}\label{chap:domain}
 
 \begin{figure}
 \caption{Domæneklassediagram over matadorspillet.}\label{fig:DomainDia}
 \centering
 \input{tikzDomain.tex}
 \end{figure}
+
+\subsection{Overblik}\label{chap:domain:sec:overblik}
+Domænemodellen i \vref{fig:DomainDia} består af en række kasser repræsenterende matadorspillets forskellige elementer (herefter klasser). Dvs. alle de enkeltgrupperinger gruppen fandt nødvendige til at kunne beskrive et helt matadorspil. I udarbejdelsen af domænemodellen er der trukket meget på den objektorienterede viden opnået gennem kurserne 02312 og 02313. Herunder særligt den anvendte UML syntaks til illustration af multipliciteter, associationer og generelt indbyrdes forhold klasserne imellem. Hver klasses multiplicitet, dvs. antal af forekomster, er angivet med et lille tal uden for klassens navn. Alle klasser har forbindelser til andre klasser. Måden disse forbindelser er tegnet på varierer efter hvordan klassernes indbyrdes forhold er. De steder hvor der står et ord på tværs af en forbindelse angiver dette ord en specificering af denne forbindelses type. Der anvendes en række forskellige syntakser i domænemodellen, hvoraf en af hver vil blive beskrevet i det følgende, samt en mere detaljeret gennemgang af modellen.
+
+\subsection{Modelforklaring}\label{chap:domain:sec:modelForklaring}
+Der er 3 centrale elementer i matadorspillet. Disse er den enkelte spiller \klasse{Player}, klassen \klasse{Game} eller spillet som helhed og brættet som udgør den fysiske dimension af spillet. \klasse{Game} skal forstås som en slags abstraktion over regelsættet i matador. Spillet spilles med 2 terninger \klasse{Die} som \klasse{Player} ruller med \klasse{MatadorRafleBaeger}. Det ses at der er 2 terninger i spillet ved det lille 2 tal under klassen \klasse{Die}. Det er også angivet at \klasse{Die} anvendes af \klasse{MatadorRafleBaeger} ved den stærke binding mellem dem som angives af den massive diamant på forbindelsesstregen. Med andre ord dikterer \klasse{Game} at \klasse{Player} ruller \klasse{MatadorRafleBaeger} med 2 terninger i. Derfor er der indbyrdes forbindelser og <<rolls>> på forbindelsen fra \klasse{Player} til \klasse{MatadorRafleBaeger}. \
+\linebreak
+Hvis der tages udgangspunkt i 1 \klasse{Player} ses det at han har 1 \klasse{Car} som har en farve \textit{color}. Denne \textit{color} står inden i kassen der angiver \klasse{Car} og er således en attribut. Altså en egenskab som \klasse{Car} har. Det ses også at \klasse{Player} har \klasse{Money} og multipliciteten "0..*" betyder at spilleren kan have fra 0 til uendeligt mange penge. Der er selvfølgeligt nogle fysiske begrænsninger på dette og * kunne også skiftes ud med den sum man skal have for at vinde spillet. \klasse{Player} har også forbindelse til \klasse{LuckyCard} hvorpå der står <<draw>>. \klasse{Player} trækker altså et \klasse{LuckyCard}. Dette sker når der landes på feltet luck. Der er taget beslutning om ikke at tilføje en forbindelse fra \klasse{LuckyCard} til \klasse{Luck} af hensyn til overskueligheden, men denne kunne meget vel også tilføjes. \klasse{Player} har også en forbindlese til \klasse{Game}. Denne skyldes det faktum at \klasse{Game} er den regeldefinerende klasser og således bestemmer restriktioner for alt i spillet. Således kunne man med rette argumentere for at \klasse{Game} skulle have forbindelse til alle dele af spillet, det er dog her valgt at udelade dette af hensyn til læsbarheden af modellen. Ydermere har \klasse{Player} forbindelse til \klasse{House} med <<buys>> på. Dette indikerer at \klasse{Player} kan købe \klasse{House}. Den videre forbindelse fra \klasse{House} til \klasse{Street} viser at disse hører til på en \klasse{Street}. \
+Under \klasse{Game} er en forbindelse til \klasse{Board}. Dette er selve spillepladen. Der er kun 1 spilleplade per spil og denne består endvidere af 40 \klasse{Fields}. Hvert \klasse{Field} har et navn og et nummmer samt en type. Typerne er angivet ved de åbne pile der går til \klasse{Field} fra nedenstående klasser. Der kan stå flere biler på samme \klasse{Field}, men hver bil kan kun stå på et \klasse{Field} ad gangen. Dette ses ved multipliciteterne på forbindelsen mellem de 2 klasser. \
+De 40 \klasse{Field}'s som spillepladen består af er som nævnt inddelt i underklasser. Hver underklasse har en speciel funktion. Multipliciteterne angiver hvor mange der er af hvert felt. Underklassen \klasse{Ownable} er en abstraktion over de \klasse{Field}'s der har den fælles egenskab at de kan ejes. Udover at have \textit{name} og \textit{number} attributterne som tidligere angivet har de også attributterne \textit{price} og \textit{rent}. I standard versionen af et matadorspil findes der også et skøde til hver \klasse{Ownable}. Der er taget beslutning om at udelade dette i modellen da skøder ikke er nødvendige for at illustrere spillet, men de kunne naturligvis indføres.           
+
+
+
 
 
 \begin{figure}
