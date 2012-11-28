@@ -8,39 +8,34 @@
 		\umlobject[x=5,class=Konto]{konto}
 		\umlobject[x=8]{BoundaryToPlayer}
 		
-		\begin{umlcall}[op={optToBuy(actField, actPlayer)}]{game}{game}
-			\begin{umlcall}[op=isInstance(actField),return=bool ownable]{game}{ownable}
-			
-			\end{umlcall}
-			\begin{umlfragment}[type=opt,label=ownable,inner xsep=0.2]
-				\begin{umlcall}[op=getOwner(),return=Player owner]{game}{ownable}
+		\begin{umlcall}[op={optToBuy(actField, actPlayer)},padding=1]{game}{game}
+			%\begin{umlcall}[op=isInstance(actField),return=bool ownable]{game}{ownable}
+			%\end{umlcall}
+			\begin{umlfragment}[type=opt,label=actField instanceof ownable,inner xsep=0.2]
+				\begin{umlcall}[op=getOwner(),return=Player owner,dt=1.5,padding=1.7]{game}{ownable}
 				\end{umlcall}
-				\begin{umlfragment}[type=opt,label={owner!=null},inner xsep=0.3]
-					\begin{umlcall}[op=getKonto(),return=konto]{game}{player}				
+				\begin{umlfragment}[type=opt,label={owner==null},inner xsep=0.3]
+					\begin{umlcall}[op=getKonto(),return=konto,padding=1.7,dt=2]{game}{player}				
 					\end{umlcall}
-					\begin{umlcall}[op=getBalance(),return=int balance]{game}{konto}					
+					\begin{umlcall}[op=getBalance(),return=int balance,padding=1.7]{game}{konto}					
 					\end{umlcall}
-					\begin{umlcall}[op=getPrice(),return=int price]{game}{ownable}
+					\begin{umlcall}[op=getPrice(),return=int price,padding=1.7]{game}{ownable}
 					\end{umlcall}
 					\begin{umlfragment}[type=opt,label={balance>=price},inner xsep=0.3]
-						\begin{umlcall}[op=opToBuy(),return= bool optToBuy]{game}{BoundaryToPlayer}
-							\begin{umlcall}[op=getPlayerInt,return=int]{BoundaryToPlayer}{Player}
-							
+						\begin{umlcall}[op=opToBuy(),return= bool optToBuy,dt=2]{game}{BoundaryToPlayer}
+							\begin{umlcall}[op=getPlayerInt,return=int,padding=1.7]{BoundaryToPlayer}{Player}
 							\end{umlcall}
-						
 						\end{umlcall}
 						\begin{umlfragment}[type=opt,label=optToBuy,inner xsep=0.2]
-							\begin{umlcall}[op=buyField(actField),return=.]{game}{player}
+							\begin{umlcall}[op=buyField(actField),return=.,dt=2,padding=0]{game}{player}
 								\begin{umlcall}[op=getPrice(),return=int price]{player}{ownable}
-								
 								\end{umlcall}
-								\begin{umlcall}[op=withdraw(price)]{player}{konto}
-								
+								\begin{umlcall}[op=withdraw(price),return=bool success]{player}{konto}
 								\end{umlcall}
-								\begin{umlcallself}[op={ownedFields.add(actField)}]{player}
-								
+								\begin{umlcallself}[op={ownedFields.add(actField)},padding=1,dt=1.5]{player}
 								\end{umlcallself}
-							
+							\end{umlcall}
+							\begin{umlcall}[op=setOwner(actPlayer),padding=0]{game}{player}
 							\end{umlcall}
 						\end{umlfragment}
 					\end{umlfragment}

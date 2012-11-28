@@ -88,7 +88,7 @@ Koden i \vref{fig:CodeArrayList} viser implementeringen af \klasse{Iterator} i \
 
 I den udeladte kode som er forskellig for de to klasser bruges numFields til at regne ud hvor dyrt det er at lande på feltet.
 
-\section{Brug af instanceof operatøren}
+\section{Brug af instanceof operatøren}\label{sec:instanceof}
 Til at regne ud hvad det skal koste at lande på \klasse{Shipping} og \klasse{Brewery} er der brug for at vide hvor mange felter af samme type ejeren af det pågældende felt ejer. Udregningen af dette er implementeret ved hjælp af instanceof operatøren og \klasse{Iterator} som er omtalt i \vref{sec:iterator}.
 
 instanceof operatøren kontrollerer om et givent objekt er en instans af en given klasse, eller underklasser af den givne klasse. Koden som implementerer dette kan ses i \vref{fig:CodeIterator} i linie 8. <instans> instanceof <klasse> vil altså returnerer true hvis <instans> er en instans af klasse <klasse>. Vedhjælp af \klasse{Iterator} gåes alle felterne som spilleren ejer igennem og antallet af felter der er en instans af det pågældende felt tælles. På denne måde har vi mulighed for at tælle hvor mange felter af en given type en spiller ejer.\cite{javaOperators}
