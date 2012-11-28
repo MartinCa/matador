@@ -82,9 +82,10 @@ public class Game {
 		BoundaryToPlayer.getPlayerAccept(actPlayer);
 		baeger.rollDice();
 		actField = board.getField(baeger.getSum() - 2);
-		actField.landOnField(actPlayer);
 
 		optToBuy(actField, actPlayer);
+		
+		actField.landOnField(actPlayer);
 
 		ShowStatus(actField);
 

@@ -45,6 +45,23 @@ public abstract class Ownable extends Field {
 		this.owner = owner;
 	}
 	
+	/* (non-Javadoc)
+	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
+	 */
+	@Override
+	public void landOnField(Player player) {
+		if (owner != player) {
+			int currentRent = rent();
+			if (player.getKonto().withdraw(currentRent)) {
+				if (owner != null) {
+					owner.getKonto().deposit(currentRent);
+				}
+			} else {
+				player.setLoser();
+			}
+		}
+	}
+	
 	/**
 	 * Used to calculate the rent for landing on the field.
 	 * @return {@link java.lang.int} rent to pay for landing on the field.

@@ -1,7 +1,5 @@
 package matador.board;
 
-import matador.business_logic.Player;
-
 /**
  * Represents the streets from Matador.
  * @author Martin Caspersen
@@ -30,22 +28,6 @@ public class Street extends Ownable{
 		return rent;
 	}
 	
-	/* (non-Javadoc)
-	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
-	 */
-	@Override
-	public void landOnField(Player player) {
-		int currentRent = rent();
-		if (owner != player) {
-			if (player.getKonto().withdraw(currentRent)) {
-				if (owner != null) {
-					owner.getKonto().deposit(currentRent);
-				}
-			} else {
-				player.setLoser();
-			}
-		}
-	}
 	/* (non-Javadoc)
 	 * @see matador.board.Ownable#toString()
 	 */

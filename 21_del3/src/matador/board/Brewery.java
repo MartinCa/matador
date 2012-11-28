@@ -43,22 +43,6 @@ public class Brewery extends Ownable {
 			return 0;
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
-	 */
-	@Override
-	public void landOnField(Player player) {
-		int currentRent = rent();
-		
-		if (owner != player) {
-			if (player.getKonto().withdraw(currentRent)) {
-				owner.getKonto().deposit(currentRent);
-			} else {
-				player.setLoser();
-			}
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see matador.board.Ownable#toString()

@@ -2,8 +2,6 @@ package matador.board;
 
 import java.util.*;
 
-import matador.business_logic.Player;
-
 /**
  * Represents the shipping companies from Matador.
  * @author Martin Caspersen
@@ -44,22 +42,6 @@ public class Shipping extends Ownable {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see matador.board.Field#landOnField(matador.business_logic.Player)
-	 */
-	@Override
-	public void landOnField(Player player) {
-		int currentFare = rent();
-		if (owner != player) {
-			if (player.getKonto().withdraw(currentFare)) {
-				if (owner != null) {
-					owner.getKonto().deposit(currentFare);
-				}
-			} else {
-				player.setLoser();
-			}
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see matador.board.Ownable#toString()
