@@ -7,7 +7,7 @@ Kravene til CDIO-opgave del 3 bliver behandlet gennem UP-modellen for en kravspe
 Kendskab til arv og polymorfisme skal demonstreres gennem implementering af fields i et matadorspil. Yderligere skal det demonstreres at gruppen kan anvende arrays i forbindelse med instanser af egne typer. Derudover skal det illustreres at der kan arbejdes på et mere abstrakt niveau gennem udarbejdelse af en domænemodel over hele spillet. 
 
 \subsection{Specificering af krav}\label{sec:krav:kravSpec}
-Udfra den udleverede opgavebeskrivelse \cite{CDIOdel3} er der udarbejdet en længere liste med specificering af kravene. De områder der fremgår klare og utvetydige i opgavebeskrivelsen er blot overført, mens andre dele er uddybet og afklaret. Da gruppen forsøger at arbejde efter UP modellen og denne er Use Case driven, er de dele af kravene der kunne overføres til Use Case's indført i \ref{sec:krav:funkKrav:UC1} og \ref{sec:krav:funkKrav:UC2}. De krav der ikke kunne overføres til Use Case's er placeret i \ref{chap:suppSpec} som er UP's artefakt til krav der ikke kan placeres i Use Case's.
+Udfra den udleverede opgavebeskrivelse \cite{CDIOdel3} er der udarbejdet en længere liste med specificering af kravene. De områder der fremgår klare og utvetydige i opgavebeskrivelsen er blot overført, mens andre dele er uddybet og afklaret. Da gruppen forsøger at arbejde efter UP modellen og denne er Use Case driven, er de dele af kravene der kunne overføres til Use Case's indført i \vref{sec:krav:funkKrav:UC1} og \vref{sec:krav:funkKrav:UC2}. De krav der ikke kunne overføres til Use Case's er placeret i \vref{chap:suppSpec} som er UP's artefakt til krav der ikke kan placeres i Use Case's.
  
 \subsection{Funktionelle krav}\label{sec:krav:funkKrav}
 \subsubsection{Use Case Diagram}\label{sec:krav:funkKrav:useCaseDia}
@@ -20,10 +20,16 @@ Til udarbejdelsen af et Use Case Diagram er identificeret 4 Use Cases.
 \item landOnField
 \end{itemize}
 
-Spillet interagerer med to aktører, spilleren og den udleverede GUI. Således fremgår begge disse af Use Case Diagram'et (\vref{use case diagram} \fxfatal{henvisning til use case diagram}.
+Spillet interagerer med to aktører, spilleren og den udleverede GUI. Således fremgår begge disse af Use Case Diagrammet i \vref{fig:UseCaseDia}.
+
+\begin{figure}
+\caption{Usecasediagram for spillet.}\label{fig:UseCaseDia}
+\centering
+\input{tikzUseCase.tex}
+\end{figure}
 
 \subsubsection{Use Case beskrivelser}\label{sec:krav:funkKrav:useCaseBeskriv}
-Der henvises til CDIO-opgave del 2 for de to Use Case's: \textit{startGame} og \textit{rollDie}. I \ref{sec:krav:funkKrav:UC1} behandles Use Case UC1 - optToBuy \ref{sec:krav:funkKrav:UC1} og UC2 - landOnField \ref{sec:krav:funkKrav:UC2}.
+Der henvises til CDIO-opgave del 2 for de to Use Case's: \textit{startGame} og \textit{rollDie}. I \vref{sec:krav:funkKrav:UC1} behandles Use Case UC1 - optToBuy og UC2 - landOnField i \vref{sec:krav:funkKrav:UC2}.
 
 \subsubsection{Use Case UC1 : optToBuy}\label{sec:krav:funkKrav:UC1}
 
