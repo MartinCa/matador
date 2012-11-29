@@ -1,0 +1,11 @@
+\chapter{Designklassediagram}\label{chap:desKlas}
+\subsection{Generelt}
+\vref{designklassediagram} viser et udsnit af det totale spil. Det er således kun de, for denne 3. del af CDIO projektet relevante, klasser der er afbildet. For designklassediagram og beskrivelse for de resterende dele henvises til \vref{CDIOdel2}. I det følgende vil overordnede designbeslutninger beroende på gruppens viden om designpatterns og principper blive behandlet.
+
+\subsection{Arv og polymorfi}
+Mere interessant i denne del af pojektet er dog forholdet mellem \klasse{Field} og de klasser der arver fra denne.\klasse{Field} er en abstrakt klasse og det ses at klasserne \klasse{Refuge}, \klasse{Taxes} og \klasse{Ownable} arver fra \klasse{Field}. \klasse{Ownable} er også en abstrakt klasse som så igen har underklasserne \klasse{Brewery}, \klasse{Shipping} og \klasse{Street}. Alle underklasserne i dette arvehieraki har hver deres polymofiske implementation af de, i de abstrakte klasser definerede, abstrakte metoder. 
+
+\subsection{Singleton}
+Da der kun er behov for en instans af klassen \klasse{Game} og \klasse{Brewery} har behov for at kunne hente værdien af terningerne, til udregning af leje, er der taget beslutning og at anvende \dpattern{Singleton} ved oprettelse af \klasse{Game}. Dette ses også i \vref{designklassediagram} ved at angivelserne af atributten \textit{game} og \metode{getGame} begge er markeret som statiske. På denne måde kan \klasse{Brewery} hente summen af terningerne ud gennem den statiske adgang til \klasse{Game}. 
+
+	
