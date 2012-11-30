@@ -9,7 +9,7 @@ public class GameBoard {
 	private static Field[] boardFields;
 
 	/**
-	 * Used to start the initilization of the board and printing.
+	 * Used to start the initialization of the board and printing.
 	 * @param args not used.
 	 */
 	public static void main(String[] args) {

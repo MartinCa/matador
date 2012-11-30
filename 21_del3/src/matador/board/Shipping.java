@@ -35,7 +35,6 @@ public class Shipping extends Ownable {
 					numFields++;
 				}
 			}
-
 			return (int)(basisFare * Math.pow(2, numFields - 1));
 		} else {
 			return 0;

@@ -5,7 +5,8 @@ import java.util.*;
 import matador.board.*;
 
 /**
- * Provides a Player that is used in a dice game. The Player holds a name, carColorm, a Konto and a list of owned fields.
+ * Provides a Player that is used in a dice game. The Player holds a name, carColor, a Konto and a list of owned fields.
+ * Also contains a boolean describing if the player has lost.
  * Provides necessary functions used by the Game class.
  * @author Martin Caspersen
  * @see Game
@@ -63,7 +64,7 @@ public class Player {
 	 * 
 	 * @param field
 	 */
-	public void buyField(Ownable field){
+	public void buyField(Ownable field) {
 		this.konto.withdraw(field.getPrice());	
 		this.ownedFields.add(field);			
 	}
@@ -100,5 +101,4 @@ public class Player {
 		return "Player [carColor=" + carColor + ", name=" + name + ", konto="
 				+ konto + "]";
 	}
-
 }

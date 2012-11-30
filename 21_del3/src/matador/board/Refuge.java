@@ -8,7 +8,7 @@ import matador.business_logic.Player;
  * @author Martin Caspersen
  *
  */
-public class Refuge extends Field{
+public class Refuge extends Field {
 	private int bonus;
 
 	/**

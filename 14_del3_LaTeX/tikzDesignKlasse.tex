@@ -5,12 +5,12 @@
  \umlclass[x=2,y=0.5]{Player}{-carColor : int\\-name : String\\-konto : Konto\\-ownedFields : List<Ownable>\\-loser : bool}{+Player(String, int, int)\\+getName() : String\\+getCarColor() : int\\+getKonto() : Konto\\+buyField(Ownable)\\+getOwnedFields() : List<Ownable>\\+isLoser() : bool\\+setLoser()}
  \umlclass[x=-5,y=-4.5]{Board}{}{-initBoard(int)\\+getField(int) : Field}
  \umlclass[y=-4.5,x=1,type=abstract]{Field}{\#name : String\\\#fieldNum : int}{\textit{+landOnField(Player)}\\+getName() : String\\+getFieldNum() : int}
- \umlclass[y=-11.5,x=-4.5]{Brewery}{}{\#rent() : int\\+landOnField(Player)}
+ \umlclass[y=-11.5,x=-4.5]{Brewery}{}{\#rent() : int}
  \umlclass[y=-8.5,x=-4.5]{Refuge}{-bonus : int}{+landOnField(Player)}
- \umlclass[y=-11.5]{Shipping}{-basisFare : int}{\#rent() : int\\+landOnField(Player)}
- \umlclass[y=-11.5,x=4.5]{Street}{-rent : int}{\#rent() : int\\+landOnField(Player)}
+ \umlclass[y=-11.5]{Shipping}{-basisFare : int}{\#rent() : int}
+ \umlclass[y=-11.5,x=4.5]{Street}{-rent : int}{\#rent() : int}
  \umlclass[y=-8.5,x=4.5]{Taxes}{}{+landOnField(Player)}
- \umlclass[y=-8.2,type=abstract]{Ownable}{\#price : int\\\#owner : Player}{+getPrice() : int\\+getOwner() : Player\\+setOwner(Player)\\\textit{\#rent() : int}}
+ \umlclass[y=-8.2,type=abstract]{Ownable}{\#price : int\\\#owner : Player}{+getPrice() : int\\+getOwner() : Player\\+setOwner(Player)\\\textit{\#rent() : int}\\+landOnField(Player)}
  
  \umlcompo[mult2=0..*,arg2=-boardFields,pos2=1.0,align2=right]{Board}{Field}
  \umlinherit{Ownable}{Field}

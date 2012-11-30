@@ -4,7 +4,7 @@ import matador.business_logic.*;
 import java.util.*;
 
 /**
- * Reprensents the breweries in Matador, subclass of {@link matador.board.Field} and {@link matador.board.Ownable}.
+ * Represents the breweries in Matador, subclass of {@link matador.board.Field} and {@link matador.board.Ownable}.
  * @author Martin Caspersen
  * @see Ownable
  * @see Field

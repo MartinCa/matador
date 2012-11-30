@@ -7,7 +7,7 @@ import matador.business_logic.Player;
  * @author Martin Caspersen.
  *
  */
-public class Taxes extends Field{
+public class Taxes extends Field {
 	private int tax;
 
 	/**
