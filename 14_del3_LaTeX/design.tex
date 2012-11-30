@@ -18,13 +18,23 @@ Hvis der tages udgangspunkt i 1 \klasse{Player} ses det at han har 1 \klasse{Car
 Under \klasse{Game} er en forbindelse til \klasse{Board}. Dette er selve spillepladen. Der er kun 1 spilleplade per spil og denne består endvidere af 40 \klasse{Fields}. Hvert \klasse{Field} har et navn og et nummmer samt en type. Typerne er angivet ved de åbne pile der går til \klasse{Field} fra nedenstående klasser. Der kan stå flere biler på samme \klasse{Field}, men hver bil kan kun stå på et \klasse{Field} ad gangen. Dette ses ved multipliciteterne på forbindelsen mellem de 2 klasser. \
 De 40 \klasse{Field}'s som spillepladen består af er som nævnt inddelt i underklasser. Hver underklasse har en speciel funktion. Multipliciteterne angiver hvor mange der er af hvert felt. Underklassen \klasse{Ownable} er en abstraktion over de \klasse{Field}'s der har den fælles egenskab at de kan ejes. Udover at have \textit{name} og \textit{number} attributterne som tidligere angivet har de også attributterne \textit{price} og \textit{rent}. I standard versionen af et matadorspil findes der også et skøde til hver \klasse{Ownable}. Der er taget beslutning om at udelade dette i modellen da skøder ikke er nødvendige for at illustrere spillet, men de kunne naturligvis indføres.           
 
-\section{Designklassediagram[2]}
+\section{Designklassediagram[2]}\label{sec:desKlas}
+\subsection{Generelt}
+\vref{fig:DesignKlasseChanged} viser et udsnit af det totale spil. Det er således kun de, for denne 3. del af CDIO projektet relevante, klasser der er afbildet. For designklassediagram og beskrivelse for de resterende dele henvises til \vref{CDIOdel2}. I det følgende vil overordnede designbeslutninger beroende på gruppens viden om designpatterns og principper blive behandlet.
+\fxfatal{Øhh siden hvornår vedlægger vi del 2 som bilag så den kan henvises til?}
 
 \begin{figure}
 \caption{Designklassediagram over ændrede klasser i matadorspillet.}\label{fig:DesignKlasseChanged}
 \centering
 \input{tikzDesignKlasse.tex}
 \end{figure}
+
+\subsection{Arv og polymorfi}
+Mere interessant i denne del af pojektet er dog forholdet mellem \klasse{Field} og de klasser der arver fra denne.\klasse{Field} er en abstrakt klasse og det ses at klasserne \klasse{Refuge}, \klasse{Taxes} og \klasse{Ownable} arver fra \klasse{Field}. \klasse{Ownable} er også en abstrakt klasse som så igen har underklasserne \klasse{Brewery}, \klasse{Shipping} og \klasse{Street}. Alle underklasserne i dette arvehieraki har hver deres polymofiske implementation af de, i de abstrakte klasser definerede, abstrakte metoder. 
+
+\subsection{Singleton}\label{sec:desSingleon}
+Da der kun er behov for en instans af klassen \klasse{Game} og \klasse{Brewery} har behov for at kunne hente værdien af terningerne, til udregning af leje, er der taget beslutning og at anvende \dpattern{Singleton} ved oprettelse af \klasse{Game}. Dette ses også i \vref{fig:DesignKlasseChanged} ved at angivelserne af atributten \textit{game} og \metode{getGame} begge er markeret som statiske. På denne måde kan \klasse{Brewery} hente summen af terningerne ud gennem den statiske adgang til \klasse{Game}. 
+\fxnote{Henvisninger ændret til korrekt label}
 
 \section{Sekvensdiagrammer[1]}
 For at vise hvordan spillet fungerer er der produceret to sekvensdiagrammer. Disse to sekvensdiagrammer viser de dele af systemet som har undergået betydningsfulde ændringer siden del 2. Der er tale om implementeringen af metoderne \metode{optToBuy(Field, Player)} og \metode{landOnField(Player)} i henholdsvis \klasse{Game} og \klasse{Field}.
