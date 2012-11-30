@@ -1,16 +1,14 @@
 \chapter{Krav[2]}\label{chap:krav}
-
-\section{Krav overblik}\label{sec:krav:kravOverblik}
 Kravene til CDIO-opgave del 3 bliver behandlet gennem UP-modellen for en kravspecifikation som præsenteret i kursus 02313. Hvor der er uklarheder i den udleverede tekst er de tolket efter bedste evne. Uklarheder i beskrivelsen bør naturligvis afklares med kunden i et virkeligt projekt. Kilde til dette afsnit er \cite{CDIOdel3}, som er opgavebeskrivelsen for CDIO-opgave del 3.
 
-\subsection{Formål}\label{sec:krav:formål}
+\section{Formål}\label{sec:krav:formål}
 Kendskab til arv og polymorfisme skal demonstreres gennem implementering af fields i et matadorspil. Yderligere skal det demonstreres at gruppen kan anvende arrays i forbindelse med instanser af egne typer. Derudover skal det illustreres at der kan arbejdes på et mere abstrakt niveau gennem udarbejdelse af en domænemodel over hele spillet. 
 
-\subsection{Specificering af krav}\label{sec:krav:kravSpec}
+\section{Specificering af krav}\label{sec:krav:kravSpec}
 Udfra den udleverede opgavebeskrivelse \cite{CDIOdel3} er der udarbejdet en længere liste med specificering af kravene. De områder der fremgår klare og utvetydige i opgavebeskrivelsen er blot overført, mens andre dele er uddybet og afklaret. Da gruppen forsøger at arbejde efter UP modellen og denne er Use Case driven, er de dele af kravene der kunne overføres til Use Case's indført i \vref{sec:krav:funkKrav:UC1} og \vref{sec:krav:funkKrav:UC2}. De krav der ikke kunne overføres til Use Case's er placeret i \vref{chap:suppSpec} som er UP's artefakt til krav der ikke kan placeres i Use Case's.
  
-\subsection{Funktionelle krav}\label{sec:krav:funkKrav}
-\subsubsection{Use Case Diagram}\label{sec:krav:funkKrav:useCaseDia}
+\section{Funktionelle krav}\label{sec:krav:funkKrav}
+\subsection{Use Case Diagram}\label{sec:krav:funkKrav:useCaseDia}
 Til udarbejdelsen af et Use Case Diagram er identificeret 4 Use Cases. 
 
 \begin{itemize}
@@ -95,13 +93,13 @@ System har enten foretaget en transaktion eller intet gjort afhængig af hvad re
 \end{enumerate}
 Alternative forløb:
 \begin{enumerate}[1a]
-\item Spiller lander på felttypen Refuge.
+\item[1a] Spiller lander på felttypen Refuge.
 	\begin{enumerate}[1.]
 	\item System overfører bonus til spillers konto
 	\item Tilbage til MSS: 5
 	\end{enumerate}
 \end{enumerate} 
-\fixme{1a står som aa. Jeg ved ikke hvad der går galt}
+
 \begin{enumerate}[1b]
 \item Spiller lander på felttypen Tax.
 	\begin{enumerate}[1.]

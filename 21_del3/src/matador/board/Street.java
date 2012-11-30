@@ -5,7 +5,7 @@ package matador.board;
  * @author Martin Caspersen
  *
  */
-public class Street extends Ownable{
+public class Street extends Ownable {
 	private int rent;
 	
 	/**
@@ -36,6 +36,4 @@ public class Street extends Ownable{
 		return "Street [rent=" + rent + ", price=" + price + ", owner=" + owner
 				+ ", name=" + name + ", fieldNum=" + fieldNum + "]";
 	}
-
-
 }
